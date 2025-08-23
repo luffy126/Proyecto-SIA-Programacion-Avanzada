@@ -10,7 +10,7 @@ package Clases;
  */
 public class GestionDeEntradas {
     public static void main(String[] args) {
-    
+        System.out.println("Hola Mundo");
     
     }
     
