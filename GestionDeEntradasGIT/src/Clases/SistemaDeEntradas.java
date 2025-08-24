@@ -43,9 +43,10 @@ public class SistemaDeEntradas {
         // Solicita crear obligatoriamente un cliente, si es que no existe (proximamente tendra mas utilidad cuando haya persistencia a traves de archivos).
         if(this.clientes.size() == 0){ 
             RegistrarCliente();
-        }
-        while(apagarSistema == false){
             limpiarConsola();
+        }
+        while(apagarSistema == false){  
+            
             System.out.println("=== SISTEMA DE GESTIÓN DE ENTRADAS ===");
             System.out.println("1. Crear Evento");
             System.out.println("2. Listar Eventos");
@@ -54,14 +55,14 @@ public class SistemaDeEntradas {
             System.out.println("5. Listar Clientes");
             System.out.println("6. Registrar Cliente");
             System.out.println("0. Salir");
+            System.out.println("");
             System.out.print(">> Seleccione una opción: ");
+            
+            limpiarConsola();
             
             // Me genero porblemas usar .nextInt, asi que se usara casteo cada vez que se quiera guardar un Int, ya que me lo recomendo varias IAs y tiene sentido
             String lineaLeida = entrada.nextLine();
             opcion = Integer.parseInt(lineaLeida);
-            
-            
-            
             
             switch(opcion){
                 case 0:
@@ -79,12 +80,12 @@ public class SistemaDeEntradas {
                     }
                     
                 case 2:
-                    ListarEventos(eventos);
+                    ListarEventos(getTodosLosEventos());
                     break;
                 case 3:
                     RemoverEvento();
                     break;
-                case 4:
+                case 4:    
                     ModificarEvento();
                     break;
                 case 5:
@@ -128,10 +129,44 @@ public class SistemaDeEntradas {
         System.out.println("Evento ID:" + ID + " - " + nombre + " se ha creado satisfactoriamente.");
     }
     
+    public void ModificarEvento() {
+        // Implementación pendiente [X]
+        int idBuscado, opcion, posEvento;
+        boolean encontrado = false;
+        
+        if(eventos.isEmpty() || eventos == null){
+            System.out.println("No hay eventos para mostrar.");
+            return;
+        }
+        
+        System.out.println("Ingrese ID del Evento: ");
+        idBuscado = Integer.parseInt(entrada.nextLine());
 
+        for (int i = 0; i < eventos.size(); i++) {
+            
+            if(idBuscado == eventos.get(i).ID){
+                posEvento = i;
+                encontrado = true;
+            }
+            
+        }
+        
+        if (encontrado) {
+            System.out.println("Se ha encontrado el evento " + idBuscado + ".");
+            System.out.println("Que quiere modificar del evento?");
+            System.out.println("1. Nombre");
+            System.out.println("2. Capacidad de Personas");
+            System.out.println("3. Ubicacion");
+            System.out.println("4. Reservar Sillas");
+            
+        } else{
+            System.out.println("No se encontro el evento " + idBuscado + ".");
+        }
+
+    }
     public void ListarEventos(List<Eventos> eventos) {
         if (eventos == null || eventos.isEmpty()) {
-            System.out.println("No hay eventos para mostrar");
+            System.out.println("No hay eventos para mostrar.");
             return;
         }
         
@@ -150,17 +185,6 @@ public class SistemaDeEntradas {
     public void RemoverEvento() {
         // Implementación pendiente
         System.out.println("Función de remover evento no implementada aún.");
-    }
-    
-    public void ModificarEvento() {
-        // Implementación pendiente
-        System.out.println("Función de modificar evento no implementada aún."); 
-        
-        // AHORA ARMO ESTE BB
-        
-        
-        
-        
     }
     
     public void RegistrarCliente() {
@@ -196,7 +220,7 @@ public class SistemaDeEntradas {
     
     // METODOS MISCELANEOS
     public static void limpiarConsola() {
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 2; i++) {
         System.out.println();
         }
     }
