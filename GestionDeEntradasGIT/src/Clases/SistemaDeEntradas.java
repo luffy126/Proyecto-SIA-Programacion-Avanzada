@@ -54,7 +54,7 @@ public class SistemaDeEntradas {
             System.out.println("5. Listar Clientes");
             System.out.println("6. Registrar Cliente");
             System.out.println("0. Salir");
-            System.out.print("Seleccione una opción: ");
+            System.out.print(">> Seleccione una opción: ");
             
             // Me genero porblemas usar .nextInt, asi que se usara casteo cada vez que se quiera guardar un Int, ya que me lo recomendo varias IAs y tiene sentido
             String lineaLeida = entrada.nextLine();
@@ -155,6 +155,12 @@ public class SistemaDeEntradas {
     public void ModificarEvento() {
         // Implementación pendiente
         System.out.println("Función de modificar evento no implementada aún."); 
+        
+        // AHORA ARMO ESTE BB
+        
+        
+        
+        
     }
     
     public void RegistrarCliente() {
