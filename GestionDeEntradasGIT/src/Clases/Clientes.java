@@ -18,7 +18,8 @@ public class Clientes {
 
     List<Compras> comprasCliente = new ArrayList<>();
 
-    public Clientes(String rut, String nombre){
+   
+    public Clientes(){
         this.rut = rut;
         this.nombre = nombre;
         this.asientosAComprar = asientosAComprar;
