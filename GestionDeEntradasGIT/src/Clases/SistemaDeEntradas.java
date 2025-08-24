@@ -45,7 +45,7 @@ public class SistemaDeEntradas {
             RegistrarCliente();
         }
         while(apagarSistema == false){
-            
+            limpiarConsola();
             System.out.println("=== SISTEMA DE GESTIÓN DE ENTRADAS ===");
             System.out.println("1. Crear Evento");
             System.out.println("2. Listar Eventos");
@@ -60,7 +60,7 @@ public class SistemaDeEntradas {
             String lineaLeida = entrada.nextLine();
             opcion = Integer.parseInt(lineaLeida);
             
-            limpiarConsola();
+            
             
             
             switch(opcion){
@@ -79,7 +79,7 @@ public class SistemaDeEntradas {
                     }
                     
                 case 2:
-                    ListarEvento();
+                    ListarEventos(eventos);
                     break;
                 case 3:
                     RemoverEvento();
@@ -119,18 +119,32 @@ public class SistemaDeEntradas {
         System.out.println("Capacidad del evento:");
         int capacidad = Integer.parseInt(entrada.nextLine());
         
-        int ID = (100 + eventos.size()); // Otra forma de decir, evento 100, 101, 102, para que se vea mas profesional.
+        Random random = new Random();
+        
+        int ID = (random.nextInt(999)); 
         System.out.println("ID del evento creado: " + ID);
         Eventos nuevoEvento = new Eventos(nombre, capacidad, ID);
         eventos.add(nuevoEvento);
         System.out.println("Evento ID:" + ID + " - " + nombre + " se ha creado satisfactoriamente.");
     }
     
-    public void ListarEvento() {
-        System.out.println("Eventos: " + eventos);
+
+    public void ListarEventos(List<Eventos> eventos) {
+        if (eventos == null || eventos.isEmpty()) {
+            System.out.println("No hay eventos para mostrar");
+            return;
+        }
+        
+        for (Eventos e : eventos) {
+            String txt = "" + (eventos.size()+1) + e.nombre + ", ID:" + e.ID;
+            System.out.println(txt);
+        }
+  
     }
+    
+    
     public void ListarClientes() {
-        System.out.println("Clientes: " + clientes.toString());
+        System.out.println("Clientes: " + clientes);
     }
     
     public void RemoverEvento() {
@@ -140,15 +154,19 @@ public class SistemaDeEntradas {
     
     public void ModificarEvento() {
         // Implementación pendiente
-        System.out.println("Función de modificar evento no implementada aún.");
+        System.out.println("Función de modificar evento no implementada aún."); 
     }
+    
     public void RegistrarCliente() {
         int edad;
         Clientes nuevoCliente = new Clientes();
         
-        if(clientes.size() == 0){
+        if(clientes == null || clientes.isEmpty()){
+            System.out.println("");
+            System.out.println("-------------------------------------------------------");
             System.out.println("Es tu primera vez ejecutando Sistema de Entradas.");
             System.out.println("Deberas crear una cuenta para poder administrar eventos!");
+            System.out.println("-------------------------------------------------------");
         }
         
         System.out.println("Ingrese su nombre: ");
