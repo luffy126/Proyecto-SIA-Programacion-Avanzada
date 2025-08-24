@@ -18,7 +18,7 @@ public class Clientes {
 
     List<Compras> comprasCliente = new ArrayList<>();
 
-    public Clientes(String rut, String nombre, int asientosAComprar, String[] acompanantes, int edad, String[] discapacidades){
+    public Clientes(String rut, String nombre){
         this.rut = rut;
         this.nombre = nombre;
         this.asientosAComprar = asientosAComprar;
@@ -27,6 +27,18 @@ public class Clientes {
         this.discapacidades = discapacidades;
         
     }
-
-    public void  
+    
+    
+    // Getters
+    public String getRut(){return this.rut;}
+    public String getNombre() {return this.nombre;}
+    public String[] getAcompanantes() {return this.acompanantes;}
+    public int getEdad(){return this.edad;}
+    public int getAsientosAComprar() {return this.asientosAComprar;}
+    public String[] getDiscapacidades(){return this.discapacidades;}
+    
+    //Setters
+    public void setEdad(int edad) {this.edad = edad;}
+    
+    
 }
