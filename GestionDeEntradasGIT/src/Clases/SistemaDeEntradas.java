@@ -224,9 +224,25 @@ public class SistemaDeEntradas {
         System.out.println("Clientes: " + clientes);
     }
     
+    @SuppressWarnings("UnnecessaryReturnStatement")
     public void RemoverEvento() {
-        // Implementación pendiente
+        int idABorrar;
+        int indice;
+        Eventos eventoEncontrado;
         System.out.println("Función de remover evento no implementada aún.");
+        if (eventos.isEmpty() || eventos == null) {
+            System.out.println("No hay eventos para borrar.");
+            return;
+        } else {
+            System.out.println("Los eventos registrados son los siguientes: ");
+            ListarEventos(eventos);
+            idABorrar = Integer.parseInt(entrada.nextLine());
+            eventoEncontrado = buscarEventosPorID(idABorrar);
+            indice = eventos.indexOf(eventoEncontrado);
+            eventos.remove(indice);
+            System.out.println("Se ha eliminado el evento con ID: " + eventos.get(indice).ID);
+        }
+           
     }
     
     public void RegistrarCliente() {
