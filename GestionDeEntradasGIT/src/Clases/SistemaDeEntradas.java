@@ -9,9 +9,9 @@ import java.io.*;
 
 public class SistemaDeEntradas {
     // Declara Colecciones de Clases a usar, y un Objeto tipo GestionDeArchivos, para despues cargar bases de datos locales.
-    private List<Eventos> eventos;
-    private List<Clientes> clientes;
-    private List<Compras> compras;
+    private List<Evento> eventos;
+    private List<Cliente> clientes;
+    private List<Compra> compras;
     private GestionDeArchivos gestorArchivos;
     private boolean apagarSistema;
     private ValidarEntradas validador;
@@ -41,7 +41,7 @@ public class SistemaDeEntradas {
         int opcion;
         
         // Solicita crear obligatoriamente un cliente, si es que no existe (proximamente tendra mas utilidad cuando haya persistencia a traves de archivos).
-        if(this.clientes.size() == 0){ 
+        if(this.clientes.isEmpty()){ 
             RegistrarCliente();
             limpiarConsola();
         }
@@ -88,7 +88,7 @@ public class SistemaDeEntradas {
                     ModificarEvento();
                     break;
                 case 5:
-                    ListarClientes();
+                    ListarClientes(clientes);
                     break;
                 case 6:
                     RegistrarCliente();
@@ -96,20 +96,6 @@ public class SistemaDeEntradas {
                    
             }
         }
-    }
-    
-    public List<Eventos> getTodosLosEventos() {
-        return eventos;
-    }
-    
-    public Eventos buscarEventosPorID(int id) {
-
-        for(Eventos e : eventos) {
-            if(e.getID() == id){
-            return e;
-            }
-        }
-        return null;
     }
     
     public void CrearEvento() {
@@ -123,7 +109,7 @@ public class SistemaDeEntradas {
         
         int ID = (random.nextInt(999)); 
         System.out.println("ID del evento creado: " + ID);
-        Eventos nuevoEvento = new Eventos(nombre, capacidad, ID);
+        Evento nuevoEvento = new Evento(nombre, capacidad, ID);
         eventos.add(nuevoEvento);
         System.out.println("Evento ID:" + ID + " - " + nombre + " se ha creado satisfactoriamente.");
     }
@@ -190,45 +176,17 @@ public class SistemaDeEntradas {
                     int numeroSillasAReservar = Integer.parseInt(entrada.nextLine());
 
                     // Crear arreglo del tamaño que pidió el usuario
-                    int[] sillasPedidas = new int[numeroSillasAReservar];
-
-                    for (int i = 0; i < numeroSillasAReservar; i++) {
-                        System.out.println("Indique qué silla desea agregar a la reserva (debe ser del lugar 1 al "
-                                           + eventos.get(posEvento).capacidadPersonas + ").");                      
-                        sillasPedidas[i] = Integer.parseInt(entrada.nextLine());
-                    }
-
-                    // Pasar el arreglo completo al método de Evento.
-                    eventos.get(posEvento).reservarSillas(sillasPedidas);
                     break;
  
             }
         }
 
     }
-    public void ListarEventos(List<Eventos> eventos) {
-        if (eventos == null || eventos.isEmpty()) {
-            System.out.println("No hay eventos para mostrar.");
-            return;
-        }
-        
-        for (Eventos e : eventos) {
-            String txt = "" + (eventos.size()+1) + e.nombre + ", ID:" + e.ID;
-            System.out.println(txt);
-        }
-  
-    }
-    
-    
-    public void ListarClientes() {
-        System.out.println("Clientes: " + clientes);
-    }
-    
-    @SuppressWarnings("UnnecessaryReturnStatement")
+        @SuppressWarnings("UnnecessaryReturnStatement")
     public void RemoverEvento() {
         int idABorrar;
         int indice;
-        Eventos eventoEncontrado;
+        Evento eventoEncontrado;
         System.out.println("Función de remover evento no implementada aún.");
         if (eventos.isEmpty() || eventos == null) {
             System.out.println("No hay eventos para borrar.");
@@ -245,9 +203,38 @@ public class SistemaDeEntradas {
            
     }
     
+    public void ListarEventos(List<Evento> eventos) {
+        if (eventos == null || eventos.isEmpty()) {
+            System.out.println("No hay eventos para mostrar.");
+            return;
+        }
+        
+        for (Evento e : eventos) {
+            String txt = "" + (eventos.size() + "1=. " + e.nombre + ", ID:" + e.ID);
+            System.out.println(txt);
+        }
+  
+    }
+    public List<Evento> getTodosLosEventos() {
+        return eventos;
+    }
+    
+    public Evento buscarEventosPorID(int id) {
+
+        for(Evento e : eventos) {
+            if(e.getID() == id){
+            return e;
+            }
+        }
+        return null;
+    }
+    
     public void RegistrarCliente() {
         int edad;
-        Clientes nuevoCliente = new Clientes();
+        String rut;
+        String nombre;
+        
+        Cliente nuevoCliente;
         
         if(clientes == null || clientes.isEmpty()){
             System.out.println("");
@@ -258,11 +245,15 @@ public class SistemaDeEntradas {
         }
         
         System.out.println("Ingrese su nombre: ");
-        nuevoCliente.nombre = entrada.nextLine();
+        nombre = entrada.nextLine();
+        
         System.out.println("Ingrese su RUT: ");
-        nuevoCliente.rut = entrada.nextLine();
+        rut = entrada.nextLine();
+        
         System.out.println("Ingrese su edad: ");
+        
         edad = Integer.parseInt(entrada.nextLine());
+        
         while(true){
                 if(edad < 16 || edad > 120){
                 System.out.println("Debes ingresar una edad valida! (16 - 120 años).");
@@ -270,10 +261,28 @@ public class SistemaDeEntradas {
                 } else{break;}
                 
             }
-        nuevoCliente.edad = edad;
+        
+        nuevoCliente = new Cliente(nombre, rut, edad); 
+                
+        nuevoCliente.setEdad(edad);
+        nuevoCliente.setNombre(nombre);
+        nuevoCliente.setRut(rut);
+        
         System.out.println("Gracias por registrarte!");
         clientes.add(nuevoCliente);
         
+    }
+    
+    public void ListarClientes(List<Cliente> clientes) {
+         if (clientes == null || clientes.isEmpty()) {
+            System.out.println("No hay clientes registrados.");
+            return;
+        }
+        
+        for (Cliente c : clientes) {
+            String txt = "" + (clientes.size() + c.nombre + ", RUT:" + c.rut);
+            System.out.println(txt);
+        }
     }
     
     // METODOS MISCELANEOS

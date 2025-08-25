@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author Tenerex
  */
-public class Clientes {
+public class Cliente {
 
     String rut;
     String nombre;
@@ -16,15 +16,14 @@ public class Clientes {
     int edad;
     String[] discapacidades;
 
-    List<Compras> comprasCliente = new ArrayList<>();
+    List<Compra> comprasCliente = new ArrayList<>();
 
-   
-    public Clientes(){
+    public Cliente(String nombre, String rut, int edad){
         this.rut = rut;
         this.nombre = nombre;
+        this.edad = edad;
         this.asientosAComprar = asientosAComprar;
         this.acompanantes = acompanantes;
-        this.edad = edad;
         this.discapacidades = discapacidades;
         
     }
@@ -40,6 +39,9 @@ public class Clientes {
     
     //Setters
     public void setEdad(int edad) {this.edad = edad;}
+    public void setNombre(String nombre){this.nombre = nombre;}
+    public void setRut(String rut) {this.rut = rut;}
+    public void setAcompanantes(){;}
     
     
 }

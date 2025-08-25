@@ -1,4 +1,6 @@
 package Clases;
+import java.io.File;
+
 
 /**
  *
@@ -10,4 +12,8 @@ public class GestionDeArchivos {
     2. Guardar/cargar un Comprador 
     3. Guardar/cargar Ordenes.
     */
+    
+    
+    
+    
 }
