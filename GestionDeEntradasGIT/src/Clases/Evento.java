@@ -49,10 +49,10 @@ public class Evento {
     public String getUbicacion(){return this.ubicacion;}
     
     // Setters
-    public void setID(){}
-    public void setNombre(){}
-    public void setCapacidad(){}
-    public void setUbicacion(){}
+    public void setID(int ID){this.ID = ID;}
+    public void setNombre(String nombre){this.nombre = nombre;}
+    public void setCapacidadPersonas(int capacidadPersonas){this.capacidadPersonas = capacidadPersonas;}
+    public void setUbicacion(String ubicacion){this.ubicacion = ubicacion;}
    
             
             
