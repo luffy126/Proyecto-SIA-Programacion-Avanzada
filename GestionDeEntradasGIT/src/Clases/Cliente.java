@@ -39,10 +39,11 @@ public class Cliente {
     public String[] getDiscapacidades(){return this.discapacidades;}
     
     //Setters
-    public void setEdad(int edad) {this.edad = edad;}
+    public void setRut(String rut){this.rut = rut;}
     public void setNombre(String nombre){this.nombre = nombre;}
-    public void setRut(String rut) {this.rut = rut;}
-    public void setAcompanantes(){}
-    
+    public void setAcompanantes(String[] acompanantes){this.acompanantes = acompanantes;}
+    public void setEdad(int edad) {this.edad = edad;}
+    public void setAsientosAComprar(int asientosAComprar){this.asientosAComprar = asientosAComprar;}
+    public void setDiscapacidades(String[] discapacidades){this.discapacidades = discapacidades;}
     
 }
