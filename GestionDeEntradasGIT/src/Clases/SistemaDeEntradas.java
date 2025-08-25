@@ -12,7 +12,7 @@ public class SistemaDeEntradas {
     private List<Evento> eventos;
     private List<Cliente> clientes;
     private List<Compra> compras;
-    private GestionDeArchivos gestorArchivos;
+    private GestorArchivos gestorArchivos;
     private boolean apagarSistema;
     private ValidarEntradas validador;
     

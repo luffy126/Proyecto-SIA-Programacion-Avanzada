@@ -6,7 +6,20 @@ package Clases;
  */
 public class Compra {
     int ordenDeCompra;
-    String fecha;
+    int montoTotal;
+    String fechaCompra;
     String estadoCompra;
+    
+    
+    public Compra () {
+    
+        
+    }
+    
+    
+    
+    
+    // SETTERS
+    
     
 }

@@ -15,7 +15,8 @@ public class Cliente {
     String[] acompanantes;
     int edad;
     String[] discapacidades;
-
+    GestorArchivos gestorArchivos;
+    
     List<Compra> comprasCliente = new ArrayList<>();
 
     public Cliente(String nombre, String rut, int edad){
@@ -41,7 +42,7 @@ public class Cliente {
     public void setEdad(int edad) {this.edad = edad;}
     public void setNombre(String nombre){this.nombre = nombre;}
     public void setRut(String rut) {this.rut = rut;}
-    public void setAcompanantes(){;}
+    public void setAcompanantes(){}
     
     
 }
