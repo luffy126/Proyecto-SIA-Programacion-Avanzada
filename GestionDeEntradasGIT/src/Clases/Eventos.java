@@ -51,7 +51,7 @@ public class Eventos {
     // Setters
     public void reservarSillas(int[] sillasAReservar){ 
         for (int i = 0; i < sillasAReservar.length; i++) {
-            sillasOcupadas[i] = true; // SI esta ocupada.
+            this.sillasOcupadas[sillasAReservar[i]] = true; // SI esta ocupada.
         }
         
     }

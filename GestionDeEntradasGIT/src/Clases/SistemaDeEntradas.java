@@ -186,18 +186,22 @@ public class SistemaDeEntradas {
                     System.out.println("Ubicacion actualizada a " + eventos.get(posEvento).ubicacion);
                     break;
                 case 4:
-                    
                     System.out.println("Cuantas sillas quiere reservar?");
                     int numeroSillasAReservar = Integer.parseInt(entrada.nextLine());
+
+                    // Crear arreglo del tamaño que pidió el usuario
                     int[] sillasPedidas = new int[numeroSillasAReservar];
+
                     for (int i = 0; i < numeroSillasAReservar; i++) {
-                        System.out.println("Indique que silla desea agregar a la reserva (debe ser del lugar 1 al " + eventos.get(posEvento).capacidadPersonas + ".");                      
+                        System.out.println("Indique qué silla desea agregar a la reserva (debe ser del lugar 1 al "
+                                           + eventos.get(posEvento).capacidadPersonas + ").");                      
                         sillasPedidas[i] = Integer.parseInt(entrada.nextLine());
                     }
+
+                    // Pasar el arreglo completo al método de Evento.
                     eventos.get(posEvento).reservarSillas(sillasPedidas);
                     break;
-                  
-            
+ 
             }
         }
 
