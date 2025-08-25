@@ -20,7 +20,7 @@ public class Eventos {
     String nombre;
     int capacidadPersonas;
     String ubicacion;
-    boolean[] sillas;
+    boolean[] sillasOcupadas;
  
     List<Clientes> clientes;
     /* el metodo toString() se usa para imprimir colecciones de variables, pero nuestro proyecto
@@ -31,6 +31,7 @@ public class Eventos {
         this.ID = ID;
         this.nombre = nombre;
         this.capacidadPersonas = capacidadPersonas;
+        this.sillasOcupadas = new boolean[capacidadPersonas];
     }
     
     public String listarEventos(ArrayList<Eventos> eventos) {
@@ -45,7 +46,15 @@ public class Eventos {
     public String getNombre(){return this.nombre;}
     public int getCapacidad(){return this.capacidadPersonas;}
     public String getUbicacion(){return this.ubicacion;}
-    public boolean[] getSillas(){return this.sillas;}
+    public boolean[] getSillas(){return this.sillasOcupadas;}
+    
+    // Setters
+    public void reservarSillas(int[] sillasAReservar){ 
+        for (int i = 0; i < sillasAReservar.length; i++) {
+            sillasOcupadas[i] = true; // SI esta ocupada.
+        }
+        
+    }
     // CORREGIR: public List<Clientes> getClientes(){return(new Clientes<>(this.clientes));}
   
 }

@@ -61,8 +61,7 @@ public class SistemaDeEntradas {
             limpiarConsola();
             
             // Me genero porblemas usar .nextInt, asi que se usara casteo cada vez que se quiera guardar un Int, ya que me lo recomendo varias IAs y tiene sentido
-            String lineaLeida = entrada.nextLine();
-            opcion = Integer.parseInt(lineaLeida);
+            opcion = Integer.parseInt(entrada.nextLine());
             
             switch(opcion){
                 case 0:
@@ -131,7 +130,7 @@ public class SistemaDeEntradas {
     
     public void ModificarEvento() {
         // Implementación pendiente [X]
-        int idBuscado, opcion, posEvento;
+        int idBuscado, opcion, posEvento = -1;
         boolean encontrado = false;
         
         if(eventos.isEmpty() || eventos == null){
@@ -151,16 +150,55 @@ public class SistemaDeEntradas {
             
         }
         
-        if (encontrado) {
+        if (!encontrado) {
+            System.out.println("No se encontro el evento " + idBuscado + ".");
+            return;
+        } else{
+            
             System.out.println("Se ha encontrado el evento " + idBuscado + ".");
+            System.out.println("----------------------------------------------");
             System.out.println("Que quiere modificar del evento?");
             System.out.println("1. Nombre");
             System.out.println("2. Capacidad de Personas");
             System.out.println("3. Ubicacion");
             System.out.println("4. Reservar Sillas");
+            System.out.println("0. Cancelar");
             
-        } else{
-            System.out.println("No se encontro el evento " + idBuscado + ".");
+            opcion = Integer.parseInt(entrada.nextLine());
+            
+            switch(opcion){
+                case 0:
+                    return;
+                case 1:
+                    String nombre = entrada.nextLine();
+                    eventos.get(posEvento).nombre = nombre;
+                    System.out.println("Se cambio el nombre a " + nombre + "!");
+                    break;
+                case 2:
+                    System.out.println("Ingrese la nueva capacidad de personas en el evento: ");
+                    int capacidad = Integer.parseInt(entrada.nextLine());
+                    eventos.get(posEvento).capacidadPersonas = capacidad;
+                    System.out.println("Capacidad actualizada!");
+                    break;
+                case 3:
+                    System.out.println("Donde se realizara este evento: ");
+                    eventos.get(posEvento).ubicacion = entrada.nextLine();
+                    System.out.println("Ubicacion actualizada a " + eventos.get(posEvento).ubicacion);
+                    break;
+                case 4:
+                    
+                    System.out.println("Cuantas sillas quiere reservar?");
+                    int numeroSillasAReservar = Integer.parseInt(entrada.nextLine());
+                    int[] sillasPedidas = new int[numeroSillasAReservar];
+                    for (int i = 0; i < numeroSillasAReservar; i++) {
+                        System.out.println("Indique que silla desea agregar a la reserva (debe ser del lugar 1 al " + eventos.get(posEvento).capacidadPersonas + ".");                      
+                        sillasPedidas[i] = Integer.parseInt(entrada.nextLine());
+                    }
+                    eventos.get(posEvento).reservarSillas(sillasPedidas);
+                    break;
+                  
+            
+            }
         }
 
     }
