@@ -250,18 +250,20 @@ public class SistemaDeEntradas {
         System.out.println("Ingrese su RUT: ");
         rut = entrada.nextLine();
         
-        System.out.println("Ingrese su edad: ");
-        
-        edad = Integer.parseInt(entrada.nextLine());
-        
         while(true){
-                if(edad < 16 || edad > 120){
+            try{
+                System.out.println("Ingrese su edad: ");
+                edad = Integer.parseInt(entrada.nextLine());
+                
+                if (edad < 16 || edad > 120){
                 System.out.println("Debes ingresar una edad valida! (16 - 120 años).");
                 edad = Integer.parseInt(entrada.nextLine());
-                } else{break;}
+                } else { break; }
                 
+            } catch (NumberFormatException e) {
+                System.out.println("Debes ingresar un número entero!");
             }
-        
+        }
         nuevoCliente = new Cliente(nombre, rut, edad); 
                 
         nuevoCliente.setEdad(edad);

@@ -1,5 +1,6 @@
 package Clases;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,10 +17,16 @@ especiales para personas con discapacidad.
 
 public class Evento {
     
-    int ID;
-    String nombre;
-    int capacidadPersonas;
-    String ubicacion;
+    private int ID;
+    private String nombre;
+    private int capacidadPersonas;
+    private String ubicacion;
+    private LocalDate fechaEvento;
+    private String orador;
+    private String temaEvento;
+    private String descripcionEvento;
+    private int asientosEspeciales;
+    
 
     
     List<Cliente> clientes;
@@ -29,10 +36,18 @@ public class Evento {
      Usa colecciones de clases/objetos, por lo tanto nos termina señalando el package y el Hashcode de la clase, entonces con el @Override le decimos a Java
      que cuando se intente usar este metodo nativo de Java en esta clase Eventos o Clientes, vamos a reconfigurar el comportamiento */
 
-    public Evento (String nombre, int capacidadPersonas, int ID) {
+    public Evento (String nombre, int capacidadPersonas, int ID, String ubicacion, 
+            LocalDate fechaEvento, String orador, String temaEvento, String descripcionEvento, int asientosEspeciales) {
         this.ID = ID;
         this.nombre = nombre;
         this.capacidadPersonas = capacidadPersonas;
+        this.ubicacion = ubicacion;
+        this.fechaEvento = fechaEvento;
+        this.orador = orador;
+        this.temaEvento = temaEvento;
+        this.descripcionEvento = descripcionEvento;
+        this.asientosEspeciales = asientosEspeciales;
+        
     }
     
     public String listarEventos(ArrayList<Evento> eventos) {
@@ -47,12 +62,23 @@ public class Evento {
     public String getNombre(){return this.nombre;}
     public int getCapacidad(){return this.capacidadPersonas;}
     public String getUbicacion(){return this.ubicacion;}
+    public LocalDate getFechaEvento(){return this.fechaEvento;}
+    public String getOrador(){return this.orador;}
+    public String getTemaEvento(){return this.temaEvento;}
+    public String getDescripcionEvento(){return this.descripcionEvento;}
+    public int getAsientosEspeciales(){return this.asientosEspeciales;}
     
     // Setters
     public void setID(int ID){this.ID = ID;}
     public void setNombre(String nombre){this.nombre = nombre;}
     public void setCapacidadPersonas(int capacidadPersonas){this.capacidadPersonas = capacidadPersonas;}
     public void setUbicacion(String ubicacion){this.ubicacion = ubicacion;}
+    public void setFechaEvento(LocalDate fechaEvento){this.fechaEvento = fechaEvento;}
+    public void setOrador(String orador){this.orador = orador;}
+    public void setTemaEvento(String temaEvento){this.temaEvento = temaEvento;}
+    public void setDescripcionEvento(String descripcionEvento){this.descripcionEvento = descripcionEvento;}
+    public void setAsientosEspeciales(int asientosEspeciales){this.asientosEspeciales = asientosEspeciales;}
+    
    
             
             
