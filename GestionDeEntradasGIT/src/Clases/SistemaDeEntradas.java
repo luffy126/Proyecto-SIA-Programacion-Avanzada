@@ -141,6 +141,7 @@ public class SistemaDeEntradas {
         // Implementación pendiente [X]
         // Implementacion media pendiente, quedan como la mitad de atributos para modificar
         int idBuscado, opcion, posEvento = -1;
+
         boolean encontrado = false;
         
         if(eventos.isEmpty() || eventos == null){
@@ -153,7 +154,7 @@ public class SistemaDeEntradas {
 
         for (int i = 0; i < eventos.size(); i++) {
             
-            if(idBuscado == eventos.get(i).ID){
+            if(idBuscado == eventos.get(i).getID()){
                 posEvento = i;
                 encontrado = true;
             }
@@ -164,6 +165,7 @@ public class SistemaDeEntradas {
             System.out.println("No se encontro el evento " + idBuscado + ".");
             return;
         } else{
+           
             
             System.out.println("Se ha encontrado el evento " + idBuscado + ".");
             System.out.println("----------------------------------------------");
@@ -182,6 +184,7 @@ public class SistemaDeEntradas {
             opcion = Integer.parseInt(entrada.nextLine());
             
             switch(opcion){
+                
                 case 0:
                     return;
                 case 1: // nombre
@@ -208,6 +211,7 @@ public class SistemaDeEntradas {
                     eventos.get(posEvento).setFechaEvento(fechaEvento);
                     System.out.println("Fecha del evento cambiada a: " + fechaEvento);
                     break;
+
                 case 5: // orador
                     System.out.println("Ingrese el orador que presentará el evento: ");
                     String orador = entrada.nextLine();
@@ -259,7 +263,7 @@ public class SistemaDeEntradas {
             eventoEncontrado = buscarEventosPorID(idABorrar);
             indice = eventos.indexOf(eventoEncontrado);
             eventos.remove(indice);
-            System.out.println("Se ha eliminado el evento con ID: " + eventos.get(indice).ID);
+            System.out.println("Se ha eliminado el evento con ID: " + eventos.get(indice).getID());
         }
            
     }
@@ -345,7 +349,7 @@ public class SistemaDeEntradas {
         }
         
         for (Cliente c : clientes) {
-            String txt = "" + (clientes.size() + c.nombre + ", RUT:" + c.rut);
+            String txt = "" + (clientes.size() + ". " + c.nombre + ", RUT:" + c.rut);
             System.out.println(txt);
         }
     }

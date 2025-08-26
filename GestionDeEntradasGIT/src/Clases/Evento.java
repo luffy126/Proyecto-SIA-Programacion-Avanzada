@@ -2,7 +2,9 @@ package Clases;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -17,6 +19,7 @@ especiales para personas con discapacidad.
 
 public class Evento {
     
+    
     private int ID;
     private String nombre;
     private int capacidadPersonas;
@@ -27,6 +30,8 @@ public class Evento {
     private String descripcionEvento;
     private int asientosEspeciales;
     private int precioEntrada;
+    
+    private Map<Integer, Asiento> asientos;
     
 
     
@@ -49,6 +54,7 @@ public class Evento {
         this.descripcionEvento = descripcionEvento;
         this.asientosEspeciales = asientosEspeciales;
         this.precioEntrada = precioEntrada;
+        this.asientos = new HashMap<>();
     }
     
     public String listarEventos(ArrayList<Evento> eventos) {
