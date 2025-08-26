@@ -26,6 +26,7 @@ public class Evento {
     private String temaEvento;
     private String descripcionEvento;
     private int asientosEspeciales;
+    private int precioEntrada;
     
 
     
@@ -37,7 +38,7 @@ public class Evento {
      que cuando se intente usar este metodo nativo de Java en esta clase Eventos o Clientes, vamos a reconfigurar el comportamiento */
 
     public Evento (String nombre, int capacidadPersonas, int ID, String ubicacion, 
-            LocalDate fechaEvento, String orador, String temaEvento, String descripcionEvento, int asientosEspeciales) {
+            LocalDate fechaEvento, String orador, String temaEvento, String descripcionEvento, int asientosEspeciales, int precioEntrada) {
         this.ID = ID;
         this.nombre = nombre;
         this.capacidadPersonas = capacidadPersonas;
@@ -47,7 +48,7 @@ public class Evento {
         this.temaEvento = temaEvento;
         this.descripcionEvento = descripcionEvento;
         this.asientosEspeciales = asientosEspeciales;
-        
+        this.precioEntrada = precioEntrada;
     }
     
     public String listarEventos(ArrayList<Evento> eventos) {
@@ -67,6 +68,7 @@ public class Evento {
     public String getTemaEvento(){return this.temaEvento;}
     public String getDescripcionEvento(){return this.descripcionEvento;}
     public int getAsientosEspeciales(){return this.asientosEspeciales;}
+    public int getPrecioEntrada(){return this.precioEntrada;}
     
     // Setters
     public void setID(int ID){this.ID = ID;}
@@ -78,6 +80,7 @@ public class Evento {
     public void setTemaEvento(String temaEvento){this.temaEvento = temaEvento;}
     public void setDescripcionEvento(String descripcionEvento){this.descripcionEvento = descripcionEvento;}
     public void setAsientosEspeciales(int asientosEspeciales){this.asientosEspeciales = asientosEspeciales;}
+    public void setPrecioEntrada(int precioEntrada){this.precioEntrada = precioEntrada;}
     
    
             

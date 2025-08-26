@@ -12,14 +12,14 @@ public class Cliente {
     String rut;
     String nombre;
     int asientosAComprar;
-    String[] acompanantes;
+    String acompanantes;
     int edad;
-    String[] discapacidades;
+    String discapacidades;
     GestorArchivos gestorArchivos;
     
     List<Compra> comprasCliente = new ArrayList<>();
 
-    public Cliente(String nombre, String rut, int edad){
+    public Cliente(String nombre, String rut, int edad, int asientosAComprar, String acompanantes, String discapacidades){
         this.rut = rut;
         this.nombre = nombre;
         this.edad = edad;
@@ -28,22 +28,21 @@ public class Cliente {
         this.discapacidades = discapacidades;
         
     }
-    
-    
+   
     // Getters
     public String getRut(){return this.rut;}
     public String getNombre() {return this.nombre;}
-    public String[] getAcompanantes() {return this.acompanantes;}
+    public String getAcompanantes() {return this.acompanantes;}
     public int getEdad(){return this.edad;}
     public int getAsientosAComprar() {return this.asientosAComprar;}
-    public String[] getDiscapacidades(){return this.discapacidades;}
+    public String getDiscapacidades(){return this.discapacidades;}
     
     //Setters
     public void setRut(String rut){this.rut = rut;}
     public void setNombre(String nombre){this.nombre = nombre;}
-    public void setAcompanantes(String[] acompanantes){this.acompanantes = acompanantes;}
+    public void setAcompanantes(String acompanantes){this.acompanantes = acompanantes;}
     public void setEdad(int edad) {this.edad = edad;}
     public void setAsientosAComprar(int asientosAComprar){this.asientosAComprar = asientosAComprar;}
-    public void setDiscapacidades(String[] discapacidades){this.discapacidades = discapacidades;}
+    public void setDiscapacidades(String discapacidades){this.discapacidades = discapacidades;}
     
 }

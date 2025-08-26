@@ -1,6 +1,8 @@
 package Clases;
 import java.util.*;
 import java.io.*;
+import java.time.LocalDate;
+import java.time.Month;
 
 /**
  *
@@ -105,17 +107,39 @@ public class SistemaDeEntradas {
         System.out.println("Capacidad del evento:");
         int capacidad = Integer.parseInt(entrada.nextLine());
         
+        System.out.println("Ingrese ubicacion del evento:");
+        String ubicacion = entrada.nextLine();
+        
+        System.out.println("Ingrese fecha del evento (Formato: año-mes-dia):");
+        LocalDate fecha = LocalDate.parse(entrada.nextLine());
+        
+        System.out.println("Ingrese nombre del orador del evento:");
+        String orador = entrada.nextLine();
+        
+        System.out.println("Ingrese tema del evento:");
+        String temaEvento = entrada.nextLine();
+        
+        System.out.println("Ingrese descripción del evento:");
+        String descripcion = entrada.nextLine();
+        
+        System.out.println("Ingrese numero de asientos destinados a discapacitados del evento:");
+        int asientosDiscapacidades = Integer.parseInt(entrada.nextLine());
+        
+        System.out.println("Ingrese precio de la entrada al evento (en pesos):");
+        int precioEntrada = Integer.parseInt(entrada.nextLine());
+        
         Random random = new Random();
         
         int ID = (random.nextInt(999)); 
         System.out.println("ID del evento creado: " + ID);
-        Evento nuevoEvento = new Evento(nombre, capacidad, ID);
+        Evento nuevoEvento = new Evento(nombre, capacidad, ID, ubicacion, fecha, orador, temaEvento, descripcion, asientosDiscapacidades, precioEntrada);
         eventos.add(nuevoEvento);
         System.out.println("Evento ID:" + ID + " - " + nombre + " se ha creado satisfactoriamente.");
     }
     
     public void ModificarEvento() {
         // Implementación pendiente [X]
+        // Implementacion media pendiente, quedan como la mitad de atributos para modificar
         int idBuscado, opcion, posEvento = -1;
         boolean encontrado = false;
         
@@ -156,24 +180,34 @@ public class SistemaDeEntradas {
                 case 0:
                     return;
                 case 1:
+                    System.out.println("Ingrese el nuevo nombre del evento:");
                     String nombre = entrada.nextLine();
-                    eventos.get(posEvento).nombre = nombre;
+                    eventos.get(posEvento).setNombre(nombre);
                     System.out.println("Se cambio el nombre a " + nombre + "!");
                     break;
                 case 2:
                     System.out.println("Ingrese la nueva capacidad de personas en el evento: ");
                     int capacidad = Integer.parseInt(entrada.nextLine());
-                    eventos.get(posEvento).capacidadPersonas = capacidad;
+                    eventos.get(posEvento).setCapacidadPersonas(capacidad);
                     System.out.println("Capacidad actualizada!");
                     break;
                 case 3:
                     System.out.println("Donde se realizara este evento: ");
-                    eventos.get(posEvento).ubicacion = entrada.nextLine();
-                    System.out.println("Ubicacion actualizada a " + eventos.get(posEvento).ubicacion);
+                    String ubicacion = entrada.nextLine();
+                    eventos.get(posEvento).setUbicacion(ubicacion);
+                    System.out.println("Ubicacion actualizada a " + ubicacion);
                     break;
                 case 4:
                     System.out.println("Cuantas sillas quiere reservar?");
                     int numeroSillasAReservar = Integer.parseInt(entrada.nextLine());
+                    eventos.get(posEvento).setCapacidad(numeroSillasAReservar);
+                    System.out.println("El numero de sillas reservadas ha sido actualizado");
+                case 5: // fecha
+                    System.out.println("INgrese la fecha donde se realizará este evento: ");
+                    LocalDate  = entrada.nextLine();
+                    eventos.get(posEvento).setUbicacion(ubicacion);
+                    System.out.println("Ubicacion actualizada a " + ubicacion);
+                    break;
 
                     // Crear arreglo del tamaño que pidió el usuario
                     break;
@@ -210,8 +244,10 @@ public class SistemaDeEntradas {
         }
         
         for (Evento e : eventos) {
-            String txt = "" + (eventos.size() + "1=. " + e.nombre + ", ID:" + e.ID);
+            String txt = "" + (e.getNombre() + ", ID:" + e.getID() + ", Tema: " + e.getTemaEvento());
+            String txt2 = "Capacidad: " + (e.getCapacidad() + ", Precio: $" + e.getPrecioEntrada()+ ", Orador: " + e.getOrador());
             System.out.println(txt);
+            System.out.println(txt2);
         }
   
     }
@@ -264,7 +300,7 @@ public class SistemaDeEntradas {
                 System.out.println("Debes ingresar un número entero!");
             }
         }
-        nuevoCliente = new Cliente(nombre, rut, edad); 
+        nuevoCliente = new Cliente(nombre, rut, edad, 0, "lorem ipsum", "lorem ipsum"); 
                 
         nuevoCliente.setEdad(edad);
         nuevoCliente.setNombre(nombre);
