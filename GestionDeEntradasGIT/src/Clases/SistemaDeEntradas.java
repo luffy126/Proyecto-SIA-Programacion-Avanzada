@@ -171,7 +171,12 @@ public class SistemaDeEntradas {
             System.out.println("1. Nombre");
             System.out.println("2. Capacidad de Personas");
             System.out.println("3. Ubicacion");
-            System.out.println("4. Reservar Sillas");
+            System.out.println("4. Fecha de realización");
+            System.out.println("5. Orador");
+            System.out.println("6. Tema del evento");
+            System.out.println("7. Descripción del evento");
+            System.out.println("8. Asientos para discapacitados");
+            System.out.println("9. Precio de la entrada");
             System.out.println("0. Cancelar");
             
             opcion = Integer.parseInt(entrada.nextLine());
@@ -179,39 +184,61 @@ public class SistemaDeEntradas {
             switch(opcion){
                 case 0:
                     return;
-                case 1:
+                case 1: // nombre
                     System.out.println("Ingrese el nuevo nombre del evento:");
                     String nombre = entrada.nextLine();
                     eventos.get(posEvento).setNombre(nombre);
                     System.out.println("Se cambio el nombre a " + nombre + "!");
                     break;
-                case 2:
+                case 2: // capacidad
                     System.out.println("Ingrese la nueva capacidad de personas en el evento: ");
                     int capacidad = Integer.parseInt(entrada.nextLine());
                     eventos.get(posEvento).setCapacidadPersonas(capacidad);
                     System.out.println("Capacidad actualizada!");
                     break;
-                case 3:
+                case 3: // ubicacion
                     System.out.println("Donde se realizara este evento: ");
                     String ubicacion = entrada.nextLine();
                     eventos.get(posEvento).setUbicacion(ubicacion);
                     System.out.println("Ubicacion actualizada a " + ubicacion);
                     break;
-                case 4:
-                    System.out.println("Cuantas sillas quiere reservar?");
-                    int numeroSillasAReservar = Integer.parseInt(entrada.nextLine());
-                    eventos.get(posEvento).setCapacidad(numeroSillasAReservar);
-                    System.out.println("El numero de sillas reservadas ha sido actualizado");
-                case 5: // fecha
-                    System.out.println("INgrese la fecha donde se realizará este evento: ");
-                    LocalDate  = entrada.nextLine();
-                    eventos.get(posEvento).setUbicacion(ubicacion);
-                    System.out.println("Ubicacion actualizada a " + ubicacion);
+                case 4: // fecha
+                    System.out.println("Ingrese la fecha donde se realizará este evento (Formato: año-mes-dia): ");
+                    LocalDate fechaEvento = LocalDate.parse(entrada.nextLine());
+                    eventos.get(posEvento).setFechaEvento(fechaEvento);
+                    System.out.println("Fecha del evento cambiada a: " + fechaEvento);
                     break;
-
-                    // Crear arreglo del tamaño que pidió el usuario
+                case 5: // orador
+                    System.out.println("Ingrese el orador que presentará el evento: ");
+                    String orador = entrada.nextLine();
+                    eventos.get(posEvento).setOrador(orador);
+                    System.out.println("Orador cambiado a: " + fechaEvento);
                     break;
- 
+                case 6: // tema del evento
+                    System.out.println("Ingrese el tema del evento: ");
+                    String tema = entrada.nextLine();
+                    eventos.get(posEvento).setTemaEvento(tema);
+                    System.out.println("Tema del evento cambiado a: " + fechaEvento);
+                    break;
+                case 7: // descripcion del evento
+                    System.out.println("Ingrese la descripción del evento: ");
+                    String descripcion = entrada.nextLine();
+                    eventos.get(posEvento).setDescripcionEvento(descripcion);
+                    System.out.println("Descripción del evento cambiado a: " + descripcion);
+                    break;
+                case 8: // asientos para discapacitados
+                    System.out.println("Ingrese la capacidad de asientos para discapacitados del evento: ");
+                    int asientosDiscapacitados = Integer.parseInt(entrada.nextLine());
+                    eventos.get(posEvento).setAsientosEspeciales(asientosDiscapacitados);
+                    System.out.println("Asientos para discapacitados cambiados a: " + asientosDiscapacitados);
+                    break;
+                case 9: // precio de la entrada
+                    System.out.println("Ingrese el precio de la entrada al evento: ");
+                    int precio = Integer.parseInt(entrada.nextLine());
+                    eventos.get(posEvento).setPrecioEntrada(precio);
+                    System.out.println("Fecha del evento cambiada a: " + precio);
+                    break;
+                    
             }
         }
 
