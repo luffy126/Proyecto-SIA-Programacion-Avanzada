@@ -6,9 +6,9 @@ package Clases;
  */
 public class Asiento {
     
-    Cliente dueño = null;
-    Evento eventoAnfitrion = null;
-    boolean ocupado = false;
+    private Cliente dueño = null;
+    private Evento eventoAnfitrion = null;
+    private boolean ocupado = false;
     
     public Asiento(Cliente dueño, Evento eventoAnfitrion, boolean ocupado) {    
         this.dueño = dueño;
