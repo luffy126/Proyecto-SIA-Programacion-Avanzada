@@ -140,7 +140,7 @@ public class SistemaDeEntradas {
     public void ModificarEvento() {
         // Implementación pendiente [X]
         // Implementacion media pendiente, quedan como la mitad de atributos para modificar
-        int idBuscado, opcion, posEvento = -1;
+        int idBuscado, opcion, posEvento = 0;
 
         boolean encontrado = false;
         
@@ -216,13 +216,13 @@ public class SistemaDeEntradas {
                     System.out.println("Ingrese el orador que presentará el evento: ");
                     String orador = entrada.nextLine();
                     eventos.get(posEvento).setOrador(orador);
-                    System.out.println("Orador cambiado a: " + fechaEvento);
+                    System.out.println("Orador cambiado a: " + orador);
                     break;
                 case 6: // tema del evento
                     System.out.println("Ingrese el tema del evento: ");
                     String tema = entrada.nextLine();
                     eventos.get(posEvento).setTemaEvento(tema);
-                    System.out.println("Tema del evento cambiado a: " + fechaEvento);
+                    System.out.println("Tema del evento cambiado a: " + tema);
                     break;
                 case 7: // descripcion del evento
                     System.out.println("Ingrese la descripción del evento: ");
@@ -275,10 +275,13 @@ public class SistemaDeEntradas {
         }
         
         for (Evento e : eventos) {
-            String txt = "" + (e.getNombre() + ", ID:" + e.getID() + ", Tema: " + e.getTemaEvento());
+            String txt = "Nombre del evento: " + (e.getNombre() + ", ID: " + e.getID() + ", Tema: " + e.getTemaEvento());
             String txt2 = "Capacidad: " + (e.getCapacidad() + ", Precio: $" + e.getPrecioEntrada()+ ", Orador: " + e.getOrador());
+            String txt3 = "Ubicación : " + (e.getUbicacion() + ", Fecha: " + e.getFechaEvento()+ ", Orador: " + e.getOrador());
+            System.out.println(" ");
             System.out.println(txt);
             System.out.println(txt2);
+            System.out.println(txt3);
         }
   
     }
@@ -349,7 +352,7 @@ public class SistemaDeEntradas {
         }
         
         for (Cliente c : clientes) {
-            String txt = "" + (clientes.size() + ". " + c.nombre + ", RUT:" + c.rut);
+            String txt = "" + (clientes.size() + ". " + clientes.get + ", RUT:" + c.rut);
             System.out.println(txt);
         }
     }
