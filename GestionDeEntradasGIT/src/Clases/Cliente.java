@@ -9,13 +9,13 @@ import java.util.List;
  */
 public class Cliente {
 
-    String rut;
-    String nombre;
-    int asientosAComprar;
-    String acompanantes;
-    int edad;
-    String discapacidades;
-    GestorArchivos gestorArchivos;
+    private String rut;
+    private String nombre;
+    private int asientosAComprar;
+    private String acompanantes;
+    private int edad;
+    private String discapacidades;
+    private GestorArchivos gestorArchivos;
     
     List<Compra> comprasCliente = new ArrayList<>();
 
