@@ -252,7 +252,7 @@ public class SistemaDeEntradas {
         int idABorrar;
         int indice;
         Evento eventoEncontrado;
-        System.out.println("Función de remover evento no implementada aún.");
+        
         if (eventos.isEmpty() || eventos == null) {
             System.out.println("No hay eventos para borrar.");
             return;
@@ -261,9 +261,14 @@ public class SistemaDeEntradas {
             ListarEventos(eventos);
             idABorrar = Integer.parseInt(entrada.nextLine());
             eventoEncontrado = buscarEventosPorID(idABorrar);
+            System.out.println("Ingrese ID de evento a eliminar: ");
+            if (eventoEncontrado == null) {
+                System.out.println("No existe el evento con la id especificada");
+            }
+            
             indice = eventos.indexOf(eventoEncontrado);
-            eventos.remove(indice);
             System.out.println("Se ha eliminado el evento con ID: " + eventos.get(indice).getID());
+            eventos.remove(indice);
         }
            
     }
@@ -277,7 +282,7 @@ public class SistemaDeEntradas {
         for (Evento e : eventos) {
             String txt = "Nombre del evento: " + (e.getNombre() + ", ID: " + e.getID() + ", Tema: " + e.getTemaEvento());
             String txt2 = "Capacidad: " + (e.getCapacidad() + ", Precio: $" + e.getPrecioEntrada()+ ", Orador: " + e.getOrador());
-            String txt3 = "Ubicación : " + (e.getUbicacion() + ", Fecha: " + e.getFechaEvento()+ ", Orador: " + e.getOrador());
+            String txt3 = "Ubicación : " + (e.getUbicacion() + ", Fecha: " + e.getFechaEvento());
             System.out.println(" ");
             System.out.println(txt);
             System.out.println(txt2);
@@ -351,10 +356,16 @@ public class SistemaDeEntradas {
             return;
         }
         
+        int i = 1;
         for (Cliente c : clientes) {
-            String txt = "" + (clientes.size() + ". " + clientes.get + ", RUT:" + c.rut);
+            String txt = "" + (i + ". Nombre: " + c.getNombre() + ", RUT: " + c.getRut() + ", Edad: " + c.getEdad());
             System.out.println(txt);
+            i++;
         }
+    }
+    
+    public void removerCliente(List<Cliente> clientes) {
+        
     }
     
     // METODOS MISCELANEOS
