@@ -259,9 +259,9 @@ public class SistemaDeEntradas {
         } else {
             System.out.println("Los eventos registrados son los siguientes: ");
             ListarEventos(eventos);
+            System.out.println("Ingrese ID de evento a eliminar: ");
             idABorrar = Integer.parseInt(entrada.nextLine());
             eventoEncontrado = buscarEventosPorID(idABorrar);
-            System.out.println("Ingrese ID de evento a eliminar: ");
             if (eventoEncontrado == null) {
                 System.out.println("No existe el evento con la id especificada");
             }
@@ -364,8 +364,28 @@ public class SistemaDeEntradas {
         }
     }
     
-    public void removerCliente(List<Cliente> clientes) {
+    public int buscarClientePorRUT(int rut) {
+        // por implementar
+        return 0;
+    }
+    
+    public void removerCliente() {
+        // por implementar
+        int rutABorrar;
+        int indice;
+        Cliente cliente;
         
+        if (clientes.isEmpty() || clientes == null) {
+            System.out.println("No hay clientes para eliminar");
+        }
+        
+        else {
+            System.out.println("Los clientes son los siguientes: ");
+            ListarClientes(clientes);
+            System.out.println("Ingrese RUT del cliente a eliminar: ");
+            rutABorrar = buscarClientesPorRUT();
+            
+        }
     }
     
     // METODOS MISCELANEOS
