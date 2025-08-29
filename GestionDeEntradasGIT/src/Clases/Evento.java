@@ -40,7 +40,7 @@ public class Evento {
     
     /* el metodo toString() se usa para imprimir colecciones de variables, pero nuestro proyecto
      Usa colecciones de clases/objetos, por lo tanto nos termina señalando el package y el Hashcode de la clase, entonces con el @Override le decimos a Java
-     que cuando se intente usar este metodo nativo de Java en esta clase Eventos o Clientes, vamos a reconfigurar el comportamiento */
+     que cuando se intente usar este metodo nativo de Java en esta clase Eventos o Clientes, reconfiguramos el comportamiento */
 
     public Evento (String nombre, int capacidadPersonas, int ID, String ubicacion, 
             LocalDate fechaEvento, String orador, String temaEvento, String descripcionEvento, int asientosEspeciales, int precioEntrada) {
@@ -55,7 +55,38 @@ public class Evento {
         this.asientosEspeciales = asientosEspeciales;
         this.precioEntrada = precioEntrada;
         this.asientos = new HashMap<>();
+        inicializarAsientos();
     }
+    
+       private void inicializarAsientos() {
+        for (int i = 1; i <= getCapacidad(); i++) {
+            // Crear asiento sin dueño inicialmente, el segundo parametro indica que pertenece a este evento, y el tercero es que esta desocupado
+            Asiento nuevoAsiento = new Asiento(null, this, false);
+            asientos.put(i, nuevoAsiento);
+        }
+    }
+       
+    public boolean reservarAsiento(int numeroAsiento, Cliente cliente) {
+        Asiento asiento = asientos.get(numeroAsiento);
+        
+        if (asiento == null) {
+            System.out.println("El asiento " + numeroAsiento + " no existe.");
+            return false;
+        }
+        
+        if (asiento.getEstadoSilla()) {
+            System.out.println("El asiento " + numeroAsiento + " ya está ocupado por " + 
+                             asiento.getDueño().getNombre());
+            return false;
+        }
+        
+        // Reservar el asiento y asginar el asiento al cliente
+        asiento.setDueño(cliente);
+        asiento.setOcupado(true);
+        System.out.println("Asiento " + numeroAsiento + " reservado para " + cliente.getNombre());
+        return true;
+    }
+    
     
     public String listarEventos(ArrayList<Evento> eventos) {
         
