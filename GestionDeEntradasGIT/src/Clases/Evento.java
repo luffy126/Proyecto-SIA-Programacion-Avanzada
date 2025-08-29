@@ -88,6 +88,16 @@ public class Evento {
     }
     
     
+    public HashMap<Integer, Asiento> buscarAsientosPorRUT(String rut) {
+        HashMap<Integer, Asiento> asientosCliente = new HashMap<>();
+        
+       
+        return asientosCliente;
+    }
+    
+    
+    
+    
     public String listarEventos(ArrayList<Evento> eventos) {
         
         String txt = "" + (eventos.size()+1) + nombre + ", ID:" + ID;
