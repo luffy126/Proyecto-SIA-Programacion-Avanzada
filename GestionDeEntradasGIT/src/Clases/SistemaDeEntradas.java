@@ -8,6 +8,8 @@ import java.time.Month;
  * @author Tenerex
  */
 
+// GITHUB: https://github.com/luffy126/Proyecto-SIA-Programacion-Avanzada
+
 public class SistemaDeEntradas {
     // Declara Colecciones de Clases a usar, y un Objeto tipo GestionDeArchivos, para despues cargar bases de datos locales.
     private List<Evento> eventos;

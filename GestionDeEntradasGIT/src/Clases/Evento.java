@@ -18,8 +18,7 @@ especiales para personas con discapacidad.
 */
 
 public class Evento {
-    
-    
+
     private int ID;
     private String nombre;
     private int capacidadPersonas;
@@ -30,18 +29,9 @@ public class Evento {
     private String descripcionEvento;
     private int asientosEspeciales;
     private int precioEntrada;
+    private Map <Integer, Asiento> asientos;
+    List <Cliente> clientes;
     
-    private Map<Integer, Asiento> asientos;
-    
-
-    
-    List<Cliente> clientes;
-    // Un amigo que paso me recomendo, que a este evento, le meta HashMap, 
-    
-    /* el metodo toString() se usa para imprimir colecciones de variables, pero nuestro proyecto
-     Usa colecciones de clases/objetos, por lo tanto nos termina señalando el package y el Hashcode de la clase, entonces con el @Override le decimos a Java
-     que cuando se intente usar este metodo nativo de Java en esta clase Eventos o Clientes, reconfiguramos el comportamiento */
-
     public Evento (String nombre, int capacidadPersonas, int ID, String ubicacion, 
             LocalDate fechaEvento, String orador, String temaEvento, String descripcionEvento, int asientosEspeciales, int precioEntrada) {
         this.ID = ID;
@@ -128,7 +118,6 @@ public class Evento {
                 ocupados.put(entry.getKey(), entry.getValue());
             }
         }
-        
         return ocupados;
     } 
      
@@ -141,7 +130,6 @@ public class Evento {
                 asientosCliente.put(entry.getKey(), asiento); // Agrega al HashMap esta entrada
             }
         }
-
         return asientosCliente;
     }
     
