@@ -74,7 +74,7 @@ public class Evento {
             return false;
         }
         
-        if (asiento.getEstadoSilla()) {
+        if (asiento.getAsientoIsOcupado()) {
             System.out.println("El asiento " + numeroAsiento + " ya está ocupado por " + 
                              asiento.getDueño().getNombre());
             return false;
@@ -82,21 +82,86 @@ public class Evento {
         
         // Reservar el asiento y asginar el asiento al cliente
         asiento.setDueño(cliente);
-        asiento.setOcupado(true);
+        asiento.setIsOcupado(true);
         System.out.println("Asiento " + numeroAsiento + " reservado para " + cliente.getNombre());
         return true;
     }
     
-    
-    public HashMap<Integer, Asiento> buscarAsientosPorRUT(String rut) {
-        HashMap<Integer, Asiento> asientosCliente = new HashMap<>();
+     public boolean liberarAsiento(int numeroAsiento) { // Devuelve si se pudo o no liberar el asiento, despues de hacer condiciones logicas, 
+        Asiento asiento = asientos.get(numeroAsiento);
         
-       
+        if (asiento == null) {
+            System.out.println("El asiento " + numeroAsiento + " no existe.");
+            return false;
+        }
+        
+        if (!asiento.getAsientoIsOcupado()) {
+            System.out.println("El asiento " + numeroAsiento + " ya está disponible.");
+            return false;
+        }
+        
+        String nombreAnterior = asiento.getDueño().getNombre(); // Var. local para el printeo mas formal indicando a quien se lo quitamos, para mayor trazabilidad y entendimiento.
+        asiento.setDueño(null);
+        asiento.setIsOcupado(false);
+        System.out.println("Asiento " + numeroAsiento + " liberado (antes ocupado por " + 
+                         nombreAnterior + ")");
+        return true;
+    }
+    
+     public HashMap<Integer, Asiento> obtenerAsientosDisponibles() { // Recorrido for simple, para ir guardando en un nuevo hashmap los disponibles y devolverlo
+        HashMap<Integer, Asiento> disponibles = new HashMap<>();
+        
+        for (Map.Entry<Integer, Asiento> entry : asientos.entrySet()) {
+            if (entry.getValue().getAsientoIsOcupado() == false) {
+                disponibles.put(entry.getKey(), entry.getValue());
+            }
+        }
+        
+        return disponibles;
+    }
+    
+    public HashMap<Integer, Asiento> obtenerAsientosOcupados() { // Lo mismo que el anterior pero al reve'
+        HashMap<Integer, Asiento> ocupados = new HashMap<>();
+        
+        for (Map.Entry<Integer, Asiento> entry : asientos.entrySet()) {
+            if (entry.getValue().getAsientoIsOcupado() == true) {
+                ocupados.put(entry.getKey(), entry.getValue());
+            }
+        }
+        
+        return ocupados;
+    } 
+     
+    public HashMap<Integer, Asiento> buscarAsientosPorRUT(String rut) {
+        HashMap<Integer, Asiento> asientosCliente = new HashMap<>(); // nuevo mapa para guardar los asientos del rut
+         
+        for (Map.Entry<Integer, Asiento> entry : asientos.entrySet()) {  // entrySet devuelve las llaves y valores por entradas, cada entrada corresponde a un asiento y porta consigo 2 tipos de dato, integer y obj Asiento
+            Asiento asiento = entry.getValue(); // Guarda la entrada actual para hacerle logica y confirmar que tiene dueño y el rut sea igual.
+            if (asiento.getDueño() != null && asiento.getDueño().getRut().equals(rut)) {
+                asientosCliente.put(entry.getKey(), asiento); // Agrega al HashMap esta entrada
+            }
+        }
+
         return asientosCliente;
     }
     
+    public Asiento buscarAsiento(int numeroAsiento) { // Forma para buscar asientos por id, creo que seria util para comprobaciones internas, o si se llega a necesitar en un futuro.
+        return asientos.get(numeroAsiento);
+    }
     
-    
+    public void mostrarEstadisticasAsientos() {
+        int totalAsientos = asientos.size();
+        int ocupados = obtenerAsientosOcupados().size();
+        int disponibles = totalAsientos - ocupados;
+        double porcentajeOcupacion = totalAsientos > 0 ? (ocupados * 100.0 / totalAsientos) : 0;
+        
+        System.out.println("=== ESTADÍSTICAS DEL EVENTO: " + getNombre() + " ===");
+        System.out.println("Total de asientos: " + totalAsientos);
+        System.out.println("Asientos ocupados: " + ocupados);
+        System.out.println("Asientos disponibles: " + disponibles);
+        System.out.printf("Porcentaje de ocupación: %.2f%%\n", porcentajeOcupacion);
+    }
+
     
     public String listarEventos(ArrayList<Evento> eventos) {
         
@@ -129,9 +194,4 @@ public class Evento {
     public void setAsientosEspeciales(int asientosEspeciales){this.asientosEspeciales = asientosEspeciales;}
     public void setPrecioEntrada(int precioEntrada){this.precioEntrada = precioEntrada;}
     
-   
-            
-            
-    // CORREGIR: public List<Clientes> getClientes(){return(new Clientes<>(this.clientes));}
-  
 }

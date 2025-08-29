@@ -378,14 +378,19 @@ public class SistemaDeEntradas {
         }
     }
     
-    public int buscarClientePorRUT(int rut) {
-        // por implementar
-        return 0;
+    public Cliente buscarClientePorRUT(String rut) {
+        
+        Cliente clienteEncontrado = null;
+        
+        if (clientes != null &&) {
+            
+        }
+        return clienteEncontrado;
     }
     
     public void removerCliente() {
         // por implementar
-        int rutABorrar;
+        String rutABorrar;
         int indice;
         Cliente cliente;
         
@@ -397,7 +402,7 @@ public class SistemaDeEntradas {
             System.out.println("Los clientes son los siguientes: ");
             ListarClientes(clientes);
             System.out.println("Ingrese RUT del cliente a eliminar: ");
-            rutABorrar = buscarClientesPorRUT();
+            rutABorrar = buscarClientePorRUT(entrada.nextLine());
             
         }
     }
