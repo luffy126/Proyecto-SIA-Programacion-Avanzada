@@ -213,7 +213,6 @@ public class SistemaDeEntradas {
                     eventos.get(posEvento).setFechaEvento(fechaEvento);
                     System.out.println("Fecha del evento cambiada a: " + fechaEvento);
                     break;
-
                 case 5: // orador
                     System.out.println("Ingrese el orador que presentará el evento: ");
                     String orador = entrada.nextLine();
@@ -242,7 +241,7 @@ public class SistemaDeEntradas {
                     System.out.println("Ingrese el precio de la entrada al evento: ");
                     int precio = Integer.parseInt(entrada.nextLine());
                     eventos.get(posEvento).setPrecioEntrada(precio);
-                    System.out.println("Fecha del evento cambiada a: " + precio);
+                    System.out.println("Precio del evento cambiado a: " + precio);
                     break;
                     
             }
@@ -314,9 +313,12 @@ public class SistemaDeEntradas {
         if(clientes == null || clientes.isEmpty()){
             System.out.println("");
             System.out.println("-------------------------------------------------------");
-            System.out.println("Es tu primera vez ejecutando Sistema de Entradas.");
-            System.out.println("Deberas crear una cuenta para poder administrar eventos!");
+            System.out.println("Es tu primera vez ejecutando Sistema de Entradas. Creando datos iniciales...");
+            System.out.println("Deberas modificar esta cuenta para poder administrar eventos!");
             System.out.println("-------------------------------------------------------");
+            nuevoCliente = new Cliente("Claudio Cubillos", "12.345.678-9", 99, 0, "lorem ipsum", "lorem ipsum"); 
+            clientes.add(nuevoCliente);
+            return;
         }
         
         System.out.println("Ingrese su nombre: ");
