@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.time.Month;
 
 /**
- *
  * @author Tenerex
  */
 
@@ -21,7 +20,6 @@ public class SistemaDeEntradas {
     // Objeto para leer, me parece mejor que el InputStreamBuffer, y basicamente es un SuperObjeto que le pone una skin mas bonita al BufferedReader
     private Scanner entrada = new Scanner(System.in); 
     
-   
     // METODO CONSTRUCTOR
     public SistemaDeEntradas(){
         this.eventos = new ArrayList<>();
@@ -56,6 +54,7 @@ public class SistemaDeEntradas {
             System.out.println("4. Modificar Evento");
             System.out.println("5. Listar Clientes");
             System.out.println("6. Registrar Cliente");
+            System.out.println("7. Eliminar Cliente");
             System.out.println("0. Salir");
             System.out.println("");
             System.out.print(">> Seleccione una opción: ");
@@ -94,6 +93,9 @@ public class SistemaDeEntradas {
                     break;
                 case 6:
                     RegistrarCliente();
+                    break;
+                case 7:
+                    removerCliente();
                     break;
                    
             }
@@ -157,16 +159,14 @@ public class SistemaDeEntradas {
             if(idBuscado == eventos.get(i).getID()){
                 posEvento = i;
                 encontrado = true;
-            }
-            
+            } 
         }
         
         if (!encontrado) {
             System.out.println("No se encontro el evento " + idBuscado + ".");
             return;
         } else{
-           
-            
+
             System.out.println("Se ha encontrado el evento " + idBuscado + ".");
             System.out.println("----------------------------------------------");
             System.out.println("Que quiere modificar del evento?");
@@ -288,7 +288,6 @@ public class SistemaDeEntradas {
             System.out.println(txt2);
             System.out.println(txt3);
         }
-  
     }
     public List<Evento> getTodosLosEventos() {
         return eventos;
@@ -308,7 +307,6 @@ public class SistemaDeEntradas {
         int edad;
         String rut;
         String nombre;
-        
         Cliente nuevoCliente;
         
         if(clientes == null || clientes.isEmpty()){
@@ -358,7 +356,6 @@ public class SistemaDeEntradas {
         nuevoCliente.setEdad(edad);
         nuevoCliente.setNombre(nombre);
         nuevoCliente.setRut(rut);
-        
         System.out.println("Gracias por registrarte!");
         clientes.add(nuevoCliente);
         
@@ -382,17 +379,18 @@ public class SistemaDeEntradas {
         
         Cliente clienteEncontrado = null;
         
-        if (clientes != null &&) {
+        if (clientes != null) {
             
         }
+        
         return clienteEncontrado;
     }
     
     public void removerCliente() {
-        // por implementar
+
         String rutABorrar;
         int indice;
-        Cliente cliente;
+        Cliente cliente = null;
         
         if (clientes.isEmpty() || clientes == null) {
             System.out.println("No hay clientes para eliminar");
@@ -402,7 +400,14 @@ public class SistemaDeEntradas {
             System.out.println("Los clientes son los siguientes: ");
             ListarClientes(clientes);
             System.out.println("Ingrese RUT del cliente a eliminar: ");
-            rutABorrar = buscarClientePorRUT(entrada.nextLine());
+            
+            try {
+            cliente = buscarClientePorRUT(entrada.nextLine());
+            clientes.remove(cliente);    // ESTO NO QUIERE BORRAR Y NO SE PORQUE.
+            } 
+            catch(Exception e) {
+                System.out.println("No se pudo encontrar el Cliente por su RUT.");
+            }
             
         }
     }
