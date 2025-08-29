@@ -11,7 +11,7 @@ import java.time.Month;
 // GITHUB: https://github.com/luffy126/Proyecto-SIA-Programacion-Avanzada
 
 public class SistemaDeEntradas {
-    // Declara Colecciones de Clases a usar, y un Objeto tipo GestionDeArchivos, para despues cargar bases de datos locales.
+    // Declaracion de  Colecciones de Clases a usar, y un Objeto tipo GestionDeArchivos, para despues cargar bases de datos locales.
     private List<Evento> eventos;
     private List<Cliente> clientes;
     private List<Compra> compras;
@@ -19,7 +19,7 @@ public class SistemaDeEntradas {
     private boolean apagarSistema;
     private ValidarEntradas validador;
     
-    // Objeto para leer, me parece mejor que el InputStreamBuffer, y basicamente es un SuperObjeto que le pone una skin mas bonita al BufferedReader
+    // Objeto para leer, me parece mejor que el InputStreamBuffer, y burdamente es un SuperObjeto que le pone una skin mas bonita al BufferedReader
     private Scanner entrada = new Scanner(System.in); 
     
     // METODO CONSTRUCTOR
@@ -213,7 +213,6 @@ public class SistemaDeEntradas {
                     eventos.get(posEvento).setFechaEvento(fechaEvento);
                     System.out.println("Fecha del evento cambiada a: " + fechaEvento);
                     break;
-
                 case 5: // orador
                     System.out.println("Ingrese el orador que presentará el evento: ");
                     String orador = entrada.nextLine();
@@ -242,7 +241,7 @@ public class SistemaDeEntradas {
                     System.out.println("Ingrese el precio de la entrada al evento: ");
                     int precio = Integer.parseInt(entrada.nextLine());
                     eventos.get(posEvento).setPrecioEntrada(precio);
-                    System.out.println("Fecha del evento cambiada a: " + precio);
+                    System.out.println("Precio del evento cambiado a: " + precio);
                     break;
                     
             }
@@ -314,9 +313,12 @@ public class SistemaDeEntradas {
         if(clientes == null || clientes.isEmpty()){
             System.out.println("");
             System.out.println("-------------------------------------------------------");
-            System.out.println("Es tu primera vez ejecutando Sistema de Entradas.");
-            System.out.println("Deberas crear una cuenta para poder administrar eventos!");
+            System.out.println("Es tu primera vez ejecutando Sistema de Entradas. Creando datos iniciales...");
+            System.out.println("Deberas modificar esta cuenta para poder administrar eventos!");
             System.out.println("-------------------------------------------------------");
+            nuevoCliente = new Cliente("Claudio Cubillos", "12.345.678-9", 99, 0, "lorem ipsum", "lorem ipsum"); 
+            clientes.add(nuevoCliente);
+            return;
         }
         
         System.out.println("Ingrese su nombre: ");
@@ -378,15 +380,22 @@ public class SistemaDeEntradas {
     }
     
     public Cliente buscarClientePorRUT(String rut) {
-        
-        Cliente clienteEncontrado = null;
-        
-        if (clientes != null) {
-            
+    Cliente clienteEncontrado = null;
+    
+    if (clientes != null) {
+        for (Cliente cliente : clientes) { // Itera sobre los objetos cliente en la lista
+            if (cliente.getRut().equals(rut)) { // Compara con el getter de la instancia actual al rut recibido.
+                clienteEncontrado = cliente;
+                break; 
+            }
         }
-        
-        return clienteEncontrado;
+    } else {
+        System.out.println("No se encontro cliente con ese rut.");
+        return null;
     }
+    
+    return clienteEncontrado;
+}
     
     public void removerCliente() {
 
@@ -405,10 +414,10 @@ public class SistemaDeEntradas {
             
             try {
             cliente = buscarClientePorRUT(entrada.nextLine());
-            clientes.remove(cliente);    // ESTO NO QUIERE BORRAR Y NO SE PORQUE.
+            clientes.remove(cliente);  
             } 
             catch(Exception e) {
-                System.out.println("No se pudo encontrar el Cliente por su RUT.");
+                System.out.println("Fallo en la funcion buscar Cliente por RUT.");
             }
             
         }

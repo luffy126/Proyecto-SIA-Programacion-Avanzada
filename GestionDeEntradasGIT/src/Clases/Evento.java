@@ -29,8 +29,9 @@ public class Evento {
     private String descripcionEvento;
     private int asientosEspeciales;
     private int precioEntrada;
-    private Map <Integer, Asiento> asientos;
-    List <Cliente> clientes;
+    
+    private HashMap<Integer, Asiento> asientos;
+    List<Cliente> clientes;
     
     public Evento (String nombre, int capacidadPersonas, int ID, String ubicacion, 
             LocalDate fechaEvento, String orador, String temaEvento, String descripcionEvento, int asientosEspeciales, int precioEntrada) {
@@ -47,6 +48,30 @@ public class Evento {
         this.asientos = new HashMap<>();
         inicializarAsientos();
     }
+    
+    // Getters
+    public int getID(){return this.ID;}
+    public String getNombre(){return this.nombre;}
+    public int getCapacidad(){return this.capacidadPersonas;}
+    public String getUbicacion(){return this.ubicacion;}
+    public LocalDate getFechaEvento(){return this.fechaEvento;}
+    public String getOrador(){return this.orador;}
+    public String getTemaEvento(){return this.temaEvento;}
+    public String getDescripcionEvento(){return this.descripcionEvento;}
+    public int getAsientosEspeciales(){return this.asientosEspeciales;}
+    public int getPrecioEntrada(){return this.precioEntrada;}
+    
+    // Setters
+    public void setID(int ID){this.ID = ID;}
+    public void setNombre(String nombre){this.nombre = nombre;}
+    public void setCapacidadPersonas(int capacidadPersonas){this.capacidadPersonas = capacidadPersonas;}
+    public void setUbicacion(String ubicacion){this.ubicacion = ubicacion;}
+    public void setFechaEvento(LocalDate fechaEvento){this.fechaEvento = fechaEvento;}
+    public void setOrador(String orador){this.orador = orador;}
+    public void setTemaEvento(String temaEvento){this.temaEvento = temaEvento;}
+    public void setDescripcionEvento(String descripcionEvento){this.descripcionEvento = descripcionEvento;}
+    public void setAsientosEspeciales(int asientosEspeciales){this.asientosEspeciales = asientosEspeciales;}
+    public void setPrecioEntrada(int precioEntrada){this.precioEntrada = precioEntrada;}
     
        private void inicializarAsientos() {
         for (int i = 1; i <= getCapacidad(); i++) {
@@ -158,28 +183,5 @@ public class Evento {
                 
     }
     
-    // Getters
-    public int getID(){return this.ID;}
-    public String getNombre(){return this.nombre;}
-    public int getCapacidad(){return this.capacidadPersonas;}
-    public String getUbicacion(){return this.ubicacion;}
-    public LocalDate getFechaEvento(){return this.fechaEvento;}
-    public String getOrador(){return this.orador;}
-    public String getTemaEvento(){return this.temaEvento;}
-    public String getDescripcionEvento(){return this.descripcionEvento;}
-    public int getAsientosEspeciales(){return this.asientosEspeciales;}
-    public int getPrecioEntrada(){return this.precioEntrada;}
-    
-    // Setters
-    public void setID(int ID){this.ID = ID;}
-    public void setNombre(String nombre){this.nombre = nombre;}
-    public void setCapacidadPersonas(int capacidadPersonas){this.capacidadPersonas = capacidadPersonas;}
-    public void setUbicacion(String ubicacion){this.ubicacion = ubicacion;}
-    public void setFechaEvento(LocalDate fechaEvento){this.fechaEvento = fechaEvento;}
-    public void setOrador(String orador){this.orador = orador;}
-    public void setTemaEvento(String temaEvento){this.temaEvento = temaEvento;}
-    public void setDescripcionEvento(String descripcionEvento){this.descripcionEvento = descripcionEvento;}
-    public void setAsientosEspeciales(int asientosEspeciales){this.asientosEspeciales = asientosEspeciales;}
-    public void setPrecioEntrada(int precioEntrada){this.precioEntrada = precioEntrada;}
-    
+
 }
