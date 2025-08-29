@@ -323,22 +323,36 @@ public class SistemaDeEntradas {
         nombre = entrada.nextLine();
         
         System.out.println("Ingrese su RUT: ");
-        rut = entrada.nextLine();
         
-        while(true){
-            try{
+        //Validar RUT hasta que sea correcto
+        while (true) {
+            rut = entrada.nextLine();
+
+            if (Cliente.validarRut(rut)) {
+                System.out.println("RUT válido ✅.");
+                break;
+            } else {
+                System.out.println("RUT inválido ❌. Por favor, ingrese un RUT válido.");
+            }
+        }
+
+        // Validar edad
+        while (true) {
+            try {
                 System.out.println("Ingrese su edad: ");
                 edad = Integer.parseInt(entrada.nextLine());
-                
-                if (edad < 16 || edad > 120){
-                System.out.println("Debes ingresar una edad valida! (16 - 120 años).");
-                edad = Integer.parseInt(entrada.nextLine());
-                } else { break; }
-                
+
+                if (edad < 16 || edad > 120) {
+                    System.out.println("Debes ingresar una edad válida! (16 - 120 años).");
+                } else {
+                    break;
+                }
+
             } catch (NumberFormatException e) {
                 System.out.println("Debes ingresar un número entero!");
             }
         }
+        
         nuevoCliente = new Cliente(nombre, rut, edad, 0, "lorem ipsum", "lorem ipsum"); 
                 
         nuevoCliente.setEdad(edad);
