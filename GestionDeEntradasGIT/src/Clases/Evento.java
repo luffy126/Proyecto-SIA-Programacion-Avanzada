@@ -109,6 +109,7 @@ public class Evento {
         return true;
     }
     
+    
      public boolean liberarAsiento(int numeroAsiento) { // Devuelve si se pudo o no liberar el asiento, despues de hacer condiciones logicas, 
         Asiento asiento = asientos.get(numeroAsiento);
         

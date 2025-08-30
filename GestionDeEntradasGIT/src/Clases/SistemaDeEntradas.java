@@ -452,11 +452,30 @@ public class SistemaDeEntradas {
             }
         }
         
-        nuevoCliente = new Cliente(nombre, rut, edad, 0, "lorem ipsum", "lorem ipsum"); 
-                
-        nuevoCliente.setEdad(edad);
-        nuevoCliente.setNombre(nombre);
-        nuevoCliente.setRut(rut);
+        nuevoCliente = new Cliente(nombre, rut, edad, 0, "", null); 
+        
+        // ✅ PREGUNTAR SI DESEA INGRESAR DISCAPACIDAD
+        System.out.println("¿Desea registrar alguna discapacidad para este cliente? (s/n): ");
+        String opcionDiscapacidad = entrada.nextLine();
+        
+        if (opcionDiscapacidad.toLowerCase().equals("s")) {
+            System.out.println("Ingrese la discapacidad: ");
+            String discapacidad = entrada.nextLine();
+            
+            nuevoCliente.setEdad(edad);
+            nuevoCliente.setNombre(nombre);
+            nuevoCliente.setRut(rut);
+            nuevoCliente.setDiscapacidades(discapacidad);
+            
+        } else {
+        
+            nuevoCliente.setEdad(edad);
+            nuevoCliente.setNombre(nombre);
+            nuevoCliente.setRut(rut);
+            
+            
+        }
+
         System.out.println("Gracias por registrarte!");
         clientes.add(nuevoCliente);
         

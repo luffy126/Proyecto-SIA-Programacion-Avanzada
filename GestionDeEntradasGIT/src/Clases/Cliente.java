@@ -25,7 +25,7 @@ public class Cliente {
         this.edad = edad;
         this.asientosAComprar = asientosAComprar;
         this.acompanantes = acompanantes;
-        this.discapacidades = discapacidades;
+        this.discapacidades = null;
     }
    
     // Getters originales
