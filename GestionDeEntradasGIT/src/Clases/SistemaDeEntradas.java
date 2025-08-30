@@ -30,6 +30,11 @@ public class SistemaDeEntradas {
         this.apagarSistema = false;
     } 
     
+    // getters (faltaban pq si)
+    public List<Evento> getEventos() { return eventos; }
+    public List<Cliente> getClientes() { return clientes; }
+    public List<Compra> getCompras() { return compras; }
+    
     // METODO QUE EJECUTA TODO.
     public static void main(String[] args) {
         /* Esta es la clase principal tronco del proyecto, encargada de sostener todo */
@@ -42,9 +47,15 @@ public class SistemaDeEntradas {
     public void iniciarSistema (){
         int opcion;
         
-        // Solicita crear obligatoriamente un cliente, si es que no existe (proximamente tendra mas utilidad cuando haya persistencia a traves de archivos).
+        // Crea automaticamente un cliente y un evento de placeholder
         if(this.clientes.isEmpty()){ 
             RegistrarCliente();
+            Evento nuevoEvento = new Evento("Charla IBC", 
+                    500, 1, "Patio IBC", 
+                    LocalDate.of(2025, 2, 2), 
+                    "Rafael Mellado", "Arrays en C", 
+                    "Introducción a los arrays en C", 10, 200);
+            eventos.add(nuevoEvento);
             limpiarConsola();
         }
         while(apagarSistema == false){  
@@ -57,6 +68,8 @@ public class SistemaDeEntradas {
             System.out.println("5. Listar Clientes");
             System.out.println("6. Registrar Cliente");
             System.out.println("7. Eliminar Cliente");
+            System.out.println("8. Crear Orden de Compra");
+            System.out.println("9. Listar Compras");
             System.out.println("0. Salir");
             System.out.println("");
             System.out.print(">> Seleccione una opción: ");
@@ -99,8 +112,80 @@ public class SistemaDeEntradas {
                 case 7:
                     removerCliente();
                     break;
+                case 8:
+                    CrearCompra();
+                    break;
                    
             }
+        }
+    }
+    
+    public Compra registrarCompra(Evento evento, Cliente cliente, int cantidadAsientos, String formaDePago) {
+            
+        Compra compra = evento.CrearOrdenDeCompra(cliente, cantidadAsientos, formaDePago);
+        this.compras.add(compra);
+        
+        if (!clientes.contains(cliente)) {
+            clientes.add(cliente);
+        }
+        
+        return compra;
+    }
+    
+    public void CrearCompra() {
+        if (eventos.isEmpty()) { // si no hay eventos
+            System.out.println("No hay eventos para comprar entradas");
+            return;
+        }
+        
+        System.out.println("Eventos disponibles: ");
+        for (int i = 0; i < eventos.size(); i++) {
+            Evento ev = eventos.get(i);
+            System.out.println((i + 1) + ". " + ev.getNombre() + " (ID: " + ev.getID() + ")");
+        }
+        
+        System.out.println("Ingrese ID del evento deseado: ");
+        int opcionEvento = Integer.parseInt(entrada.nextLine());
+        Evento eventoSeleccionado = buscarEventosPorID(opcionEvento);
+        if (eventoSeleccionado == null) {
+            System.out.println("No se ha encontrado el evento solicitado");
+        }
+        
+        System.out.println("Ingrese RUT del cliente: ");
+        String rut = entrada.nextLine();
+        Cliente cliente = buscarClientePorRUT(rut);
+        
+        if (cliente == null) {
+            System.out.println("No se encontró el rut del cliente en el sistema");
+            return;
+        }
+        
+        System.out.println("Ingrese la cantidad de asientos a comprar: ");
+        int asientosAComprar = Integer.parseInt(entrada.nextLine());
+        
+        System.out.println("Ingrese la forma de pago: ");
+        String formaDePago = entrada.nextLine();
+        
+        System.out.println("✅");
+        System.out.println(
+            "Evento: " + eventoSeleccionado.getNombre() +
+            " | Cliente: " + cliente.getNombre() +
+            " | Asientos a comprar: " + asientosAComprar +
+            " | Forma de pago: " + formaDePago
+        );
+
+        try {
+            
+            Compra compra = registrarCompra(eventoSeleccionado, cliente, asientosAComprar, formaDePago);
+            System.out.println("✅");
+            System.out.println("✅Compra realizada con éxito.");
+            System.out.println("ID de Orden de Compra: " + compra.getOrdenDeCompra());
+            System.out.println("Monto total: $" + compra.getMontoTotal());
+            System.out.println("✅");
+        }    
+        
+        catch (IllegalArgumentException e) {
+            System.out.println("No se pudo realizar la compra: " + e.getMessage());
         }
     }
     
@@ -134,7 +219,7 @@ public class SistemaDeEntradas {
         
         Random random = new Random();
         
-        int ID = (random.nextInt(999)); 
+        int ID = (random.nextInt(9999)); 
         System.out.println("ID del evento creado: " + ID);
         Evento nuevoEvento = new Evento(nombre, capacidad, ID, ubicacion, fecha, orador, temaEvento, descripcion, asientosDiscapacidades, precioEntrada);
         eventos.add(nuevoEvento);
@@ -246,7 +331,6 @@ public class SistemaDeEntradas {
                     
             }
         }
-
     }
         @SuppressWarnings("UnnecessaryReturnStatement")
     public void RemoverEvento() {

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.*;
+import java.io.*;
 
 /**
  *
@@ -32,6 +34,7 @@ public class Evento {
     
     private HashMap<Integer, Asiento> asientos;
     List<Cliente> clientes;
+    List<Compra> compras;
     
     public Evento (String nombre, int capacidadPersonas, int ID, String ubicacion, 
             LocalDate fechaEvento, String orador, String temaEvento, String descripcionEvento, int asientosEspeciales, int precioEntrada) {
@@ -47,6 +50,10 @@ public class Evento {
         this.precioEntrada = precioEntrada;
         this.asientos = new HashMap<>();
         inicializarAsientos();
+        this.clientes = new ArrayList<>();
+        this.compras = new ArrayList<>();
+        
+        
     }
     
     // Getters
@@ -183,5 +190,47 @@ public class Evento {
                 
     }
     
+    public Compra CrearOrdenDeCompra(Cliente cliente, int cantidadAsientos, String formaDePago) {
+        
+        Random random = new Random();
+        int ID = (random.nextInt(9999)); 
+        String metodoDePago = formaDePago;
+        String estadoDeCompra = "Lorem Ipsum";
+        int montoTotal;
+        
+        List<Asiento> asientosReservados = new ArrayList<>();
+        
+        for (Asiento asiento : asientos.values()) {
 
+            if (!asiento.getAsientoIsOcupado()) {
+                asiento.setDueño(cliente);
+                asiento.setEventoAnfitrion(this);
+                asiento.setIsOcupado(true);
+                asientosReservados.add(asiento);
+            }
+            
+            // if (asientosReservados.size() => cantidadAsientos) break;
+            
+        }
+        
+        if (asientosReservados.size() < cantidadAsientos) {
+            throw new IllegalArgumentException("No hay asientos suficientes para esta orden de compra");
+        }
+        
+        montoTotal = cantidadAsientos * this.precioEntrada;
+        
+        Compra nuevaCompra = new Compra (
+                ID, cliente.getRut(), metodoDePago, LocalDate.now(), estadoDeCompra, montoTotal 
+        );
+        
+        cliente.getComprasClientes().add(nuevaCompra);
+        this.compras.add(nuevaCompra);
+        
+        if (!clientes.contains(cliente)) {
+            clientes.add(cliente);
+        }
+        
+        return nuevaCompra;
+    }
+    
 }

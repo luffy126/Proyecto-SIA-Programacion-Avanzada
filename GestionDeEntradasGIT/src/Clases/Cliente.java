@@ -35,6 +35,7 @@ public class Cliente {
     public int getEdad(){return this.edad;}
     public int getAsientosAComprar() {return this.asientosAComprar;}
     public String getDiscapacidades(){return this.discapacidades;}
+    public List<Compra> getComprasClientes(){return this.comprasCliente;}
     
     // Setters originales
     public void setRut(String rut){this.rut = rut;}
