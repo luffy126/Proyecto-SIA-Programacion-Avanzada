@@ -201,17 +201,15 @@ public class Evento {
         List<Asiento> asientosReservados = new ArrayList<>();
         
         for (Asiento asiento : asientos.values()) {
-
             if (!asiento.getAsientoIsOcupado()) {
                 asiento.setDueño(cliente);
                 asiento.setEventoAnfitrion(this);
                 asiento.setIsOcupado(true);
                 asientosReservados.add(asiento);
-            }
-            
-            // if (asientosReservados.size() => cantidadAsientos) break;
-            
-        }
+
+        if (asientosReservados.size() == cantidadAsientos) break; // ✅ se detiene justo al llegar a la cantidad solicitada
+    }
+}
         
         if (asientosReservados.size() < cantidadAsientos) {
             throw new IllegalArgumentException("No hay asientos suficientes para esta orden de compra");

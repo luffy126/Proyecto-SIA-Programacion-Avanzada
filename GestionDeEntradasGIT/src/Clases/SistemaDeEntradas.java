@@ -96,6 +96,9 @@ public class SistemaDeEntradas {
                     
                 case 2:
                     ListarEventos(getTodosLosEventos());
+                    System.out.println("");
+                    System.out.println(">> Presione enter para continuar.");
+                    entrada.nextLine();
                     break;
                 case 3:
                     RemoverEvento();
@@ -105,6 +108,9 @@ public class SistemaDeEntradas {
                     break;
                 case 5:
                     ListarClientes(clientes);
+                    System.out.println("");
+                    System.out.println(">> Presione enter para continuar.");
+                    entrada.nextLine();
                     break;
                 case 6:
                     RegistrarCliente();
@@ -114,6 +120,12 @@ public class SistemaDeEntradas {
                     break;
                 case 8:
                     CrearCompra();
+                    break;
+                case 9:
+                    ListarCompra(compras);
+                    System.out.println("");
+                    System.out.println(">> Presione enter para continuar.");
+                    entrada.nextLine();
                     break;
                    
             }
@@ -373,6 +385,7 @@ public class SistemaDeEntradas {
             System.out.println(txt2);
             System.out.println(txt3);
         }
+        
     }
     public List<Evento> getTodosLosEventos() {
         return eventos;
@@ -453,6 +466,7 @@ public class SistemaDeEntradas {
          if (clientes == null || clientes.isEmpty()) {
             System.out.println("No hay clientes registrados.");
             return;
+  
         }
         
         int i = 1;
@@ -480,6 +494,21 @@ public class SistemaDeEntradas {
     
     return clienteEncontrado;
 }
+    
+    public void ListarCompra(List<Compra> compras) {
+    
+        if (compras.isEmpty() || compras == null){
+            System.out.println("No existen compradas realizadas.");
+        } else {
+            
+            System.out.println("Las compras son las siguentes: ");
+            for (Compra c : compras) {
+                System.out.println((compras.indexOf(c)+1) + ". Orden de Compra: " + compras.get(compras.indexOf(c)).getOrdenDeCompra() + " - Rut asociado: " + compras.get(compras.indexOf(c)).getRut() + " - Monto total (CLP): $" + compras.get(compras.indexOf(c)).getMontoTotal());
+            }
+           
+        }
+        
+    }
     
     public void removerCliente() {
 
