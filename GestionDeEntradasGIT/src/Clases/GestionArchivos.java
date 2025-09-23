@@ -20,15 +20,33 @@ class GestionArchivos {
     private static final String RUTA_EVENTOS = "Assets/eventosRegistrados.csv";
     private static final String RUTA_CLIENTES = "Assets/clientesRegistrados.csv";
     
-    public void GestorArchivos(){
-    
+    public GestionArchivos() {
         File directorio = new File("Assets");
-        
-        if(!directorio.exists()){
+        if (!directorio.exists()) {
             directorio.mkdirs();
             System.out.println("Se ha creado el directorio Assets.");
         }
+
+        // Crear archivos si no existen
+        try {
+            File archivoEventos = new File(directorio, "eventosRegistrados.csv");
+            if (!archivoEventos.exists()) {
+                archivoEventos.createNewFile();
+                System.out.println("Se ha creado el archivo eventosRegistrados.csv");
+            }
+
+            File archivoClientes = new File(directorio, "clientesRegistrados.csv");
+            if (!archivoClientes.exists()) {
+                archivoClientes.createNewFile();
+                System.out.println("Se ha creado el archivo clientesRegistrados.csv");
+            }
+        } catch (IOException e) {
+            // Manejar el error
+            System.out.println("Error al crear los archivos: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
+
     
     public List<Evento> cargarEventos() {
         System.out.println("aloha");
@@ -68,16 +86,20 @@ class GestionArchivos {
     }
     
     public void guardarEvento(Evento evento) {
+        System.out.println("Guardando evento: " + evento.getNombre());
         try (FileWriter fw = new FileWriter(RUTA_EVENTOS, true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter out = new PrintWriter(bw)) {
-        
-            out.println(evento.getID() + "," + evento.getNombre() + "," + evento.getCapacidad() + "," + evento.getUbicacion() 
-                    + "," + evento.getFechaEvento() + "," + evento.getOrador() + "," + evento.getTemaEvento() + "," 
-                    + evento.getDescripcionEvento()+ "," + evento.getAsientosEspeciales() + "," + evento.getPrecioEntrada());
-        
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter out = new PrintWriter(bw)) {
+
+            out.println(evento.getID() + "," + evento.getNombre() + "," + evento.getCapacidad() + "," + evento.getUbicacion()
+                    + "," + evento.getFechaEvento() + "," + evento.getOrador() + "," + evento.getTemaEvento() + ","
+                    + evento.getDescripcionEvento() + "," + evento.getAsientosEspeciales() + "," + evento.getPrecioEntrada());
+
+            System.out.println("Evento guardado en CSV.");
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 }

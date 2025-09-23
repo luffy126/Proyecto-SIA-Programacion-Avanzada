@@ -47,20 +47,13 @@ public class SistemaDeEntradas {
     // METODOS PARA LA LOGICA DEL PROGRAMITA WOM
     public void iniciarSistema (){
         int opcion;
-        gestor.GestorArchivos();
         eventos = gestor.cargarEventos();
-        // Crea automaticamente un cliente y un evento de placeholder
+        
         if(this.clientes.isEmpty()){ 
             RegistrarCliente();
-            /* Evento nuevoEvento = new Evento("Charla IBC", 
-                    500, 1, "Patio IBC", 
-                    LocalDate.of(2025, 2, 2), 
-                    "Rafael Mellado", "Arrays en C", 
-                    "Introducción a los arrays en C", 10, 200);
-            eventos.add(nuevoEvento);
-            gestor.guardarEvento(nuevoEvento); */
             limpiarConsola();
         }
+        
         while(apagarSistema == false){  
             
             System.out.println("=== SISTEMA DE GESTIÓN DE ENTRADAS ===");
@@ -238,6 +231,7 @@ public class SistemaDeEntradas {
         System.out.println("ID del evento creado: " + ID);
         Evento nuevoEvento = new Evento(nombre, capacidad, ID, ubicacion, fecha, orador, temaEvento, descripcion, asientosDiscapacidades, precioEntrada);
         eventos.add(nuevoEvento);
+        gestor.guardarEvento(nuevoEvento);
         System.out.println("Evento ID:" + ID + " - " + nombre + " se ha creado satisfactoriamente.");
     }
     
