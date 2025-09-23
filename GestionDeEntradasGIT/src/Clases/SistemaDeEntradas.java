@@ -15,7 +15,7 @@ public class SistemaDeEntradas {
     private List<Evento> eventos;
     private List<Cliente> clientes;
     private List<Compra> compras;
-    private GestorArchivos gestorArchivos;
+    private GestionArchivos gestor = new GestionArchivos();
     private boolean apagarSistema;
     private ValidarEntradas validador;
     
@@ -40,22 +40,25 @@ public class SistemaDeEntradas {
         /* Esta es la clase principal tronco del proyecto, encargada de sostener todo */
         System.out.println("Se esta ejecutando el Sistema de Gestion de Entradas.");
         SistemaDeEntradas programa = new SistemaDeEntradas();
+        
         programa.iniciarSistema();
     } 
     
     // METODOS PARA LA LOGICA DEL PROGRAMITA WOM
     public void iniciarSistema (){
         int opcion;
-        
+        gestor.GestorArchivos();
+        eventos = gestor.cargarEventos();
         // Crea automaticamente un cliente y un evento de placeholder
         if(this.clientes.isEmpty()){ 
             RegistrarCliente();
-            Evento nuevoEvento = new Evento("Charla IBC", 
+            /* Evento nuevoEvento = new Evento("Charla IBC", 
                     500, 1, "Patio IBC", 
                     LocalDate.of(2025, 2, 2), 
                     "Rafael Mellado", "Arrays en C", 
                     "Introducción a los arrays en C", 10, 200);
             eventos.add(nuevoEvento);
+            gestor.guardarEvento(nuevoEvento); */
             limpiarConsola();
         }
         while(apagarSistema == false){  

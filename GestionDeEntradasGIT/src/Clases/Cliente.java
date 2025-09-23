@@ -15,7 +15,6 @@ public class Cliente {
     private String acompanantes;
     private int edad;
     private String discapacidades;
-    private GestorArchivos gestorArchivos;
     
     List<Compra> comprasCliente = new ArrayList<>();
     
