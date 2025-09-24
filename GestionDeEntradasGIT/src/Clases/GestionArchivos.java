@@ -62,7 +62,7 @@ class GestionArchivos {
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split(","); // separar por coma
-                if (datos.length >= 3) { 
+                if (datos.length == 10) { 
                     int id = Integer.parseInt(datos[0]);
                     String nombre = datos[1];
                     int capacidad = Integer.parseInt(datos[2]);
@@ -85,6 +85,39 @@ class GestionArchivos {
         return listaEventos;
     }
     
+    public List<Cliente> cargarClientes() {
+        System.out.println("aloha de nuevo");
+        List<Cliente> listaClientes = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // formato de LocalDate
+
+        File archivo = new File(RUTA_CLIENTES);
+        if (!archivo.exists()) {
+            return listaClientes;
+        }
+
+        try (BufferedReader br = new BufferedReader(new FileReader(RUTA_CLIENTES))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] datos = linea.split(","); // separar por coma
+                if (datos.length == 6) { 
+                    String rut = datos[0];
+                    String nombre = datos[1];
+                    String acompanantes = datos[2];
+                    int edad = Integer.parseInt(datos[3]);
+                    int asientos = Integer.parseInt(datos[4]);
+                    String discapacidades = datos[5];
+                    
+                    Cliente c = new Cliente(nombre, rut, edad, asientos, acompanantes, discapacidades);
+                    listaClientes.add(c);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listaClientes;
+    }
+    
     public void guardarEvento(Evento evento) {
         System.out.println("Guardando evento: " + evento.getNombre());
         try (FileWriter fw = new FileWriter(RUTA_EVENTOS, true);
@@ -101,5 +134,55 @@ class GestionArchivos {
             e.printStackTrace();
         }
     }
+    
+    public void guardarEvento(List<Evento> eventos) { // guardarEvento sobrecargado, si le llega un evento lo inserta y si le llega la lista lo modifica
+        System.out.println("Guardando lista completa de eventos...");
+        try (FileWriter fw = new FileWriter(RUTA_EVENTOS, false); 
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter out = new PrintWriter(bw)) {
 
+            for (Evento evento : eventos) {
+                out.println(evento.getID() + "," + evento.getNombre() + "," + evento.getCapacidad() + "," + evento.getUbicacion()
+                        + "," + evento.getFechaEvento() + "," + evento.getOrador() + "," + evento.getTemaEvento() + ","
+                        + evento.getDescripcionEvento() + "," + evento.getAsientosEspeciales() + "," + evento.getPrecioEntrada());
+            }
+
+            System.out.println("Lista de eventos sobrescrita en CSV.");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void guardarCliente(Cliente cliente) {
+        System.out.println("Guardando cliente: " + cliente.getNombre());
+        try (FileWriter fw = new FileWriter(RUTA_CLIENTES, true);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter out = new PrintWriter(bw)) {
+
+            out.println(cliente.getRut()+ "," + cliente.getNombre() + "," + cliente.getAcompanantes()
+                    + "," + cliente.getEdad() + "," + cliente.getAsientosAComprar()+ "," + cliente.getDiscapacidades());
+            System.out.println("Cliente guardado en CSV.");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void guardarCliente(List<Cliente> clientes) { // guardarCliente sobrecargado, si le llega un cliente lo inserta y si le llega la lista lo modifica
+        System.out.println("Guardando lista completa de clientes...");
+        try (FileWriter fw = new FileWriter(RUTA_CLIENTES, false); 
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter out = new PrintWriter(bw)) {
+
+            for (Cliente cliente : clientes) {
+                out.println(cliente.getRut()+ "," + cliente.getNombre() + "," + cliente.getAcompanantes()
+                + "," + cliente.getEdad() + "," + cliente.getAsientosAComprar()+ "," + cliente.getDiscapacidades());
+            }
+            System.out.println("Lista de clientes sobrescrita en CSV.");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -48,6 +48,7 @@ public class SistemaDeEntradas {
     public void iniciarSistema (){
         int opcion;
         eventos = gestor.cargarEventos();
+        clientes = gestor.cargarClientes();
         
         if(this.clientes.isEmpty()){ 
             RegistrarCliente();
@@ -63,9 +64,12 @@ public class SistemaDeEntradas {
             System.out.println("4. Modificar Evento");
             System.out.println("5. Listar Clientes");
             System.out.println("6. Registrar Cliente");
-            System.out.println("7. Eliminar Cliente");
-            System.out.println("8. Crear Orden de Compra");
-            System.out.println("9. Listar Compras");
+            System.out.println("7. Modificar Cliente (pendiente)");
+            System.out.println("8. Eliminar Cliente");
+            System.out.println("9. Crear Orden de Compra");
+            System.out.println("10. Listar Compras");
+            System.out.println("11. Modificar Compra (pendiente)");
+            System.out.println("12. Eliminar Compra (pendiente)");
             System.out.println("0. Salir");
             System.out.println("");
             System.out.print(">> Seleccione una opción: ");
@@ -111,21 +115,42 @@ public class SistemaDeEntradas {
                 case 6:
                     RegistrarCliente();
                     break;
-                case 7:
-                    removerCliente();
+                case 7: 
+                    ModificarCliente();
                     break;
                 case 8:
-                    CrearCompra();
+                    removerCliente();
                     break;
                 case 9:
+                    CrearCompra();
+                    break;
+                case 10:
                     ListarCompra(compras);
                     System.out.println("");
                     System.out.println(">> Presione enter para continuar.");
                     entrada.nextLine();
                     break;
+                case 11:
+                    ModificarCompra();
+                    break;
+                case 12:
+                    EliminarCompra();
+                    break;
                    
             }
         }
+    }
+    
+    public void ModificarCliente() {
+        System.out.println("falta implementarlo !!! venga mas tarde");
+    }
+    
+    public void ModificarCompra() {
+        System.out.println("falta implementarlo !!! venga mas tarde");
+    }
+    
+    public void EliminarCompra() {
+        System.out.println("falta implementarlo !!! venga mas tarde");
     }
     
     public Compra registrarCompra(Evento evento, Cliente cliente, int cantidadAsientos, String formaDePago) {
@@ -288,54 +313,63 @@ public class SistemaDeEntradas {
                     String nombre = entrada.nextLine();
                     eventos.get(posEvento).setNombre(nombre);
                     System.out.println("Se cambio el nombre a " + nombre + "!");
+                    gestor.guardarEvento(eventos);
                     break;
                 case 2: // capacidad
                     System.out.println("Ingrese la nueva capacidad de personas en el evento: ");
                     int capacidad = Integer.parseInt(entrada.nextLine());
                     eventos.get(posEvento).setCapacidadPersonas(capacidad);
                     System.out.println("Capacidad actualizada!");
+                    gestor.guardarEvento(eventos);
                     break;
                 case 3: // ubicacion
                     System.out.println("Donde se realizara este evento: ");
                     String ubicacion = entrada.nextLine();
                     eventos.get(posEvento).setUbicacion(ubicacion);
                     System.out.println("Ubicacion actualizada a " + ubicacion);
+                    gestor.guardarEvento(eventos);
                     break;
                 case 4: // fecha
                     System.out.println("Ingrese la fecha donde se realizará este evento (Formato: año-mes-dia): ");
                     LocalDate fechaEvento = LocalDate.parse(entrada.nextLine());
                     eventos.get(posEvento).setFechaEvento(fechaEvento);
                     System.out.println("Fecha del evento cambiada a: " + fechaEvento);
+                    gestor.guardarEvento(eventos);
                     break;
                 case 5: // orador
                     System.out.println("Ingrese el orador que presentará el evento: ");
                     String orador = entrada.nextLine();
                     eventos.get(posEvento).setOrador(orador);
                     System.out.println("Orador cambiado a: " + orador);
+                    gestor.guardarEvento(eventos);
                     break;
                 case 6: // tema del evento
                     System.out.println("Ingrese el tema del evento: ");
                     String tema = entrada.nextLine();
                     eventos.get(posEvento).setTemaEvento(tema);
                     System.out.println("Tema del evento cambiado a: " + tema);
+                    gestor.guardarEvento(eventos);
                     break;
                 case 7: // descripcion del evento
                     System.out.println("Ingrese la descripción del evento: ");
                     String descripcion = entrada.nextLine();
                     eventos.get(posEvento).setDescripcionEvento(descripcion);
                     System.out.println("Descripción del evento cambiado a: " + descripcion);
+                    gestor.guardarEvento(eventos);
                     break;
                 case 8: // asientos para discapacitados
                     System.out.println("Ingrese la capacidad de asientos para discapacitados del evento: ");
                     int asientosDiscapacitados = Integer.parseInt(entrada.nextLine());
                     eventos.get(posEvento).setAsientosEspeciales(asientosDiscapacitados);
                     System.out.println("Asientos para discapacitados cambiados a: " + asientosDiscapacitados);
+                    gestor.guardarEvento(eventos);
                     break;
                 case 9: // precio de la entrada
                     System.out.println("Ingrese el precio de la entrada al evento: ");
                     int precio = Integer.parseInt(entrada.nextLine());
                     eventos.get(posEvento).setPrecioEntrada(precio);
                     System.out.println("Precio del evento cambiado a: " + precio);
+                    gestor.guardarEvento(eventos);
                     break;
                     
             }
@@ -403,14 +437,16 @@ public class SistemaDeEntradas {
         String rut;
         String nombre;
         Cliente nuevoCliente;
-        
+
         if(clientes == null || clientes.isEmpty()){
             System.out.println("");
             System.out.println("-------------------------------------------------------");
             System.out.println("Es tu primera vez ejecutando Sistema de Entradas. Creando datos iniciales...");
             System.out.println("Deberas modificar esta cuenta para poder administrar eventos!");
             System.out.println("-------------------------------------------------------");
+            
             nuevoCliente = new Cliente("Claudio Cubillos", "12.345.678-9", 99, 0, "lorem ipsum", "lorem ipsum"); 
+            gestor.guardarCliente(nuevoCliente);
             clientes.add(nuevoCliente);
             return;
         }
@@ -473,8 +509,9 @@ public class SistemaDeEntradas {
             
         }
 
-        System.out.println("Gracias por registrarte!");
+        gestor.guardarCliente(nuevoCliente);
         clientes.add(nuevoCliente);
+        System.out.println("Gracias por registrarte!");
         
     }
     
