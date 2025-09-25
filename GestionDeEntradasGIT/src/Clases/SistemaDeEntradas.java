@@ -40,9 +40,18 @@ public class SistemaDeEntradas {
     
     // METODO QUE EJECUTA TODO.
     public static void main(String[] args) {
+        
+        try {
+            com.formdev.flatlaf.FlatDarkLaf.setup();
+        } catch (Exception ex) {
+            System.err.println("No se pudo estilizar el Menu a 'FlatDarkLaf'");
+        }
+        
         /* Esta es la clase principal tronco del proyecto, encargada de sostener todo */
         System.out.println("Se esta ejecutando el Sistema de Gestion de Entradas.");
         SistemaDeEntradas programa = new SistemaDeEntradas();
+        
+        
         
         programa.iniciarSistema();
     } 
@@ -53,13 +62,12 @@ public class SistemaDeEntradas {
         eventos = gestor.cargarEventos();
         clientes = gestor.cargarClientes();
         
+        
+        
         javax.swing.SwingUtilities.invokeLater(() -> {
-            javax.swing.JFrame frame = new javax.swing.JFrame("Sistema de Entradas");
-            frame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-            frame.setContentPane(interfaz);
-            frame.pack();
-            frame.setLocationRelativeTo(null);
-            frame.setVisible(true); });
+        interfaz.setLocationRelativeTo(null);
+        interfaz.setVisible(true);
+        });
         
         if(this.clientes.isEmpty()){ 
             RegistrarCliente();

@@ -28,6 +28,7 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panPadre = new javax.swing.JPanel();
         panFondoPrincipal = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         btnEventos = new javax.swing.JButton();
@@ -65,7 +66,8 @@ public class Menu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Entradas - by: Simon, Tomas, Pancha");
         setResizable(false);
-        getContentPane().setLayout(new java.awt.CardLayout());
+
+        panPadre.setLayout(new java.awt.CardLayout());
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         lblTitulo.setText("Sistema de Gestion de Entradas");
@@ -160,7 +162,7 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(lblVer))
         );
 
-        getContentPane().add(panFondoPrincipal, "card2");
+        panPadre.add(panFondoPrincipal, "card2");
 
         lblTitulo1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         lblTitulo1.setText("Eventos");
@@ -253,7 +255,7 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(lblVer1))
         );
 
-        getContentPane().add(panFondoEventos, "card3");
+        panPadre.add(panFondoEventos, "card3");
 
         lblTitulo2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         lblTitulo2.setText("Clientes");
@@ -330,7 +332,7 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(20, 20, 20))
         );
 
-        getContentPane().add(panFondoClientes, "card4");
+        panPadre.add(panFondoClientes, "card4");
 
         panFondoCompras.setEnabled(false);
 
@@ -381,22 +383,25 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(btnVolverCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
             .addGroup(panFondoComprasLayout.createSequentialGroup()
-                .addGap(52, 52, 52)
                 .addGroup(panFondoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panFondoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(btnListarClientes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAgregarClientes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnModificarClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEliminarClientes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(panFondoComprasLayout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addGroup(panFondoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnListarClientes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAgregarClientes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnModificarClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEliminarClientes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(panFondoComprasLayout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(jLabel2)))
                 .addContainerGap(439, Short.MAX_VALUE))
         );
         panFondoComprasLayout.setVerticalGroup(
             panFondoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panFondoComprasLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(36, 36, 36)
                 .addComponent(jLabel2)
-                .addGap(117, 117, 117)
+                .addGap(118, 118, 118)
                 .addComponent(btnAgregarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnListarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -409,7 +414,9 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(20, 20, 20))
         );
 
-        getContentPane().add(panFondoCompras, "card4");
+        panPadre.add(panFondoCompras, "card4");
+
+        getContentPane().add(panPadre, java.awt.BorderLayout.LINE_START);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -500,27 +507,7 @@ public class Menu extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Menu().setVisible(true));
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarCliente;
@@ -556,5 +543,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel panFondoCompras;
     private javax.swing.JPanel panFondoEventos;
     private javax.swing.JPanel panFondoPrincipal;
+    private javax.swing.JPanel panPadre;
     // End of variables declaration//GEN-END:variables
 }
