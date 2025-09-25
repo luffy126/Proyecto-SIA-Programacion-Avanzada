@@ -40,13 +40,27 @@ public class Menu extends javax.swing.JFrame {
         lblVer = new javax.swing.JLabel();
         panFondoEventos = new javax.swing.JPanel();
         lblTitulo1 = new javax.swing.JLabel();
-        btnAgregar = new javax.swing.JButton();
-        btnListar = new javax.swing.JButton();
-        btnCompras1 = new javax.swing.JButton();
-        btnSalir1 = new javax.swing.JButton();
+        btnAgregarEvento = new javax.swing.JButton();
+        btnListarEvento = new javax.swing.JButton();
+        btnModificarEvento = new javax.swing.JButton();
+        btnVolverEventos = new javax.swing.JButton();
         lblVer1 = new javax.swing.JLabel();
         btnCompras2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        panFondoClientes = new javax.swing.JPanel();
+        lblTitulo2 = new javax.swing.JLabel();
+        btnAgregarCliente = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        btnVolverClientes = new javax.swing.JButton();
+        panFondoCompras = new javax.swing.JPanel();
+        btnListarClientes = new javax.swing.JButton();
+        btnAgregarClientes = new javax.swing.JButton();
+        btnModificarClientes = new javax.swing.JButton();
+        btnEliminarClientes = new javax.swing.JButton();
+        btnVolverCompras = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Entradas - by: Simon, Tomas, Pancha");
@@ -90,7 +104,7 @@ public class Menu extends javax.swing.JFrame {
 
         lblPanelCompras.setText("Panel de Compras");
 
-        lblVer.setText("ver1.0");
+        lblVer.setText("ver1.1");
 
         javax.swing.GroupLayout panFondoPrincipalLayout = new javax.swing.GroupLayout(panFondoPrincipal);
         panFondoPrincipal.setLayout(panFondoPrincipalLayout);
@@ -151,31 +165,31 @@ public class Menu extends javax.swing.JFrame {
         lblTitulo1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         lblTitulo1.setText("Eventos");
 
-        btnAgregar.setText("Agregar");
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregarEvento.setText("Agregar");
+        btnAgregarEvento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
+                btnAgregarEventoActionPerformed(evt);
             }
         });
 
-        btnListar.setText("Listar");
-        btnListar.addActionListener(new java.awt.event.ActionListener() {
+        btnListarEvento.setText("Listar");
+        btnListarEvento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnListarActionPerformed(evt);
+                btnListarEventoActionPerformed(evt);
             }
         });
 
-        btnCompras1.setText("Modificar");
-        btnCompras1.addActionListener(new java.awt.event.ActionListener() {
+        btnModificarEvento.setText("Modificar");
+        btnModificarEvento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCompras1ActionPerformed(evt);
+                btnModificarEventoActionPerformed(evt);
             }
         });
 
-        btnSalir1.setText("Salir");
-        btnSalir1.addActionListener(new java.awt.event.ActionListener() {
+        btnVolverEventos.setText("Volver");
+        btnVolverEventos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalir1ActionPerformed(evt);
+                btnVolverEventosActionPerformed(evt);
             }
         });
 
@@ -198,7 +212,7 @@ public class Menu extends javax.swing.JFrame {
             panFondoEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panFondoEventosLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSalir1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnVolverEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
             .addGroup(panFondoEventosLayout.createSequentialGroup()
                 .addGroup(panFondoEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,10 +222,10 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(panFondoEventosLayout.createSequentialGroup()
                         .addGap(51, 51, 51)
                         .addGroup(panFondoEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnCompras1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnListar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnModificarEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnListarEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panFondoEventosLayout.createSequentialGroup()
-                                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnAgregarEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(lblTitulo1)
@@ -225,35 +239,194 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(lblTitulo1)
                 .addGap(95, 95, 95)
                 .addGroup(panFondoEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAgregarEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnListar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnListarEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnCompras1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnModificarEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnCompras2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addComponent(btnSalir1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnVolverEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(lblVer1))
         );
 
         getContentPane().add(panFondoEventos, "card3");
 
+        lblTitulo2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        lblTitulo2.setText("Clientes");
+
+        btnAgregarCliente.setText("Listar Clientes por RUT");
+        btnAgregarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarClienteActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Agregar Cliente");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Modificar Clientes");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Eliminar Clientes");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        btnVolverClientes.setText("Volver");
+        btnVolverClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverClientesActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panFondoClientesLayout = new javax.swing.GroupLayout(panFondoClientes);
+        panFondoClientes.setLayout(panFondoClientesLayout);
+        panFondoClientesLayout.setHorizontalGroup(
+            panFondoClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panFondoClientesLayout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addGroup(panFondoClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panFondoClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btnAgregarCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblTitulo2))
+                .addContainerGap(434, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panFondoClientesLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnVolverClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
+        );
+        panFondoClientesLayout.setVerticalGroup(
+            panFondoClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panFondoClientesLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(lblTitulo2)
+                .addGap(92, 92, 92)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnAgregarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addComponent(btnVolverClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
+        );
+
+        getContentPane().add(panFondoClientes, "card4");
+
+        panFondoCompras.setEnabled(false);
+
+        btnListarClientes.setText("Listar Compras por ID");
+        btnListarClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarClientesActionPerformed(evt);
+            }
+        });
+
+        btnAgregarClientes.setText("Realizar Compra");
+        btnAgregarClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarClientesActionPerformed(evt);
+            }
+        });
+
+        btnModificarClientes.setText("Modificar Compras");
+        btnModificarClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarClientesActionPerformed(evt);
+            }
+        });
+
+        btnEliminarClientes.setText("Eliminar Compras");
+        btnEliminarClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarClientesActionPerformed(evt);
+            }
+        });
+
+        btnVolverCompras.setText("Volver");
+        btnVolverCompras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverComprasActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel2.setText("Compras");
+
+        javax.swing.GroupLayout panFondoComprasLayout = new javax.swing.GroupLayout(panFondoCompras);
+        panFondoCompras.setLayout(panFondoComprasLayout);
+        panFondoComprasLayout.setHorizontalGroup(
+            panFondoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panFondoComprasLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnVolverCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
+            .addGroup(panFondoComprasLayout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addGroup(panFondoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panFondoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btnListarClientes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAgregarClientes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnModificarClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEliminarClientes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(439, Short.MAX_VALUE))
+        );
+        panFondoComprasLayout.setVerticalGroup(
+            panFondoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panFondoComprasLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jLabel2)
+                .addGap(117, 117, 117)
+                .addComponent(btnAgregarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnListarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnModificarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnEliminarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addComponent(btnVolverCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
+        );
+
+        getContentPane().add(panFondoCompras, "card4");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEventosActionPerformed
-        // TODO add your handling code here:
+        panFondoPrincipal.setVisible(false);
+        panFondoEventos.setVisible(true);
     }//GEN-LAST:event_btnEventosActionPerformed
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
-        // TODO add your handling code here:
+        panFondoPrincipal.setVisible(false);
+        panFondoClientes.setVisible(true);
     }//GEN-LAST:event_btnClientesActionPerformed
 
     private void btnComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprasActionPerformed
-        // TODO add your handling code here:
+        panFondoPrincipal.setVisible(false);
+        panFondoCompras.setVisible(true);
     }//GEN-LAST:event_btnComprasActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -261,25 +434,68 @@ public class Menu extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+    private void btnAgregarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarEventoActionPerformed
 
-    }//GEN-LAST:event_btnAgregarActionPerformed
+    }//GEN-LAST:event_btnAgregarEventoActionPerformed
 
-    private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
+    private void btnListarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarEventoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnListarActionPerformed
+    }//GEN-LAST:event_btnListarEventoActionPerformed
 
-    private void btnCompras1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompras1ActionPerformed
+    private void btnModificarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarEventoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnCompras1ActionPerformed
-
-    private void btnSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalir1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSalir1ActionPerformed
+    }//GEN-LAST:event_btnModificarEventoActionPerformed
 
     private void btnCompras2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompras2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCompras2ActionPerformed
+
+    private void btnAgregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarClienteActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void btnVolverClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverClientesActionPerformed
+        panFondoClientes.setVisible(false);
+        panFondoPrincipal.setVisible(true);
+    }//GEN-LAST:event_btnVolverClientesActionPerformed
+
+    private void btnListarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarClientesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnListarClientesActionPerformed
+
+    private void btnAgregarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarClientesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarClientesActionPerformed
+
+    private void btnModificarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarClientesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnModificarClientesActionPerformed
+
+    private void btnEliminarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarClientesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarClientesActionPerformed
+
+    private void btnVolverComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverComprasActionPerformed
+        panFondoPrincipal.setVisible(true);
+        panFondoCompras.setVisible(false);
+    }//GEN-LAST:event_btnVolverComprasActionPerformed
+
+    private void btnVolverEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverEventosActionPerformed
+        panFondoEventos.setVisible(false);
+        panFondoPrincipal.setVisible(true);
+    }//GEN-LAST:event_btnVolverEventosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -307,23 +523,37 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnAgregarCliente;
+    private javax.swing.JButton btnAgregarClientes;
+    private javax.swing.JButton btnAgregarEvento;
     private javax.swing.JButton btnClientes;
     private javax.swing.JButton btnCompras;
-    private javax.swing.JButton btnCompras1;
     private javax.swing.JButton btnCompras2;
+    private javax.swing.JButton btnEliminarClientes;
     private javax.swing.JButton btnEventos;
-    private javax.swing.JButton btnListar;
+    private javax.swing.JButton btnListarClientes;
+    private javax.swing.JButton btnListarEvento;
+    private javax.swing.JButton btnModificarClientes;
+    private javax.swing.JButton btnModificarEvento;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JButton btnSalir1;
+    private javax.swing.JButton btnVolverClientes;
+    private javax.swing.JButton btnVolverCompras;
+    private javax.swing.JButton btnVolverEventos;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblPanelClientes;
     private javax.swing.JLabel lblPanelCompras;
     private javax.swing.JLabel lblPanelEventos;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblTitulo1;
+    private javax.swing.JLabel lblTitulo2;
     private javax.swing.JLabel lblVer;
     private javax.swing.JLabel lblVer1;
+    private javax.swing.JPanel panFondoClientes;
+    private javax.swing.JPanel panFondoCompras;
     private javax.swing.JPanel panFondoEventos;
     private javax.swing.JPanel panFondoPrincipal;
     // End of variables declaration//GEN-END:variables
