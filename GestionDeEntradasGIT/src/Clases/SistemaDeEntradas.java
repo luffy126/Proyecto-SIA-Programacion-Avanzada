@@ -1,4 +1,5 @@
 package Clases;
+import InterfazSwing.Menu;
 import java.util.*;
 import java.io.*;
 import java.time.LocalDate;
@@ -18,6 +19,7 @@ public class SistemaDeEntradas {
     private GestionArchivos gestor = new GestionArchivos();
     private boolean apagarSistema;
     private ValidarEntradas validador;
+    private Menu interfaz = new Menu();
     
     // Objeto para leer, me parece mejor que el InputStreamBuffer, y burdamente es un SuperObjeto que le pone una skin mas bonita al BufferedReader
     private Scanner entrada = new Scanner(System.in); 
@@ -28,6 +30,7 @@ public class SistemaDeEntradas {
         this.clientes = new ArrayList<>();
         this.compras = new ArrayList<>();
         this.apagarSistema = false;
+        
     } 
     
     // getters (faltaban pq si)
@@ -49,6 +52,14 @@ public class SistemaDeEntradas {
         int opcion;
         eventos = gestor.cargarEventos();
         clientes = gestor.cargarClientes();
+        
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            javax.swing.JFrame frame = new javax.swing.JFrame("Sistema de Entradas");
+            frame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+            frame.setContentPane(interfaz);
+            frame.pack();
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true); });
         
         if(this.clientes.isEmpty()){ 
             RegistrarCliente();
