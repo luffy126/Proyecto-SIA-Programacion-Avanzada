@@ -49,17 +49,19 @@ class GestionArchivos {
 
     
     public List<Evento> cargarEventos() {
-        System.out.println("aloha");
+        
         List<Evento> listaEventos = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // formato de LocalDate
 
         File archivo = new File(RUTA_EVENTOS);
         if (!archivo.exists()) {
+            
             return listaEventos;
         }
 
         try (BufferedReader br = new BufferedReader(new FileReader(RUTA_EVENTOS))) {
             String linea;
+            System.out.println("Eventos han sido cargados!");
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split(","); // separar por coma
                 if (datos.length == 10) { 
@@ -86,7 +88,7 @@ class GestionArchivos {
     }
     
     public List<Cliente> cargarClientes() {
-        System.out.println("aloha de nuevo");
+        
         List<Cliente> listaClientes = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // formato de LocalDate
 
@@ -96,6 +98,7 @@ class GestionArchivos {
         }
 
         try (BufferedReader br = new BufferedReader(new FileReader(RUTA_CLIENTES))) {
+            System.out.println("Clientes han sido cargados!");
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split(","); // separar por coma
