@@ -90,12 +90,13 @@ public class Menu extends javax.swing.JFrame {
         ScrollPaneCompras = new javax.swing.JScrollPane();
         jTablaCompras = new javax.swing.JTable();
         panFondoReporte = new javax.swing.JPanel();
+        lblMsjExito = new javax.swing.JLabel();
+        lblAdvertencia = new javax.swing.JLabel();
         jlblTituloReporte = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jLabel3 = new javax.swing.JLabel();
+        checkRutaEspecifica = new javax.swing.JCheckBox();
+        txtFieldRutaDeArchivo = new javax.swing.JTextField();
+        btnGuardarPDF = new javax.swing.JButton();
+        btnGuardarWord = new javax.swing.JButton();
         btnVolverReporte = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -775,33 +776,43 @@ public class Menu extends javax.swing.JFrame {
 
         panPadre.add(panFondoBusqueda, "card6");
 
+        lblMsjExito.setVisible(false);
+        lblMsjExito.setFont(new java.awt.Font("Calibri", 2, 18)); // NOI18N
+        lblMsjExito.setForeground(new java.awt.Color(0, 255, 0));
+        lblMsjExito.setText("Se ha creado exitosamente el archivo!");
+
+        lblAdvertencia.setText("(La casilla desactivada generara el archivo dentro del directorio del proyecto)");
+
         jlblTituloReporte.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jlblTituloReporte.setText("Reporte");
 
-        jButton1.setText("Guardar en .word");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        checkRutaEspecifica.setText("Utilizar esta ruta especifica");
+        checkRutaEspecifica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                checkRutaEspecificaActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Guardar en .PDF");
-
-        jTextField1.setText("C://Users/NombreDeEjemplo/Documents/NetbeansProjects/");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtFieldRutaDeArchivo.setText("C://Users/NombreDeEjemplo/Documents/NetbeansProjects/");
+        txtFieldRutaDeArchivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtFieldRutaDeArchivoActionPerformed(evt);
             }
         });
 
-        jCheckBox1.setText("Utilizar esta ruta especifica");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardarPDF.setText("Guardar en .PDF");
+        btnGuardarPDF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                btnGuardarPDFActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("(La casilla desactivada generara el archivo dentro del directorio del proyecto)");
+        btnGuardarWord.setText("Guardar en .word");
+        btnGuardarWord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarWordActionPerformed(evt);
+            }
+        });
 
         btnVolverReporte.setText("Volver");
         btnVolverReporte.addActionListener(new java.awt.event.ActionListener() {
@@ -814,52 +825,51 @@ public class Menu extends javax.swing.JFrame {
         panFondoReporte.setLayout(panFondoReporteLayout);
         panFondoReporteLayout.setHorizontalGroup(
             panFondoReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panFondoReporteLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnVolverReporte)
+                .addGap(17, 17, 17))
             .addGroup(panFondoReporteLayout.createSequentialGroup()
                 .addGap(60, 60, 60)
                 .addGroup(panFondoReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panFondoReporteLayout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBox1))
-                    .addComponent(jlblTituloReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(lblMsjExito)
+                    .addGroup(panFondoReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(panFondoReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panFondoReporteLayout.createSequentialGroup()
+                                .addComponent(txtFieldRutaDeArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(checkRutaEspecifica))
+                            .addComponent(lblAdvertencia))
+                        .addGroup(panFondoReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(panFondoReporteLayout.createSequentialGroup()
+                                .addComponent(btnGuardarPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnGuardarWord, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panFondoReporteLayout.createSequentialGroup()
+                                .addComponent(jlblTituloReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(53, 53, 53)))))
                 .addContainerGap(86, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panFondoReporteLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panFondoReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panFondoReporteLayout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(88, 88, 88))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panFondoReporteLayout.createSequentialGroup()
-                        .addComponent(btnVolverReporte)
-                        .addContainerGap())))
-            .addGroup(panFondoReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panFondoReporteLayout.createSequentialGroup()
-                    .addGap(54, 54, 54)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(459, Short.MAX_VALUE)))
         );
         panFondoReporteLayout.setVerticalGroup(
             panFondoReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panFondoReporteLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jlblTituloReporte)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 283, Short.MAX_VALUE)
-                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
+                .addComponent(lblMsjExito)
+                .addGap(52, 52, 52)
+                .addComponent(lblAdvertencia)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panFondoReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81)
+                    .addComponent(txtFieldRutaDeArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(checkRutaEspecifica))
+                .addGap(33, 33, 33)
+                .addGroup(panFondoReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGuardarWord, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardarPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(78, 78, 78)
                 .addComponent(btnVolverReporte)
-                .addContainerGap())
-            .addGroup(panFondoReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panFondoReporteLayout.createSequentialGroup()
-                    .addContainerGap(423, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(115, 115, 115)))
+                .addGap(9, 9, 9))
         );
 
         panPadre.add(panFondoReporte, "card6");
@@ -981,22 +991,32 @@ public class Menu extends javax.swing.JFrame {
         jTablaCompras.setVisible(false);
     }//GEN-LAST:event_VisibilidadCompras
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnGuardarWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarWordActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+        lblMsjExito.setVisible(true);
+  
+    }//GEN-LAST:event_btnGuardarWordActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void txtFieldRutaDeArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldRutaDeArchivoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_txtFieldRutaDeArchivoActionPerformed
+
+    private void checkRutaEspecificaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkRutaEspecificaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_checkRutaEspecificaActionPerformed
 
     private void btnVolverReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverReporteActionPerformed
         panFondoReporte.setVisible(false);
         panFondoPrincipal.setVisible(true);
+        lblMsjExito.setVisible(false);
+
     }//GEN-LAST:event_btnVolverReporteActionPerformed
+
+    private void btnGuardarPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPDFActionPerformed
+        
+        lblMsjExito.setVisible(true);
+        
+    }//GEN-LAST:event_btnGuardarPDFActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1025,6 +1045,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btnCompras2;
     private javax.swing.JButton btnEliminarClientes;
     private javax.swing.JButton btnEventos;
+    private javax.swing.JButton btnGuardarPDF;
+    private javax.swing.JButton btnGuardarWord;
     private javax.swing.JButton btnListarClientes;
     private javax.swing.JButton btnListarEvento;
     private javax.swing.JButton btnModificarClientes;
@@ -1036,16 +1058,13 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btnVolverCompras;
     private javax.swing.JButton btnVolverEventos;
     private javax.swing.JButton btnVolverReporte;
+    private javax.swing.JCheckBox checkRutaEspecifica;
     private javax.swing.ButtonGroup grupoBotonesBusqueda;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLayeredPane jPanInterno;
     private javax.swing.JPanel jPanTablas;
     private javax.swing.JPopupMenu jPopupMenu1;
@@ -1055,7 +1074,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JTable jTablaClientes;
     private javax.swing.JTable jTablaCompras;
     private javax.swing.JTable jTablaEventos;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel jlblTitulo;
     private javax.swing.JLabel jlblTituloReporte;
     private javax.swing.JTextArea jtxtAgregarCliente;
@@ -1066,6 +1084,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JTextArea jtxtListarEvento;
     private javax.swing.JTextArea jtxtListarEvento1;
     private javax.swing.JTextArea jtxtListarEvento2;
+    private javax.swing.JLabel lblAdvertencia;
+    private javax.swing.JLabel lblMsjExito;
     private javax.swing.JLabel lblPanelBuscador;
     private javax.swing.JLabel lblPanelClientes;
     private javax.swing.JLabel lblPanelCompras;
@@ -1082,5 +1102,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel panFondoPrincipal;
     private javax.swing.JPanel panFondoReporte;
     private javax.swing.JPanel panPadre;
+    private javax.swing.JTextField txtFieldRutaDeArchivo;
     // End of variables declaration//GEN-END:variables
 }
