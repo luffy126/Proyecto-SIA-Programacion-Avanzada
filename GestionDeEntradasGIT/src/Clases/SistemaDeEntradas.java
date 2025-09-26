@@ -4,6 +4,8 @@ import java.util.*;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.format.DateTimeParseException;
+import javax.swing.JOptionPane;
 
 /**
  * @author Tenerex
@@ -19,7 +21,7 @@ public class SistemaDeEntradas {
     private GestionArchivos gestor = new GestionArchivos();
     private boolean apagarSistema;
     private ValidarEntradas validador;
-    private Menu interfaz = new Menu();
+    private Menu interfaz;
     
     // Objeto para leer, me parece mejor que el InputStreamBuffer, y burdamente es un SuperObjeto que le pone una skin mas bonita al BufferedReader
     private Scanner entrada = new Scanner(System.in); 
@@ -61,10 +63,10 @@ public class SistemaDeEntradas {
         int opcion;
         eventos = gestor.cargarEventos();
         clientes = gestor.cargarClientes();
-        
-        
-        
+        interfaz = new Menu(this);
+
         javax.swing.SwingUtilities.invokeLater(() -> {
+        // o aqui?
         interfaz.setLocationRelativeTo(null);
         interfaz.setVisible(true);
         });
@@ -224,42 +226,40 @@ public class SistemaDeEntradas {
         }
     }
     
-    public void CrearEvento() {
-        System.out.println("Ingrese nombre del evento:");
-        String nombre = entrada.nextLine();
-        
-        System.out.println("Capacidad del evento:");
-        int capacidad = Integer.parseInt(entrada.nextLine());
-        
-        System.out.println("Ingrese ubicacion del evento:");
-        String ubicacion = entrada.nextLine();
-        
-        System.out.println("Ingrese fecha del evento (Formato: año-mes-dia):");
-        LocalDate fecha = LocalDate.parse(entrada.nextLine());
-        
-        System.out.println("Ingrese nombre del orador del evento:");
-        String orador = entrada.nextLine();
-        
-        System.out.println("Ingrese tema del evento:");
-        String temaEvento = entrada.nextLine();
-        
-        System.out.println("Ingrese descripción del evento:");
-        String descripcion = entrada.nextLine();
-        
-        System.out.println("Ingrese numero de asientos destinados a discapacitados del evento:");
-        int asientosDiscapacidades = Integer.parseInt(entrada.nextLine());
-        
-        System.out.println("Ingrese precio de la entrada al evento (en pesos):");
-        int precioEntrada = Integer.parseInt(entrada.nextLine());
-        
-        Random random = new Random();
-        
-        int ID = (random.nextInt(9999)); 
-        System.out.println("ID del evento creado: " + ID);
-        Evento nuevoEvento = new Evento(nombre, capacidad, ID, ubicacion, fecha, orador, temaEvento, descripcion, asientosDiscapacidades, precioEntrada);
-        eventos.add(nuevoEvento);
-        gestor.guardarEvento(nuevoEvento);
-        System.out.println("Evento ID:" + ID + " - " + nombre + " se ha creado satisfactoriamente.");
+    public void CrearEvento(String nombre, String capacidadStr, String ubicacion, 
+                                       String fechaStr, String orador, String temaEvento, 
+                                       String descripcion, String asientosStr, String precioStr) {
+        try {
+            int capacidad = Integer.parseInt(capacidadStr);
+            int asientosDiscapacidades = Integer.parseInt(asientosStr);
+            int precioEntrada = Integer.parseInt(precioStr);
+
+            LocalDate fecha = LocalDate.parse(fechaStr); // formato: yyyy-MM-dd
+
+            Random random = new Random();
+            int ID = random.nextInt(9999);
+
+            Evento nuevoEvento = new Evento(
+                    nombre, capacidad, ID, ubicacion, fecha,
+                    orador, temaEvento, descripcion, asientosDiscapacidades, precioEntrada
+            );
+
+            eventos.add(nuevoEvento);
+            gestor.guardarEvento(nuevoEvento);
+
+            JOptionPane.showMessageDialog(null,
+                    "Evento creado satisfactoriamente!\nID: " + ID + " - " + nombre,
+                    "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Error: Algunos valores numéricos no son válidos.",
+                    "Error de formato", JOptionPane.ERROR_MESSAGE);
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Error: La fecha debe tener el formato yyyy-MM-dd",
+                    "Error de formato", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     public void ModificarEvento() {
