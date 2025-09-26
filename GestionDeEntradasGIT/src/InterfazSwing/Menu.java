@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package InterfazSwing;
+import Clases.SistemaDeEntradas;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -11,11 +14,13 @@ package InterfazSwing;
 public class Menu extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Menu.class.getName());
+    private SistemaDeEntradas sistema;
 
     /**
      * Creates new form Menu
      */
-    public Menu() {
+    public Menu(SistemaDeEntradas sistema) {
+        this.sistema = sistema;
         initComponents();
     }
 
@@ -900,7 +905,42 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnAgregarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarEventoActionPerformed
+        JTextField txtNombre = new JTextField();
+        JTextField txtCapacidad = new JTextField();
+        JTextField txtUbicacion = new JTextField();
+        JTextField txtFecha = new JTextField(); // formato yyyy-MM-dd
+        JTextField txtOrador = new JTextField();
+        JTextField txtTema = new JTextField();
+        JTextField txtDescripcion = new JTextField();
+        JTextField txtAsientosDiscap = new JTextField();
+        JTextField txtPrecio = new JTextField();
 
+        Object[] message = {
+            "Nombre:", txtNombre,
+            "Capacidad:", txtCapacidad,
+            "Ubicación:", txtUbicacion,
+            "Fecha (yyyy-MM-dd):", txtFecha,
+            "Orador:", txtOrador,
+            "Tema:", txtTema,
+            "Descripción:", txtDescripcion,
+            "Asientos discapacitados:", txtAsientosDiscap,
+            "Precio:", txtPrecio
+        };
+
+        int option = JOptionPane.showConfirmDialog(this, message, "Crear Evento", JOptionPane.OK_CANCEL_OPTION);
+        if (option == JOptionPane.OK_OPTION) {
+            sistema.CrearEvento(
+                txtNombre.getText(),
+                txtCapacidad.getText(),
+                txtUbicacion.getText(),
+                txtFecha.getText(),
+                txtOrador.getText(),
+                txtTema.getText(),
+                txtDescripcion.getText(),
+                txtAsientosDiscap.getText(),
+                txtPrecio.getText()
+            );
+        }
     }//GEN-LAST:event_btnAgregarEventoActionPerformed
 
     private void btnListarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarEventoActionPerformed
