@@ -90,7 +90,7 @@ public class SistemaDeEntradas {
                     break;
                 case 1:
                     try {
-                        CrearEvento();
+                        // CrearEvento();
                         break;
                     }
                     catch(Exception e) {
@@ -433,6 +433,8 @@ public class SistemaDeEntradas {
         }
         return null;
     }
+    
+ 
     
     public void RegistrarCliente() {
         int edad;
