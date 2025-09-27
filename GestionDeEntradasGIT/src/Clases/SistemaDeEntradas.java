@@ -90,7 +90,7 @@ public class SistemaDeEntradas {
                     break;
                 case 1:
                     try {
-                        CrearEvento();
+                        // CrearEvento();
                         break;
                     }
                     catch(Exception e) {
