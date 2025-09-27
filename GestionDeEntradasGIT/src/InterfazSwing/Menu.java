@@ -951,7 +951,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnListarEventoActionPerformed
 
     private void btnModificarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarEventoActionPerformed
-        // TODO add your handling code here:
+        sistema.ModificarEventoSwingPanel();
     }//GEN-LAST:event_btnModificarEventoActionPerformed
 
     private void btnCompras2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompras2ActionPerformed

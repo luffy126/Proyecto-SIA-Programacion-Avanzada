@@ -5,9 +5,13 @@ import java.io.*;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeParseException;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 /**
  * @author Tenerex
@@ -110,7 +114,7 @@ public class SistemaDeEntradas {
                     RemoverEvento();
                     break;
                 case 4:    
-                    ModificarEvento();
+                    // ModificarEvento();
                     break;
                 case 5:
                     ListarClientes(clientes);
@@ -264,121 +268,76 @@ public class SistemaDeEntradas {
         }
     }
     
-    public void ModificarEvento() {
-        // Implementación pendiente [X]
-        // Implementacion media pendiente, quedan como la mitad de atributos para modificar
-        int idBuscado, opcion, posEvento = 0;
-
-        boolean encontrado = false;
-        
-        if(eventos.isEmpty() || eventos == null){
-            System.out.println("No hay eventos para mostrar.");
+    public void ModificarEventoSwingPanel() {
+        if (eventos == null || eventos.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay eventos para mostrar.");
             return;
         }
-        
-        System.out.println("Ingrese ID del Evento: ");
-        idBuscado = Integer.parseInt(entrada.nextLine());
 
-        for (int i = 0; i < eventos.size(); i++) {
-            
-            if(idBuscado == eventos.get(i).getID()){
-                posEvento = i;
-                encontrado = true;
-            } 
+        // Pedir ID del evento
+        String idStr = JOptionPane.showInputDialog("Ingrese ID del Evento:");
+        if (idStr == null) return; // Cancelar
+        int idBuscado = Integer.parseInt(idStr);
+
+        Evento eventoSeleccionado = null;
+        for (Evento e : eventos) {
+            if (e.getID() == idBuscado) {
+                eventoSeleccionado = e;
+                break;
+            }
         }
-        
-        if (!encontrado) {
-            System.out.println("No se encontro el evento " + idBuscado + ".");
-            return;
-        } else{
 
-            System.out.println("Se ha encontrado el evento " + idBuscado + ".");
-            System.out.println("----------------------------------------------");
-            System.out.println("Que quiere modificar del evento?");
-            System.out.println("1. Nombre");
-            System.out.println("2. Capacidad de Personas");
-            System.out.println("3. Ubicacion");
-            System.out.println("4. Fecha de realización");
-            System.out.println("5. Orador");
-            System.out.println("6. Tema del evento");
-            System.out.println("7. Descripción del evento");
-            System.out.println("8. Asientos para discapacitados");
-            System.out.println("9. Precio de la entrada");
-            System.out.println("0. Cancelar");
-            
-            opcion = Integer.parseInt(entrada.nextLine());
-            
-            switch(opcion){
-                
-                case 0:
-                    return;
-                case 1: // nombre
-                    System.out.println("Ingrese el nuevo nombre del evento:");
-                    String nombre = entrada.nextLine();
-                    eventos.get(posEvento).setNombre(nombre);
-                    System.out.println("Se cambio el nombre a " + nombre + "!");
-                    gestor.guardarEvento(eventos);
-                    break;
-                case 2: // capacidad
-                    System.out.println("Ingrese la nueva capacidad de personas en el evento: ");
-                    int capacidad = Integer.parseInt(entrada.nextLine());
-                    eventos.get(posEvento).setCapacidadPersonas(capacidad);
-                    System.out.println("Capacidad actualizada!");
-                    gestor.guardarEvento(eventos);
-                    break;
-                case 3: // ubicacion
-                    System.out.println("Donde se realizara este evento: ");
-                    String ubicacion = entrada.nextLine();
-                    eventos.get(posEvento).setUbicacion(ubicacion);
-                    System.out.println("Ubicacion actualizada a " + ubicacion);
-                    gestor.guardarEvento(eventos);
-                    break;
-                case 4: // fecha
-                    System.out.println("Ingrese la fecha donde se realizará este evento (Formato: año-mes-dia): ");
-                    LocalDate fechaEvento = LocalDate.parse(entrada.nextLine());
-                    eventos.get(posEvento).setFechaEvento(fechaEvento);
-                    System.out.println("Fecha del evento cambiada a: " + fechaEvento);
-                    gestor.guardarEvento(eventos);
-                    break;
-                case 5: // orador
-                    System.out.println("Ingrese el orador que presentará el evento: ");
-                    String orador = entrada.nextLine();
-                    eventos.get(posEvento).setOrador(orador);
-                    System.out.println("Orador cambiado a: " + orador);
-                    gestor.guardarEvento(eventos);
-                    break;
-                case 6: // tema del evento
-                    System.out.println("Ingrese el tema del evento: ");
-                    String tema = entrada.nextLine();
-                    eventos.get(posEvento).setTemaEvento(tema);
-                    System.out.println("Tema del evento cambiado a: " + tema);
-                    gestor.guardarEvento(eventos);
-                    break;
-                case 7: // descripcion del evento
-                    System.out.println("Ingrese la descripción del evento: ");
-                    String descripcion = entrada.nextLine();
-                    eventos.get(posEvento).setDescripcionEvento(descripcion);
-                    System.out.println("Descripción del evento cambiado a: " + descripcion);
-                    gestor.guardarEvento(eventos);
-                    break;
-                case 8: // asientos para discapacitados
-                    System.out.println("Ingrese la capacidad de asientos para discapacitados del evento: ");
-                    int asientosDiscapacitados = Integer.parseInt(entrada.nextLine());
-                    eventos.get(posEvento).setAsientosEspeciales(asientosDiscapacitados);
-                    System.out.println("Asientos para discapacitados cambiados a: " + asientosDiscapacitados);
-                    gestor.guardarEvento(eventos);
-                    break;
-                case 9: // precio de la entrada
-                    System.out.println("Ingrese el precio de la entrada al evento: ");
-                    int precio = Integer.parseInt(entrada.nextLine());
-                    eventos.get(posEvento).setPrecioEntrada(precio);
-                    System.out.println("Precio del evento cambiado a: " + precio);
-                    gestor.guardarEvento(eventos);
-                    break;
-                    
+        if (eventoSeleccionado == null) {
+            JOptionPane.showMessageDialog(null, "No se encontró el evento " + idBuscado + ".");
+            return;
+        }
+
+        // Crear panel con campos para modificar
+        JTextField nombreField = new JTextField(eventoSeleccionado.getNombre());
+        JTextField capacidadField = new JTextField(String.valueOf(eventoSeleccionado.getCapacidad()));
+        JTextField ubicacionField = new JTextField(eventoSeleccionado.getUbicacion());
+        JTextField fechaField = new JTextField(eventoSeleccionado.getFechaEvento().toString());
+        JTextField oradorField = new JTextField(eventoSeleccionado.getOrador());
+        JTextField temaField = new JTextField(eventoSeleccionado.getTemaEvento());
+        JTextField descripcionField = new JTextField(eventoSeleccionado.getDescripcionEvento());
+        JTextField asientosField = new JTextField(String.valueOf(eventoSeleccionado.getAsientosEspeciales()));
+        JTextField precioField = new JTextField(String.valueOf(eventoSeleccionado.getPrecioEntrada()));
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(new JLabel("Nombre:")); panel.add(nombreField);
+        panel.add(new JLabel("Capacidad:")); panel.add(capacidadField);
+        panel.add(new JLabel("Ubicación:")); panel.add(ubicacionField);
+        panel.add(new JLabel("Fecha (yyyy-MM-dd):")); panel.add(fechaField);
+        panel.add(new JLabel("Orador:")); panel.add(oradorField);
+        panel.add(new JLabel("Tema del evento:")); panel.add(temaField);
+        panel.add(new JLabel("Descripción:")); panel.add(descripcionField);
+        panel.add(new JLabel("Asientos especiales:")); panel.add(asientosField);
+        panel.add(new JLabel("Precio de entrada:")); panel.add(precioField);
+
+        int result = JOptionPane.showConfirmDialog(null, panel, 
+            "Modificar Evento ID: " + idBuscado, JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        if (result == JOptionPane.OK_OPTION) {
+            try {
+                eventoSeleccionado.setNombre(nombreField.getText());
+                eventoSeleccionado.setCapacidadPersonas(Integer.parseInt(capacidadField.getText()));
+                eventoSeleccionado.setUbicacion(ubicacionField.getText());
+                eventoSeleccionado.setFechaEvento(LocalDate.parse(fechaField.getText()));
+                eventoSeleccionado.setOrador(oradorField.getText());
+                eventoSeleccionado.setTemaEvento(temaField.getText());
+                eventoSeleccionado.setDescripcionEvento(descripcionField.getText());
+                eventoSeleccionado.setAsientosEspeciales(Integer.parseInt(asientosField.getText()));
+                eventoSeleccionado.setPrecioEntrada(Integer.parseInt(precioField.getText()));
+
+                gestor.guardarEvento(eventos);
+                JOptionPane.showMessageDialog(null, "Evento modificado correctamente.");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Error al modificar el evento: " + ex.getMessage());
             }
         }
     }
+
         @SuppressWarnings("UnnecessaryReturnStatement")
     public void RemoverEvento() {
         int idABorrar;
