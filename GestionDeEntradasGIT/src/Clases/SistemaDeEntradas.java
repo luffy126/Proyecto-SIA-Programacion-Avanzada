@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeParseException;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 /**
  * @author Tenerex
@@ -99,7 +101,7 @@ public class SistemaDeEntradas {
                     }
                     
                 case 2:
-                    ListarEventos(getTodosLosEventos());
+                    // ListarEventos(getTodosLosEventos());
                     System.out.println("");
                     System.out.println(">> Presione enter para continuar.");
                     entrada.nextLine();
@@ -405,21 +407,35 @@ public class SistemaDeEntradas {
     
     public void ListarEventos(List<Evento> eventos) {
         if (eventos == null || eventos.isEmpty()) {
-            System.out.println("No hay eventos para mostrar.");
+            JOptionPane.showMessageDialog(null, "No hay eventos para mostrar.", "Listado de Eventos", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        
+
+        // Crear un JTextArea para mostrar los eventos
+        JTextArea textArea = new JTextArea(20, 50); // 20 filas, 50 columnas
+        textArea.setEditable(false); // que no se pueda editar
+
+        // Construir el texto con los eventos
+        StringBuilder sb = new StringBuilder();
         for (Evento e : eventos) {
-            String txt = "Nombre del evento: " + (e.getNombre() + ", ID: " + e.getID() + ", Tema: " + e.getTemaEvento());
-            String txt2 = "Capacidad: " + (e.getCapacidad() + ", Precio: $" + e.getPrecioEntrada()+ ", Orador: " + e.getOrador());
-            String txt3 = "Ubicación : " + (e.getUbicacion() + ", Fecha: " + e.getFechaEvento());
-            System.out.println(" ");
-            System.out.println(txt);
-            System.out.println(txt2);
-            System.out.println(txt3);
+            sb.append("Nombre del evento: ").append(e.getNombre())
+              .append(", ID: ").append(e.getID())
+              .append(", Tema: ").append(e.getTemaEvento()).append("\n");
+            sb.append("Capacidad: ").append(e.getCapacidad())
+              .append(", Precio: $").append(e.getPrecioEntrada())
+              .append(", Orador: ").append(e.getOrador()).append("\n");
+            sb.append("Ubicación: ").append(e.getUbicacion())
+              .append(", Fecha: ").append(e.getFechaEvento()).append("\n");
+            sb.append("\n"); // línea en blanco entre eventos
         }
-        
+
+        textArea.setText(sb.toString());
+
+        // Mostrar en un JScrollPane dentro de un JOptionPane
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        JOptionPane.showMessageDialog(null, scrollPane, "Listado de Eventos", JOptionPane.INFORMATION_MESSAGE);
     }
+    
     public List<Evento> getTodosLosEventos() {
         return eventos;
     }

@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package InterfazSwing;
+import Clases.Evento;
 import Clases.SistemaDeEntradas;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -944,7 +946,8 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarEventoActionPerformed
 
     private void btnListarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarEventoActionPerformed
-        // TODO add your handling code here:
+        List<Evento> eventos = sistema.getEventos();
+        sistema.ListarEventos(eventos);
     }//GEN-LAST:event_btnListarEventoActionPerformed
 
     private void btnModificarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarEventoActionPerformed
