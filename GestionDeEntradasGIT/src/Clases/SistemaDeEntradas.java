@@ -575,17 +575,37 @@ public class SistemaDeEntradas {
     }
     
     public void ListarClientes(List<Cliente> clientes) {
-         if (clientes == null || clientes.isEmpty()) {
-            System.out.println("No hay clientes registrados.");
-            return;
-  
-        }
+        try {
+            if (clientes == null || clientes.isEmpty()) {
+                JOptionPane.showMessageDialog(null,
+                        "No hay clientes registrados en el sistema.",
+                        "Lista de Clientes", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+
+            StringBuilder listaClientes = new StringBuilder();
+            listaClientes.append("=== LISTA DE CLIENTES REGISTRADOS ===\n\n");
         
-        int i = 1;
-        for (Cliente c : clientes) {
-            String txt = "" + (i + ". Nombre: " + c.getNombre() + ", RUT: " + c.getRut() + ", Edad: " + c.getEdad());
-            System.out.println(txt);
-            i++;
+            for (int i = 0; i < clientes.size(); i++) {
+                Cliente cliente = clientes.get(i);
+                listaClientes.append(i + 1).append(". Nombre: ").append(cliente.getNombre())
+                            .append(", RUT: ").append(cliente.getRut())
+                            .append(", Edad: ").append(cliente.getEdad()).append(" años\n");
+                listaClientes.append("   Asientos a comprar: ").append(cliente.getAsientosAComprar()).append("\n");
+                listaClientes.append("   Acompañantes: ").append(cliente.getAcompanantes() != null ? cliente.getAcompanantes() : "Ninguno").append("\n");
+                listaClientes.append("   Discapacidades: ").append(cliente.getDiscapacidades() != null ? cliente.getDiscapacidades() : "Ninguna").append("\n");
+                listaClientes.append("   Total de compras: ").append(cliente.getComprasClientes().size()).append("\n");
+                listaClientes.append("─────────────────────────────────\n");
+            }
+
+            JOptionPane.showMessageDialog(null, listaClientes.toString(),
+                    "Lista de Clientes (" + clientes.size() + " registrados)",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,
+                    "Error al mostrar la lista de clientes: " + e.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     
