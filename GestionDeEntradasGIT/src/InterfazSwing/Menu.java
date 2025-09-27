@@ -3,7 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package InterfazSwing;
-import Clases.SistemaDeEntradas;
+
+import Clases.*;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -12,7 +13,7 @@ import javax.swing.JTextField;
  * @author Tomas
  */
 public class Menu extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Menu.class.getName());
     private SistemaDeEntradas sistema;
 
@@ -64,20 +65,20 @@ public class Menu extends javax.swing.JFrame {
         jtxtListarEvento2 = new javax.swing.JTextArea();
         panFondoClientes = new javax.swing.JPanel();
         lblTitulo2 = new javax.swing.JLabel();
-        btnAgregarCliente = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnAgregarClientes = new javax.swing.JButton();
+        btnListarClientes = new javax.swing.JButton();
+        btnModificarClientes = new javax.swing.JButton();
+        btnEliminarClientes = new javax.swing.JButton();
         btnVolverClientes = new javax.swing.JButton();
         jtxtAgregarCliente = new javax.swing.JTextArea();
         jtxtListarCliente = new javax.swing.JTextArea();
         jtxtListarCliente1 = new javax.swing.JTextArea();
         jtxtListarCliente2 = new javax.swing.JTextArea();
         panFondoCompras = new javax.swing.JPanel();
-        btnListarClientes = new javax.swing.JButton();
-        btnAgregarClientes = new javax.swing.JButton();
-        btnModificarClientes = new javax.swing.JButton();
-        btnEliminarClientes = new javax.swing.JButton();
+        btnAgregarCompras = new javax.swing.JButton();
+        btnListarCompras = new javax.swing.JButton();
+        btnModificarCompras = new javax.swing.JButton();
+        btnEliminarCompras = new javax.swing.JButton();
         btnVolverCompras = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         panFondoBusqueda = new javax.swing.JPanel();
@@ -380,31 +381,31 @@ public class Menu extends javax.swing.JFrame {
         lblTitulo2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         lblTitulo2.setText("Clientes");
 
-        btnAgregarCliente.setText("Listar Clientes");
-        btnAgregarCliente.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregarClientes.setText("Agregar Cliente");
+        btnAgregarClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarClienteActionPerformed(evt);
+                btnAgregarClientesActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Agregar Cliente");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnListarClientes.setText("Listar Clientes");
+        btnListarClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnListarClientesActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Modificar Clientes");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnModificarClientes.setText("Modificar Clientes");
+        btnModificarClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnModificarClientesActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Eliminar Clientes");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminarClientes.setText("Eliminar Clientes");
+        btnEliminarClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnEliminarClientesActionPerformed(evt);
             }
         });
 
@@ -460,10 +461,10 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(panFondoClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panFondoClientesLayout.createSequentialGroup()
                         .addGroup(panFondoClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnAgregarCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnListarClientes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAgregarClientes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnModificarClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEliminarClientes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panFondoClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtxtAgregarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -484,19 +485,19 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(lblTitulo2)
                 .addGap(92, 92, 92)
                 .addGroup(panFondoClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAgregarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtxtAgregarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panFondoClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAgregarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnListarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtxtListarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panFondoClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnModificarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtxtListarCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panFondoClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtxtListarCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
                 .addComponent(btnVolverClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -507,31 +508,31 @@ public class Menu extends javax.swing.JFrame {
 
         panFondoCompras.setEnabled(false);
 
-        btnListarClientes.setText("Listar Compras por ID");
-        btnListarClientes.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregarCompras.setText("Realizar Compra");
+        btnAgregarCompras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnListarClientesActionPerformed(evt);
+                btnAgregarComprasActionPerformed(evt);
             }
         });
 
-        btnAgregarClientes.setText("Realizar Compra");
-        btnAgregarClientes.addActionListener(new java.awt.event.ActionListener() {
+        btnListarCompras.setText("Listar Compras por ID");
+        btnListarCompras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarClientesActionPerformed(evt);
+                btnListarComprasActionPerformed(evt);
             }
         });
 
-        btnModificarClientes.setText("Modificar Compras");
-        btnModificarClientes.addActionListener(new java.awt.event.ActionListener() {
+        btnModificarCompras.setText("Modificar Compras");
+        btnModificarCompras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarClientesActionPerformed(evt);
+                btnModificarComprasActionPerformed(evt);
             }
         });
 
-        btnEliminarClientes.setText("Eliminar Compras");
-        btnEliminarClientes.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminarCompras.setText("Eliminar Compras");
+        btnEliminarCompras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarClientesActionPerformed(evt);
+                btnEliminarComprasActionPerformed(evt);
             }
         });
 
@@ -554,10 +555,10 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(panFondoComprasLayout.createSequentialGroup()
                         .addGap(52, 52, 52)
                         .addGroup(panFondoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnListarClientes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnAgregarClientes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnModificarClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEliminarClientes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btnListarCompras, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAgregarCompras, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnModificarCompras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEliminarCompras, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(panFondoComprasLayout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addComponent(jLabel2)))
@@ -573,13 +574,13 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addComponent(jLabel2)
                 .addGap(118, 118, 118)
-                .addComponent(btnAgregarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAgregarCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnListarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnListarCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnModificarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnModificarCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnEliminarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEliminarCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
                 .addComponent(btnVolverCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
@@ -930,15 +931,15 @@ public class Menu extends javax.swing.JFrame {
         int option = JOptionPane.showConfirmDialog(this, message, "Crear Evento", JOptionPane.OK_CANCEL_OPTION);
         if (option == JOptionPane.OK_OPTION) {
             sistema.CrearEvento(
-                txtNombre.getText(),
-                txtCapacidad.getText(),
-                txtUbicacion.getText(),
-                txtFecha.getText(),
-                txtOrador.getText(),
-                txtTema.getText(),
-                txtDescripcion.getText(),
-                txtAsientosDiscap.getText(),
-                txtPrecio.getText()
+                    txtNombre.getText(),
+                    txtCapacidad.getText(),
+                    txtUbicacion.getText(),
+                    txtFecha.getText(),
+                    txtOrador.getText(),
+                    txtTema.getText(),
+                    txtDescripcion.getText(),
+                    txtAsientosDiscap.getText(),
+                    txtPrecio.getText()
             );
         }
     }//GEN-LAST:event_btnAgregarEventoActionPerformed
@@ -955,42 +956,597 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCompras2ActionPerformed
 
-    private void btnAgregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAgregarClienteActionPerformed
+    // Método auxiliar para buscar cliente con RUT normalizado
+    private Cliente buscarClienteConRUTNormalizado(String rutIngresado) {
+        String rutBuscado = normalizarRUT(rutIngresado);
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        // Buscar comparando RUTs normalizados
+        for (Cliente cliente : sistema.getClientes()) {
+            String rutCliente = normalizarRUT(cliente.getRut());
+            if (rutBuscado.equals(rutCliente)) {
+                return cliente;
+            }
+        }
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+        return null;
+    }
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    // Método auxiliar para normalizar RUT
+    private String normalizarRUT(String rut) {
+        if (rut == null) {
+            return null;
+        }
+
+        // Remover puntos y guiones, convertir a mayúsculas
+        String rutLimpio = rut.trim().replace(".", "").replace("-", "").toUpperCase();
+
+        // Si no tiene guión, agregarlo antes del último dígito
+        if (rutLimpio.length() >= 2) {
+            String numero = rutLimpio.substring(0, rutLimpio.length() - 1);
+            String dv = rutLimpio.substring(rutLimpio.length() - 1);
+            return numero + "-" + dv;
+        }
+
+        return rutLimpio;
+    }
+
+
+    private void btnListarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarClientesActionPerformed
+        if (sistema.getClientes().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay clientes registrados.", "Lista de clientes", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        StringBuilder clientesInfo = new StringBuilder();
+        clientesInfo.append("LISTA DE CLIENTES REGISTRADOS:\n");
+        clientesInfo.append("==========================================\n\n");
+
+        int i = 1;
+        for (Cliente c : sistema.getClientes()) {
+            String rutFormateado = normalizarRUT(c.getRut()); // Asegurar formato consistente
+
+            clientesInfo.append(i).append(". Nombre: ").append(c.getNombre()).append("\n");
+            clientesInfo.append("   RUT: ").append(rutFormateado).append("\n");
+            clientesInfo.append("   Edad: ").append(c.getEdad()).append(" años\n");
+
+            if (c.getDiscapacidades() != null && !c.getDiscapacidades().trim().isEmpty()) {
+                clientesInfo.append("   Discapacidad: ").append(c.getDiscapacidades()).append("\n");
+            }
+
+            clientesInfo.append("\n");
+            i++;
+        }
+
+        JOptionPane.showMessageDialog(this, clientesInfo.toString(), "Lista de clientes", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnListarClientesActionPerformed
+
+    private void btnAgregarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarClientesActionPerformed
+        JTextField txtNombre = new JTextField();
+        JTextField txtRut = new JTextField();
+        JTextField txtEdad = new JTextField();
+        JTextField txtCantAsientos = new JTextField("1");
+
+        Object[] mensaje = {
+            "Nombre:", txtNombre,
+            "RUT (puede escribirlo con o sin puntos/guión):", txtRut,
+            "Edad:", txtEdad,
+            "Cantidad de asientos a comprar:", txtCantAsientos
+        };
+
+        int opcion = JOptionPane.showConfirmDialog(this, mensaje, "Agregar Cliente", JOptionPane.OK_CANCEL_OPTION);
+        if (opcion == JOptionPane.OK_OPTION) {
+            try {
+                String nombre = txtNombre.getText().trim();
+                String rutIngresado = txtRut.getText().trim();
+                String edadStr = txtEdad.getText().trim();
+                String cantAsientosStr = txtCantAsientos.getText().trim();
+
+                // Validaciones básicas
+                if (nombre.isEmpty() || rutIngresado.isEmpty() || edadStr.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                // Normalizar RUT
+                String rut = normalizarRUT(rutIngresado);
+
+                // Validar RUT
+                if (!Cliente.validarRut(rut)) {
+                    JOptionPane.showMessageDialog(this, "RUT inválido. Verifique el formato.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                // Verificar si ya existe (buscar con ambos formatos)
+                if (buscarClienteConRUTNormalizado(rutIngresado) != null) {
+                    JOptionPane.showMessageDialog(this, "Ya existe un cliente con ese RUT.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                int edad = Integer.parseInt(edadStr);
+                if (edad < 16 || edad > 120) {
+                    JOptionPane.showMessageDialog(this, "La edad debe estar entre 16 y 120 años.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                int cantAsientos = Integer.parseInt(cantAsientosStr);
+                if (cantAsientos < 0) {
+                    JOptionPane.showMessageDialog(this, "La cantidad de asientos no puede ser negativa.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                // Preguntar por discapacidades
+                String discapacidad = "";
+                int opcionDiscapacidad = JOptionPane.showConfirmDialog(this,
+                        "¿Desea registrar alguna discapacidad para este cliente?",
+                        "Discapacidad", JOptionPane.YES_NO_OPTION);
+
+                if (opcionDiscapacidad == JOptionPane.YES_OPTION) {
+                    discapacidad = JOptionPane.showInputDialog(this, "Ingrese la discapacidad:");
+                    if (discapacidad == null) {
+                        discapacidad = "";
+                    }
+                }
+
+                // Crear cliente con RUT normalizado
+                Cliente nuevoCliente = new Cliente(nombre, rut, edad, cantAsientos, discapacidad, null);
+                sistema.getClientes().add(nuevoCliente);
+
+                JOptionPane.showMessageDialog(this,
+                        "Cliente registrado exitosamente!\nNombre: " + nombre + "\nRUT: " + rut,
+                        "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Edad y cantidad de asientos deben ser números.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnAgregarClientesActionPerformed
+
+    private void btnModificarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarClientesActionPerformed
+        if (sistema.getClientes().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay clientes para modificar.", "Modificar cliente", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Mostrar lista de clientes primero
+        StringBuilder clientesList = new StringBuilder();
+        clientesList.append("CLIENTES REGISTRADOS:\n");
+        clientesList.append("============================\n\n");
+
+        for (int i = 0; i < sistema.getClientes().size(); i++) {
+            Cliente c = sistema.getClientes().get(i);
+            String rutFormateado = normalizarRUT(c.getRut()); // Formato consistente
+            clientesList.append((i + 1)).append(". ")
+                    .append(c.getNombre()).append(" - RUT: ").append(rutFormateado).append("\n");
+        }
+
+        clientesList.append("\n¿Cuál cliente desea modificar?");
+
+        String rutBuscado = JOptionPane.showInputDialog(this, clientesList.toString() + "\n\nIngrese el RUT del cliente:");
+        if (rutBuscado == null || rutBuscado.trim().isEmpty()) {
+            return;
+        }
+
+        Cliente cliente = buscarClienteConRUTNormalizado(rutBuscado);
+        if (cliente == null) {
+            JOptionPane.showMessageDialog(this, "No se encontró un cliente con ese RUT.", "Cliente no encontrado", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String[] opciones = {"Modificar Nombre", "Modificar Edad", "Modificar Discapacidades", "Cancelar"};
+
+        int opcion = JOptionPane.showOptionDialog(this,
+                "Cliente encontrado: " + cliente.getNombre() + "\n¿Qué desea modificar?",
+                "Modificar cliente",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null, opciones, opciones[0]);
+
+        switch (opcion) {
+            case 0: // Modificar nombre
+                String nuevoNombre = JOptionPane.showInputDialog(this,
+                        "Nombre actual: " + cliente.getNombre() + "\nIngrese el nuevo nombre:");
+
+                if (nuevoNombre != null && !nuevoNombre.trim().isEmpty()) {
+                    cliente.setNombre(nuevoNombre.trim());
+                    JOptionPane.showMessageDialog(this, "Nombre actualizado exitosamente!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                }
+                break;
+
+            case 1: // Modificar edad
+                try {
+                    String edadStr = JOptionPane.showInputDialog(this,
+                            "Edad actual: " + cliente.getEdad() + " años\nIngrese la nueva edad:");
+
+                    if (edadStr != null && !edadStr.trim().isEmpty()) {
+                        int nuevaEdad = Integer.parseInt(edadStr.trim());
+                        if (nuevaEdad < 16 || nuevaEdad > 120) {
+                            JOptionPane.showMessageDialog(this, "La edad debe estar entre 16 y 120 años.", "Error", JOptionPane.ERROR_MESSAGE);
+                        } else {
+                            cliente.setEdad(nuevaEdad);
+                            JOptionPane.showMessageDialog(this, "Edad actualizada exitosamente!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    }
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "Ingrese un número válido para la edad.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                break;
+
+            case 2: // Modificar discapacidades
+                String discapacidadActual = cliente.getDiscapacidades() != null ? cliente.getDiscapacidades() : "Ninguna";
+
+                String nuevaDiscapacidad = JOptionPane.showInputDialog(this,
+                        "Discapacidad actual: " + discapacidadActual + "\nIngrese la nueva discapacidad (o deje vacío):");
+
+                if (nuevaDiscapacidad != null) {
+                    cliente.setDiscapacidades(nuevaDiscapacidad.trim());
+                    JOptionPane.showMessageDialog(this, "Discapacidad actualizada exitosamente!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                }
+                break;
+        }
+    }//GEN-LAST:event_btnModificarClientesActionPerformed
+
+    private void btnEliminarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarClientesActionPerformed
+        if (sistema.getClientes().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay clientes para eliminar.", "Eliminar cliente", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Mostrar lista de clientes primero
+        StringBuilder clientesList = new StringBuilder();
+        clientesList.append("CLIENTES REGISTRADOS:\n");
+        clientesList.append("============================\n\n");
+
+        for (int i = 0; i < sistema.getClientes().size(); i++) {
+            Cliente c = sistema.getClientes().get(i);
+            String rutFormateado = normalizarRUT(c.getRut()); // Formato consistente
+            clientesList.append((i + 1)).append(". ")
+                    .append(c.getNombre()).append(" - RUT: ").append(rutFormateado);
+        }
+        clientesList.append("\n");
+        clientesList.append("\n¿Cuál cliente desea eliminar?");
+
+        String rutBuscado = JOptionPane.showInputDialog(this, clientesList.toString() + "\n\nIngrese el RUT del cliente:");
+        if (rutBuscado == null || rutBuscado.trim().isEmpty()) {
+            return;
+        }
+
+        Cliente cliente = buscarClienteConRUTNormalizado(rutBuscado);
+        if (cliente == null) {
+            JOptionPane.showMessageDialog(this, "No se encontró un cliente con ese RUT.", "Cliente no encontrado", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int confirmacion = JOptionPane.showConfirmDialog(this,
+                "¿Está seguro que desea eliminar al cliente?\n\n"
+                + "Nombre: " + cliente.getNombre() + "\n"
+                + "RUT: " + cliente.getRut() + "\n"
+                + "Edad: " + cliente.getEdad() + " años\n\n"
+                + "Esta acción no se puede deshacer.",
+                "Confirmar eliminación",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE);
+
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            sistema.getClientes().remove(cliente);
+            JOptionPane.showMessageDialog(this, "Cliente eliminado exitosamente!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEliminarClientesActionPerformed
 
     private void btnVolverClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverClientesActionPerformed
         panFondoClientes.setVisible(false);
         panFondoPrincipal.setVisible(true);
     }//GEN-LAST:event_btnVolverClientesActionPerformed
 
-    private void btnListarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarClientesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnListarClientesActionPerformed
+    private void btnListarComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarComprasActionPerformed
+        if (sistema.getCompras().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay compras registradas.", "Lista de compras", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
 
-    private void btnAgregarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarClientesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAgregarClientesActionPerformed
+        StringBuilder comprasInfo = new StringBuilder();
+        comprasInfo.append("LISTA DE COMPRAS REALIZADAS:\n");
+        comprasInfo.append("==========================================\n\n");
 
-    private void btnModificarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarClientesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnModificarClientesActionPerformed
+        int i = 1;
+        for (Compra c : sistema.getCompras()) {
+            comprasInfo.append(i).append(". Compra #").append(c.getOrdenDeCompra()).append("\n");
+            comprasInfo.append("   RUT Cliente: ").append(normalizarRUT(c.getRut())).append("\n");
+            comprasInfo.append("   Monto Total: $").append(c.getMontoTotal()).append("\n");
 
-    private void btnEliminarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarClientesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminarClientesActionPerformed
+            // Buscar el cliente para mostrar el nombre
+            Cliente cliente = buscarClienteConRUTNormalizado(c.getRut());
+            if (cliente != null) {
+                comprasInfo.append("   Cliente: ").append(cliente.getNombre()).append("\n");
+            }
+
+            comprasInfo.append("\n");
+            i++;
+        }
+
+        JOptionPane.showMessageDialog(this, comprasInfo.toString(), "Lista de compras", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnListarComprasActionPerformed
+
+    private void btnAgregarComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarComprasActionPerformed
+        // Verificar que haya eventos disponibles
+        if (sistema.getEventos().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay eventos disponibles para realizar compras.", "Sin eventos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Verificar que haya clientes registrados
+        if (sistema.getClientes().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay clientes registrados. Debe registrar un cliente primero.", "Sin clientes", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Mostrar eventos disponibles
+        StringBuilder eventosList = new StringBuilder();
+        eventosList.append("EVENTOS DISPONIBLES:\n");
+        eventosList.append("============================\n\n");
+
+        for (int i = 0; i < sistema.getEventos().size(); i++) {
+            Evento e = sistema.getEventos().get(i);
+            eventosList.append((i + 1)).append(". ").append(e.getNombre())
+                    .append(" - ID: ").append(e.getID())
+                    .append(" - Precio: $").append(e.getPrecioEntrada())
+                    .append(" - Capacidad: ").append(e.getCapacidad()).append("\n");
+        }
+
+        String idEventoStr = JOptionPane.showInputDialog(this,
+                eventosList.toString() + "\n\nIngrese el ID del evento:");
+
+        if (idEventoStr == null || idEventoStr.trim().isEmpty()) {
+            return;
+        }
+
+        try {
+            int idEvento = Integer.parseInt(idEventoStr.trim());
+            Evento eventoSeleccionado = sistema.buscarEventosPorID(idEvento);
+
+            if (eventoSeleccionado == null) {
+                JOptionPane.showMessageDialog(this, "No se encontró un evento con ese ID.", "Evento no encontrado", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Mostrar clientes registrados
+            StringBuilder clientesList = new StringBuilder();
+            clientesList.append("CLIENTES REGISTRADOS:\n");
+            clientesList.append("============================\n\n");
+
+            for (int i = 0; i < sistema.getClientes().size(); i++) {
+                Cliente c = sistema.getClientes().get(i);
+                String rutFormateado = normalizarRUT(c.getRut());
+                clientesList.append((i + 1)).append(". ").append(c.getNombre())
+                        .append(" - RUT: ").append(rutFormateado).append("\n");
+            }
+
+            String rutCliente = JOptionPane.showInputDialog(this,
+                    clientesList.toString() + "\n\nIngrese el RUT del cliente:");
+
+            if (rutCliente == null || rutCliente.trim().isEmpty()) {
+                return;
+            }
+
+            Cliente clienteSeleccionado = buscarClienteConRUTNormalizado(rutCliente);
+            if (clienteSeleccionado == null) {
+                JOptionPane.showMessageDialog(this, "No se encontró un cliente con ese RUT.", "Cliente no encontrado", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Solicitar cantidad de asientos
+            String cantidadStr = JOptionPane.showInputDialog(this,
+                    "Evento: " + eventoSeleccionado.getNombre()
+                    + "\nCliente: " + clienteSeleccionado.getNombre()
+                    + "\nPrecio por entrada: $" + eventoSeleccionado.getPrecioEntrada()
+                    + "\n\nIngrese la cantidad de asientos a comprar:");
+
+            if (cantidadStr == null || cantidadStr.trim().isEmpty()) {
+                return;
+            }
+
+            int cantidadAsientos = Integer.parseInt(cantidadStr.trim());
+            if (cantidadAsientos <= 0) {
+                JOptionPane.showMessageDialog(this, "La cantidad de asientos debe ser mayor a 0.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (cantidadAsientos > eventoSeleccionado.getCapacidad()) {
+                JOptionPane.showMessageDialog(this, "No hay suficientes asientos disponibles.\nCapacidad del evento: " + eventoSeleccionado.getCapacidad(), "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Solicitar forma de pago
+            String[] formasPago = {"Efectivo", "Tarjeta de Débito", "Tarjeta de Crédito", "Transferencia Bancaria"};
+            String formaPago = (String) JOptionPane.showInputDialog(this,
+                    "Seleccione la forma de pago:",
+                    "Forma de pago",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    formasPago,
+                    formasPago[0]);
+
+            if (formaPago == null) {
+                return;
+            }
+
+            // Crear la compra
+            int montoTotal = cantidadAsientos * eventoSeleccionado.getPrecioEntrada();
+
+            int confirmacion = JOptionPane.showConfirmDialog(this,
+                    "CONFIRMAR COMPRA:\n\n"
+                    + "Evento: " + eventoSeleccionado.getNombre() + "\n"
+                    + "Cliente: " + clienteSeleccionado.getNombre() + "\n"
+                    + "Cantidad de asientos: " + cantidadAsientos + "\n"
+                    + "Precio por entrada: $" + eventoSeleccionado.getPrecioEntrada() + "\n"
+                    + "Monto total: $" + montoTotal + "\n"
+                    + "Forma de pago: " + formaPago + "\n\n"
+                    + "¿Confirma la compra?",
+                    "Confirmar compra",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (confirmacion == JOptionPane.YES_OPTION) {
+                try {
+                    Compra nuevaCompra = sistema.registrarCompra(eventoSeleccionado, clienteSeleccionado, cantidadAsientos, formaPago);
+
+                    JOptionPane.showMessageDialog(this,
+                            "¡Compra realizada exitosamente!\n\n"
+                            + "Orden de Compra: " + nuevaCompra.getOrdenDeCompra() + "\n"
+                            + "Monto total: $" + nuevaCompra.getMontoTotal(),
+                            "Compra exitosa",
+                            JOptionPane.INFORMATION_MESSAGE);
+
+                } catch (IllegalArgumentException e) {
+                    JOptionPane.showMessageDialog(this, "No se pudo realizar la compra: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Ingrese valores numéricos válidos.", "Error de formato", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnAgregarComprasActionPerformed
+
+    private void btnModificarComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarComprasActionPerformed
+        if (sistema.getCompras().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay compras para modificar.", "Modificar compra", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Mostrar lista de compras
+        StringBuilder comprasList = new StringBuilder();
+        comprasList.append("COMPRAS REGISTRADAS:\n");
+        comprasList.append("============================\n\n");
+
+        for (int i = 0; i < sistema.getCompras().size(); i++) {
+            Compra c = sistema.getCompras().get(i);
+            Cliente cliente = buscarClienteConRUTNormalizado(c.getRut());
+            String nombreCliente = cliente != null ? cliente.getNombre() : "Cliente no encontrado";
+
+            comprasList.append((i + 1)).append(". Orden: ").append(c.getOrdenDeCompra())
+                    .append(" - Cliente: ").append(nombreCliente)
+                    .append(" - Monto: $").append(c.getMontoTotal()).append("\n");
+        }
+
+        String ordenStr = JOptionPane.showInputDialog(this,
+                comprasList.toString() + "\n¿Cuál compra desea modificar?\n\nIngrese el número de orden:");
+
+        if (ordenStr == null || ordenStr.trim().isEmpty()) {
+            return;
+        }
+
+        try {
+            int ordenBuscada = Integer.parseInt(ordenStr.trim());
+            Compra compraEncontrada = null;
+
+            // Buscar la compra por orden
+            for (Compra c : sistema.getCompras()) {
+                if (c.getOrdenDeCompra() == ordenBuscada) {
+                    compraEncontrada = c;
+                    break;
+                }
+            }
+
+            if (compraEncontrada == null) {
+                JOptionPane.showMessageDialog(this, "No se encontró una compra con ese número de orden.", "Compra no encontrada", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Solo permitir modificar la forma de pago por simplicidad
+            String[] formasPago = {"Efectivo", "Tarjeta de Débito", "Tarjeta de Crédito", "Transferencia Bancaria"};
+
+            Cliente cliente = buscarClienteConRUTNormalizado(compraEncontrada.getRut());
+            String nombreCliente = cliente != null ? cliente.getNombre() : "Cliente no encontrado";
+
+            String nuevaFormaPago = (String) JOptionPane.showInputDialog(this,
+                    "Compra encontrada:\n"
+                    + "Orden: " + compraEncontrada.getOrdenDeCompra() + "\n"
+                    + "Cliente: " + nombreCliente + "\n"
+                    + "Monto: $" + compraEncontrada.getMontoTotal() + "\n\n"
+                    + "Seleccione la nueva forma de pago:",
+                    "Modificar forma de pago",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    formasPago,
+                    formasPago[0]);
+
+            if (nuevaFormaPago != null) {
+                compraEncontrada.setFormaDePago(nuevaFormaPago);
+                JOptionPane.showMessageDialog(this, "Forma de pago actualizada exitosamente!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Ingrese un número válido para la orden.", "Error de formato", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnModificarComprasActionPerformed
+
+    private void btnEliminarComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarComprasActionPerformed
+        if (sistema.getCompras().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay compras para eliminar.", "Eliminar compra", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Mostrar lista de compras
+        StringBuilder comprasList = new StringBuilder();
+        comprasList.append("COMPRAS REGISTRADAS:\n");
+        comprasList.append("============================\n\n");
+
+        for (int i = 0; i < sistema.getCompras().size(); i++) {
+            Compra c = sistema.getCompras().get(i);
+            Cliente cliente = buscarClienteConRUTNormalizado(c.getRut());
+            String nombreCliente = cliente != null ? cliente.getNombre() : "Cliente no encontrado";
+
+            comprasList.append((i + 1)).append(". Orden: ").append(c.getOrdenDeCompra())
+                    .append(" - Cliente: ").append(nombreCliente)
+                    .append(" - RUT: ").append(normalizarRUT(c.getRut()))
+                    .append(" - Monto: $").append(c.getMontoTotal()).append("\n");
+        }
+
+        String ordenStr = JOptionPane.showInputDialog(this,
+                comprasList.toString() + "\n¿Cuál compra desea eliminar?\n\nIngrese el número de orden:");
+
+        if (ordenStr == null || ordenStr.trim().isEmpty()) {
+            return;
+        }
+
+        try {
+            int ordenBuscada = Integer.parseInt(ordenStr.trim());
+            Compra compraEncontrada = null;
+
+            // Buscar la compra por orden
+            for (Compra c : sistema.getCompras()) {
+                if (c.getOrdenDeCompra() == ordenBuscada) {
+                    compraEncontrada = c;
+                    break;
+                }
+            }
+
+            if (compraEncontrada == null) {
+                JOptionPane.showMessageDialog(this, "No se encontró una compra con ese número de orden.", "Compra no encontrada", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            Cliente cliente = buscarClienteConRUTNormalizado(compraEncontrada.getRut());
+            String nombreCliente = cliente != null ? cliente.getNombre() : "Cliente no encontrado";
+
+            int confirmacion = JOptionPane.showConfirmDialog(this,
+                    "¿Está seguro que desea eliminar la compra?\n\n"
+                    + "Orden: " + compraEncontrada.getOrdenDeCompra() + "\n"
+                    + "Cliente: " + nombreCliente + "\n"
+                    + "RUT: " + normalizarRUT(compraEncontrada.getRut()) + "\n"
+                    + "Monto: $" + compraEncontrada.getMontoTotal() + "\n\n"
+                    + "Esta acción no se puede deshacer.",
+                    "Confirmar eliminación",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE);
+
+            if (confirmacion == JOptionPane.YES_OPTION) {
+                sistema.getCompras().remove(compraEncontrada);
+                JOptionPane.showMessageDialog(this, "Compra eliminada exitosamente!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Ingrese un número válido para la orden.", "Error de formato", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEliminarComprasActionPerformed
 
     private void btnVolverComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverComprasActionPerformed
         panFondoPrincipal.setVisible(true);
@@ -1034,7 +1590,7 @@ public class Menu extends javax.swing.JFrame {
     private void btnGuardarWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarWordActionPerformed
 
         lblMsjExito.setVisible(true);
-  
+
     }//GEN-LAST:event_btnGuardarWordActionPerformed
 
     private void txtFieldRutaDeArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldRutaDeArchivoActionPerformed
@@ -1053,43 +1609,46 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverReporteActionPerformed
 
     private void btnGuardarPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPDFActionPerformed
-        
+
         lblMsjExito.setVisible(true);
-        
+
     }//GEN-LAST:event_btnGuardarPDFActionPerformed
 
     /**
      * @param args the command line arguments
      */
-
     public static void main(String args[]) {
-    /* Create and display the form */
-    java.awt.EventQueue.invokeLater(new Runnable() {
-        public void run() {
-            new Menu().setVisible(true);
-        }
-    });
-}
-    
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                SistemaDeEntradas sistema = new SistemaDeEntradas();
+                new Menu(sistema).setVisible(true);
+            }
+        });
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane ScrollPaneClientes;
     private javax.swing.JScrollPane ScrollPaneCompras;
     private javax.swing.JScrollPane ScrollPaneEventos;
-    private javax.swing.JButton btnAgregarCliente;
     private javax.swing.JButton btnAgregarClientes;
+    private javax.swing.JButton btnAgregarCompras;
     private javax.swing.JButton btnAgregarEvento;
     private javax.swing.JButton btnBuscador;
     private javax.swing.JButton btnClientes;
     private javax.swing.JButton btnCompras;
     private javax.swing.JButton btnCompras2;
     private javax.swing.JButton btnEliminarClientes;
+    private javax.swing.JButton btnEliminarCompras;
     private javax.swing.JButton btnEventos;
     private javax.swing.JButton btnGuardarPDF;
     private javax.swing.JButton btnGuardarWord;
     private javax.swing.JButton btnListarClientes;
+    private javax.swing.JButton btnListarCompras;
     private javax.swing.JButton btnListarEvento;
     private javax.swing.JButton btnModificarClientes;
+    private javax.swing.JButton btnModificarCompras;
     private javax.swing.JButton btnModificarEvento;
     private javax.swing.JButton btnReporte;
     private javax.swing.JButton btnSalir;
@@ -1100,9 +1659,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btnVolverReporte;
     private javax.swing.JCheckBox checkRutaEspecifica;
     private javax.swing.ButtonGroup grupoBotonesBusqueda;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLayeredPane jPanInterno;
