@@ -951,11 +951,11 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnListarEventoActionPerformed
 
     private void btnModificarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarEventoActionPerformed
-        sistema.ModificarEventoSwingPanel();
+        sistema.ModificarEvento();
     }//GEN-LAST:event_btnModificarEventoActionPerformed
 
     private void btnCompras2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompras2ActionPerformed
-        // TODO add your handling code here:
+        sistema.RemoverEvento();
     }//GEN-LAST:event_btnCompras2ActionPerformed
 
     private void btnAgregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarClienteActionPerformed

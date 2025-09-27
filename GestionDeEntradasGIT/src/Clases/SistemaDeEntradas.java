@@ -1,5 +1,7 @@
 package Clases;
 import InterfazSwing.Menu;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.util.*;
 import java.io.*;
 import java.time.LocalDate;
@@ -10,8 +12,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * @author Tenerex
@@ -111,7 +116,7 @@ public class SistemaDeEntradas {
                     entrada.nextLine();
                     break;
                 case 3:
-                    RemoverEvento();
+                    // RemoverEvento();
                     break;
                 case 4:    
                     // ModificarEvento();
@@ -268,101 +273,87 @@ public class SistemaDeEntradas {
         }
     }
     
-    public void ModificarEventoSwingPanel() {
+    @SuppressWarnings("UnnecessaryReturnStatement")
+
+    public void ModificarEvento() {
         if (eventos == null || eventos.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No hay eventos para mostrar.");
+            JOptionPane.showMessageDialog(null, "No hay eventos para modificar.");
             return;
         }
 
-        // Pedir ID del evento
-        String idStr = JOptionPane.showInputDialog("Ingrese ID del Evento:");
-        if (idStr == null) return; // Cancelar
-        int idBuscado = Integer.parseInt(idStr);
+        String[] columnas = {"ID", "Nombre", "Fecha", "Ubicación", "Orador"};
+        DefaultTableModel model = new DefaultTableModel(columnas, 0);
 
-        Evento eventoSeleccionado = null;
         for (Evento e : eventos) {
-            if (e.getID() == idBuscado) {
-                eventoSeleccionado = e;
-                break;
+            Object[] fila = { e.getID(), e.getNombre(), e.getFechaEvento(), e.getUbicacion(), e.getOrador() };
+            model.addRow(fila);
+        }
+
+        JTable table = new JTable(model);
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setPreferredSize(new Dimension(600, 300));
+
+        int option = JOptionPane.showConfirmDialog(null, scrollPane, "Seleccione el evento a modificar",
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        if (option == JOptionPane.OK_OPTION) {
+            int selectedRow = table.getSelectedRow();
+            if (selectedRow == -1) {
+                JOptionPane.showMessageDialog(null, "No se seleccionó ningún evento.");
+                return;
             }
-        }
 
-        if (eventoSeleccionado == null) {
-            JOptionPane.showMessageDialog(null, "No se encontró el evento " + idBuscado + ".");
-            return;
-        }
+            int idSeleccionado = (int) table.getValueAt(selectedRow, 0);
+            Evento evento = buscarEventosPorID(idSeleccionado);
 
-        // Crear panel con campos para modificar
-        JTextField nombreField = new JTextField(eventoSeleccionado.getNombre());
-        JTextField capacidadField = new JTextField(String.valueOf(eventoSeleccionado.getCapacidad()));
-        JTextField ubicacionField = new JTextField(eventoSeleccionado.getUbicacion());
-        JTextField fechaField = new JTextField(eventoSeleccionado.getFechaEvento().toString());
-        JTextField oradorField = new JTextField(eventoSeleccionado.getOrador());
-        JTextField temaField = new JTextField(eventoSeleccionado.getTemaEvento());
-        JTextField descripcionField = new JTextField(eventoSeleccionado.getDescripcionEvento());
-        JTextField asientosField = new JTextField(String.valueOf(eventoSeleccionado.getAsientosEspeciales()));
-        JTextField precioField = new JTextField(String.valueOf(eventoSeleccionado.getPrecioEntrada()));
+            JTextField nombreField = new JTextField(evento.getNombre());
+            JTextField capacidadField = new JTextField(String.valueOf(evento.getCapacidad()));
+            JTextField ubicacionField = new JTextField(evento.getUbicacion());
+            JTextField fechaField = new JTextField(evento.getFechaEvento().toString());
+            JTextField oradorField = new JTextField(evento.getOrador());
+            JTextField temaField = new JTextField(evento.getTemaEvento());
+            JTextField descripcionField = new JTextField(evento.getDescripcionEvento());
+            JTextField asientosField = new JTextField(String.valueOf(evento.getAsientosEspeciales()));
+            JTextField precioField = new JTextField(String.valueOf(evento.getPrecioEntrada()));
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.add(new JLabel("Nombre:")); panel.add(nombreField);
-        panel.add(new JLabel("Capacidad:")); panel.add(capacidadField);
-        panel.add(new JLabel("Ubicación:")); panel.add(ubicacionField);
-        panel.add(new JLabel("Fecha (yyyy-MM-dd):")); panel.add(fechaField);
-        panel.add(new JLabel("Orador:")); panel.add(oradorField);
-        panel.add(new JLabel("Tema del evento:")); panel.add(temaField);
-        panel.add(new JLabel("Descripción:")); panel.add(descripcionField);
-        panel.add(new JLabel("Asientos especiales:")); panel.add(asientosField);
-        panel.add(new JLabel("Precio de entrada:")); panel.add(precioField);
+            JPanel panel = new JPanel();
+            panel.setLayout(new GridLayout(10, 2, 5, 5));
+            panel.add(new JLabel("Nombre:")); panel.add(nombreField);
+            panel.add(new JLabel("Capacidad:")); panel.add(capacidadField);
+            panel.add(new JLabel("Ubicación:")); panel.add(ubicacionField);
+            panel.add(new JLabel("Fecha (yyyy-MM-dd):")); panel.add(fechaField);
+            panel.add(new JLabel("Orador:")); panel.add(oradorField);
+            panel.add(new JLabel("Tema:")); panel.add(temaField);
+            panel.add(new JLabel("Descripción:")); panel.add(descripcionField);
+            panel.add(new JLabel("Asientos especiales:")); panel.add(asientosField);
+            panel.add(new JLabel("Precio:")); panel.add(precioField);
 
-        int result = JOptionPane.showConfirmDialog(null, panel, 
-            "Modificar Evento ID: " + idBuscado, JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+            int result = JOptionPane.showConfirmDialog(null, panel,
+                    "Modificar Evento ID: " + evento.getID(), JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
-        if (result == JOptionPane.OK_OPTION) {
-            try {
-                eventoSeleccionado.setNombre(nombreField.getText());
-                eventoSeleccionado.setCapacidadPersonas(Integer.parseInt(capacidadField.getText()));
-                eventoSeleccionado.setUbicacion(ubicacionField.getText());
-                eventoSeleccionado.setFechaEvento(LocalDate.parse(fechaField.getText()));
-                eventoSeleccionado.setOrador(oradorField.getText());
-                eventoSeleccionado.setTemaEvento(temaField.getText());
-                eventoSeleccionado.setDescripcionEvento(descripcionField.getText());
-                eventoSeleccionado.setAsientosEspeciales(Integer.parseInt(asientosField.getText()));
-                eventoSeleccionado.setPrecioEntrada(Integer.parseInt(precioField.getText()));
+            if (result == JOptionPane.OK_OPTION) {
+                try {
+                    evento.setNombre(nombreField.getText());
+                    evento.setCapacidadPersonas(Integer.parseInt(capacidadField.getText()));
+                    evento.setUbicacion(ubicacionField.getText());
+                    evento.setFechaEvento(LocalDate.parse(fechaField.getText()));
+                    evento.setOrador(oradorField.getText());
+                    evento.setTemaEvento(temaField.getText());
+                    evento.setDescripcionEvento(descripcionField.getText());
+                    evento.setAsientosEspeciales(Integer.parseInt(asientosField.getText()));
+                    evento.setPrecioEntrada(Integer.parseInt(precioField.getText()));
 
-                gestor.guardarEvento(eventos);
-                JOptionPane.showMessageDialog(null, "Evento modificado correctamente.");
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Error al modificar el evento: " + ex.getMessage());
+                    gestor.guardarEvento(eventos); // guardar csv al final de todo
+                    JOptionPane.showMessageDialog(null, "Evento modificado correctamente.");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Error al modificar el evento: " + ex.getMessage());
+                }
             }
         }
     }
 
-        @SuppressWarnings("UnnecessaryReturnStatement")
-    public void RemoverEvento() {
-        int idABorrar;
-        int indice;
-        Evento eventoEncontrado;
-        
-        if (eventos.isEmpty() || eventos == null) {
-            System.out.println("No hay eventos para borrar.");
-            return;
-        } else {
-            System.out.println("Los eventos registrados son los siguientes: ");
-            ListarEventos(eventos);
-            System.out.println("Ingrese ID de evento a eliminar: ");
-            idABorrar = Integer.parseInt(entrada.nextLine());
-            eventoEncontrado = buscarEventosPorID(idABorrar);
-            if (eventoEncontrado == null) {
-                System.out.println("No existe el evento con la id especificada");
-            }
-            
-            indice = eventos.indexOf(eventoEncontrado);
-            System.out.println("Se ha eliminado el evento con ID: " + eventos.get(indice).getID());
-            eventos.remove(indice);
-        }
-           
-    }
     
     public void ListarEventos(List<Evento> eventos) {
         if (eventos == null || eventos.isEmpty()) {
@@ -393,6 +384,55 @@ public class SistemaDeEntradas {
         // Mostrar en un JScrollPane dentro de un JOptionPane
         JScrollPane scrollPane = new JScrollPane(textArea);
         JOptionPane.showMessageDialog(null, scrollPane, "Listado de Eventos", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    public void RemoverEvento() {
+        if (eventos == null || eventos.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay eventos para borrar.");
+            return;
+        }
+
+        // Crear modelo de tabla
+        String[] columnas = {"ID", "Nombre", "Fecha", "Ubicación", "Orador"};
+        DefaultTableModel model = new DefaultTableModel(columnas, 0);
+
+        for (Evento e : eventos) {
+            Object[] fila = { e.getID(), e.getNombre(), e.getFechaEvento(), e.getUbicacion(), e.getOrador() };
+            model.addRow(fila);
+        }
+
+        JTable table = new JTable(model);
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // Solo seleccionar una fila
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setPreferredSize(new Dimension(600, 300));
+
+        int option = JOptionPane.showConfirmDialog(null, scrollPane, "Seleccione el evento a eliminar",
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        if (option == JOptionPane.OK_OPTION) {
+            int selectedRow = table.getSelectedRow();
+            if (selectedRow == -1) {
+                JOptionPane.showMessageDialog(null, "No se seleccionó ningún evento.");
+                return;
+            }
+
+            // Obtener el evento seleccionado
+            int idSeleccionado = (int) table.getValueAt(selectedRow, 0);
+            Evento eventoEncontrado = buscarEventosPorID(idSeleccionado);
+
+            // Confirmar eliminación
+            int confirm = JOptionPane.showConfirmDialog(null, 
+                "¿Seguro que desea eliminar el evento: " + eventoEncontrado.getNombre() + "?",
+                "Confirmar eliminación",
+                JOptionPane.YES_NO_OPTION);
+
+            if (confirm == JOptionPane.YES_OPTION) {
+                eventos.remove(eventoEncontrado);
+                gestor.guardarEvento(eventos); // Guardar cambios en CSV
+                JOptionPane.showMessageDialog(null, "Evento eliminado correctamente.");
+            }
+        }
     }
     
     public List<Evento> getTodosLosEventos() {
