@@ -3,8 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package InterfazSwing;
-import Clases.Evento;
-import Clases.SistemaDeEntradas;
+
+import Clases.*;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -14,7 +14,7 @@ import javax.swing.JTextField;
  * @author Tomas
  */
 public class Menu extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Menu.class.getName());
     private SistemaDeEntradas sistema;
 
@@ -66,20 +66,20 @@ public class Menu extends javax.swing.JFrame {
         jtxtListarEvento2 = new javax.swing.JTextArea();
         panFondoClientes = new javax.swing.JPanel();
         lblTitulo2 = new javax.swing.JLabel();
-        btnAgregarCliente = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnAgregarClientes = new javax.swing.JButton();
+        btnListarClientes = new javax.swing.JButton();
+        btnModificarClientes = new javax.swing.JButton();
+        btnEliminarClientes = new javax.swing.JButton();
         btnVolverClientes = new javax.swing.JButton();
         jtxtAgregarCliente = new javax.swing.JTextArea();
         jtxtListarCliente = new javax.swing.JTextArea();
         jtxtListarCliente1 = new javax.swing.JTextArea();
         jtxtListarCliente2 = new javax.swing.JTextArea();
         panFondoCompras = new javax.swing.JPanel();
-        btnListarClientes = new javax.swing.JButton();
-        btnAgregarClientes = new javax.swing.JButton();
-        btnModificarClientes = new javax.swing.JButton();
-        btnEliminarClientes = new javax.swing.JButton();
+        btnAgregarCompras = new javax.swing.JButton();
+        btnListarCompras = new javax.swing.JButton();
+        btnModificarCompras = new javax.swing.JButton();
+        btnEliminarCompras = new javax.swing.JButton();
         btnVolverCompras = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         panFondoBusqueda = new javax.swing.JPanel();
@@ -382,31 +382,31 @@ public class Menu extends javax.swing.JFrame {
         lblTitulo2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         lblTitulo2.setText("Clientes");
 
-        btnAgregarCliente.setText("Listar Clientes");
-        btnAgregarCliente.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregarClientes.setText("Agregar Cliente");
+        btnAgregarClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarClienteActionPerformed(evt);
+                btnAgregarClientesActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Agregar Cliente");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnListarClientes.setText("Listar Clientes");
+        btnListarClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnListarClientesActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Modificar Clientes");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnModificarClientes.setText("Modificar Clientes");
+        btnModificarClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnModificarClientesActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Eliminar Clientes");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminarClientes.setText("Eliminar Clientes");
+        btnEliminarClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnEliminarClientesActionPerformed(evt);
             }
         });
 
@@ -462,10 +462,10 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(panFondoClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panFondoClientesLayout.createSequentialGroup()
                         .addGroup(panFondoClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnAgregarCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnListarClientes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAgregarClientes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnModificarClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEliminarClientes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panFondoClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtxtAgregarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -486,19 +486,19 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(lblTitulo2)
                 .addGap(92, 92, 92)
                 .addGroup(panFondoClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAgregarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtxtAgregarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panFondoClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAgregarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnListarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtxtListarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panFondoClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnModificarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtxtListarCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panFondoClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtxtListarCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
                 .addComponent(btnVolverClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -509,31 +509,31 @@ public class Menu extends javax.swing.JFrame {
 
         panFondoCompras.setEnabled(false);
 
-        btnListarClientes.setText("Listar Compras por ID");
-        btnListarClientes.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregarCompras.setText("Realizar Compra");
+        btnAgregarCompras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnListarClientesActionPerformed(evt);
+                btnAgregarComprasActionPerformed(evt);
             }
         });
 
-        btnAgregarClientes.setText("Realizar Compra");
-        btnAgregarClientes.addActionListener(new java.awt.event.ActionListener() {
+        btnListarCompras.setText("Listar Compras por ID");
+        btnListarCompras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarClientesActionPerformed(evt);
+                btnListarComprasActionPerformed(evt);
             }
         });
 
-        btnModificarClientes.setText("Modificar Compras");
-        btnModificarClientes.addActionListener(new java.awt.event.ActionListener() {
+        btnModificarCompras.setText("Modificar Compras");
+        btnModificarCompras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarClientesActionPerformed(evt);
+                btnModificarComprasActionPerformed(evt);
             }
         });
 
-        btnEliminarClientes.setText("Eliminar Compras");
-        btnEliminarClientes.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminarCompras.setText("Eliminar Compras");
+        btnEliminarCompras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarClientesActionPerformed(evt);
+                btnEliminarComprasActionPerformed(evt);
             }
         });
 
@@ -556,10 +556,10 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(panFondoComprasLayout.createSequentialGroup()
                         .addGap(52, 52, 52)
                         .addGroup(panFondoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnListarClientes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnAgregarClientes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnModificarClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEliminarClientes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btnListarCompras, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAgregarCompras, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnModificarCompras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEliminarCompras, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(panFondoComprasLayout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addComponent(jLabel2)))
@@ -575,13 +575,13 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addComponent(jLabel2)
                 .addGap(118, 118, 118)
-                .addComponent(btnAgregarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAgregarCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnListarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnListarCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnModificarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnModificarCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnEliminarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEliminarCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
                 .addComponent(btnVolverCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
@@ -932,15 +932,15 @@ public class Menu extends javax.swing.JFrame {
         int option = JOptionPane.showConfirmDialog(this, message, "Crear Evento", JOptionPane.OK_CANCEL_OPTION);
         if (option == JOptionPane.OK_OPTION) {
             sistema.CrearEvento(
-                txtNombre.getText(),
-                txtCapacidad.getText(),
-                txtUbicacion.getText(),
-                txtFecha.getText(),
-                txtOrador.getText(),
-                txtTema.getText(),
-                txtDescripcion.getText(),
-                txtAsientosDiscap.getText(),
-                txtPrecio.getText()
+                    txtNombre.getText(),
+                    txtCapacidad.getText(),
+                    txtUbicacion.getText(),
+                    txtFecha.getText(),
+                    txtOrador.getText(),
+                    txtTema.getText(),
+                    txtDescripcion.getText(),
+                    txtAsientosDiscap.getText(),
+                    txtPrecio.getText()
             );
         }
     }//GEN-LAST:event_btnAgregarEventoActionPerformed
@@ -958,42 +958,88 @@ public class Menu extends javax.swing.JFrame {
         sistema.RemoverEvento();
     }//GEN-LAST:event_btnCompras2ActionPerformed
 
-    private void btnAgregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAgregarClienteActionPerformed
+    private void btnListarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarClientesActionPerformed
+        String info = sistema.listarClientes();
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        if (info == null) {
+            JOptionPane.showMessageDialog(this, "No hay clientes registrados.", "Lista de clientes", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, info, "Lista de clientes", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnListarClientesActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void btnAgregarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarClientesActionPerformed
+        JTextField txtNombre = new JTextField();
+        JTextField txtRut = new JTextField();
+        JTextField txtEdad = new JTextField();
+        JTextField txtCantAsientos = new JTextField("1");
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        Object[] mensaje = {
+            "Nombre:", txtNombre,
+            "RUT (puede escribirlo con o sin puntos/guión):", txtRut,
+            "Edad:", txtEdad,
+            "Cantidad de asientos a comprar:", txtCantAsientos
+        };
+
+        int opcion = JOptionPane.showConfirmDialog(this, mensaje, "Agregar Cliente", JOptionPane.OK_CANCEL_OPTION);
+        if (opcion == JOptionPane.OK_OPTION) {
+            String discapacidad = "";
+            int opcionDiscapacidad = JOptionPane.showConfirmDialog(this,
+                    "¿Desea registrar alguna discapacidad para este cliente?",
+                    "Discapacidad", JOptionPane.YES_NO_OPTION);
+
+            if (opcionDiscapacidad == JOptionPane.YES_OPTION) {
+                discapacidad = JOptionPane.showInputDialog(this, "Ingrese la discapacidad:");
+                if (discapacidad == null) {
+                    discapacidad = "";
+                }
+            }
+
+            String error = sistema.RegistrarCliente(
+                    txtNombre.getText(),
+                    txtRut.getText(),
+                    txtEdad.getText(),
+                    txtCantAsientos.getText(),
+                    discapacidad
+            );
+
+            if (error == null) {
+                JOptionPane.showMessageDialog(this, "Cliente registrado exitosamente!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, error, "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnAgregarClientesActionPerformed
+
+    private void btnModificarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarClientesActionPerformed
+        sistema.ModificarCliente();
+    }//GEN-LAST:event_btnModificarClientesActionPerformed
+
+    private void btnEliminarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarClientesActionPerformed
+        sistema.RemoverCliente();
+    }//GEN-LAST:event_btnEliminarClientesActionPerformed
 
     private void btnVolverClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverClientesActionPerformed
         panFondoClientes.setVisible(false);
         panFondoPrincipal.setVisible(true);
     }//GEN-LAST:event_btnVolverClientesActionPerformed
 
-    private void btnListarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarClientesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnListarClientesActionPerformed
+    private void btnListarComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarComprasActionPerformed
+        sistema.ListarCompras();
 
-    private void btnAgregarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarClientesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAgregarClientesActionPerformed
+    }//GEN-LAST:event_btnListarComprasActionPerformed
 
-    private void btnModificarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarClientesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnModificarClientesActionPerformed
+    private void btnAgregarComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarComprasActionPerformed
+        sistema.CrearCompra();
+    }//GEN-LAST:event_btnAgregarComprasActionPerformed
 
-    private void btnEliminarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarClientesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminarClientesActionPerformed
+    private void btnModificarComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarComprasActionPerformed
+        sistema.modificarCompraSwing();
+    }//GEN-LAST:event_btnModificarComprasActionPerformed
+
+    private void btnEliminarComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarComprasActionPerformed
+        sistema.eliminarCompra();
+    }//GEN-LAST:event_btnEliminarComprasActionPerformed
 
     private void btnVolverComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverComprasActionPerformed
         panFondoPrincipal.setVisible(true);
@@ -1037,7 +1083,7 @@ public class Menu extends javax.swing.JFrame {
     private void btnGuardarWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarWordActionPerformed
 
         lblMsjExito.setVisible(true);
-  
+
     }//GEN-LAST:event_btnGuardarWordActionPerformed
 
     private void txtFieldRutaDeArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldRutaDeArchivoActionPerformed
@@ -1056,44 +1102,46 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverReporteActionPerformed
 
     private void btnGuardarPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPDFActionPerformed
-        
+
         lblMsjExito.setVisible(true);
-        
+
     }//GEN-LAST:event_btnGuardarPDFActionPerformed
 
     /**
      * @param args the command line arguments
      */
-
     public static void main(String args[]) {
-    /* Create and display the form */
-    java.awt.EventQueue.invokeLater(new Runnable() {
-        public void run() {
-            SistemaDeEntradas sistema = new SistemaDeEntradas();
-            new Menu(sistema).setVisible(true);
-        }
-    });
-}
-    
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                SistemaDeEntradas sistema = new SistemaDeEntradas();
+                new Menu(sistema).setVisible(true);
+            }
+        });
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane ScrollPaneClientes;
     private javax.swing.JScrollPane ScrollPaneCompras;
     private javax.swing.JScrollPane ScrollPaneEventos;
-    private javax.swing.JButton btnAgregarCliente;
     private javax.swing.JButton btnAgregarClientes;
+    private javax.swing.JButton btnAgregarCompras;
     private javax.swing.JButton btnAgregarEvento;
     private javax.swing.JButton btnBuscador;
     private javax.swing.JButton btnClientes;
     private javax.swing.JButton btnCompras;
     private javax.swing.JButton btnCompras2;
     private javax.swing.JButton btnEliminarClientes;
+    private javax.swing.JButton btnEliminarCompras;
     private javax.swing.JButton btnEventos;
     private javax.swing.JButton btnGuardarPDF;
     private javax.swing.JButton btnGuardarWord;
     private javax.swing.JButton btnListarClientes;
+    private javax.swing.JButton btnListarCompras;
     private javax.swing.JButton btnListarEvento;
     private javax.swing.JButton btnModificarClientes;
+    private javax.swing.JButton btnModificarCompras;
     private javax.swing.JButton btnModificarEvento;
     private javax.swing.JButton btnReporte;
     private javax.swing.JButton btnSalir;
@@ -1104,9 +1152,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btnVolverReporte;
     private javax.swing.JCheckBox checkRutaEspecifica;
     private javax.swing.ButtonGroup grupoBotonesBusqueda;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLayeredPane jPanInterno;

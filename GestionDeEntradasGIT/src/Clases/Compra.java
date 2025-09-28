@@ -13,15 +13,17 @@ public class Compra {
     private LocalDate fechaDeCompra;
     private String estadoDeCompra;
     private int montoTotal;
+    private int idEvento;
     
     //constructor con parámetros 
-    public Compra (int ordenDeCompra, String rut, String formaDePago, LocalDate fechaDeCompra, String estadoDeCompra, int montoTotal) {
+    public Compra (int ordenDeCompra, String rut, String formaDePago, LocalDate fechaDeCompra, String estadoDeCompra, int montoTotal, int idEvento) {
         this.ordenDeCompra =  ordenDeCompra;
         this.rut = rut;
         this.formaDePago = formaDePago;
         this.fechaDeCompra = fechaDeCompra;
         this.estadoDeCompra = estadoDeCompra;
         this.montoTotal = montoTotal;
+        this.idEvento = idEvento;
     }
     
     //GETTERS
@@ -31,6 +33,7 @@ public class Compra {
     public LocalDate getFechaDeCompra(){return fechaDeCompra;}
     public String getEstadoDeCompra(){return estadoDeCompra;}
     public int getMontoTotal(){return montoTotal;}
+    public int getIdEvento() { return idEvento; }
     
     // SETTERS
     public void setOrdenDeCompra(int ordenDeCompra){this.ordenDeCompra = ordenDeCompra;}
@@ -39,4 +42,5 @@ public class Compra {
     public void setFechaDeCompra(LocalDate fechaDeCompra){this.fechaDeCompra = fechaDeCompra;}
     public void setEstadoDeCompra(String estadoDeCompra){this.estadoDeCompra = estadoDeCompra;}
     public void setMontoTotal(int montoTotal){this.montoTotal = montoTotal;}
+    public void setIdEvento(int idEvento) { this.idEvento = idEvento; }
 }

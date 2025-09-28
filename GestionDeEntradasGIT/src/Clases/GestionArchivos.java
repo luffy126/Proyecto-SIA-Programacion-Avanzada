@@ -19,6 +19,7 @@ import java.util.List;
 class GestionArchivos {
     private static final String RUTA_EVENTOS = "Assets/eventosRegistrados.csv";
     private static final String RUTA_CLIENTES = "Assets/clientesRegistrados.csv";
+    private static final String RUTA_COMPRAS = "Assets/comprasRegistradas.csv";
     
     public GestionArchivos() {
         File directorio = new File("Assets");
@@ -40,6 +41,13 @@ class GestionArchivos {
                 archivoClientes.createNewFile();
                 System.out.println("Se ha creado el archivo clientesRegistrados.csv");
             }
+            
+            File archivoCompras = new File(directorio, "comprasRegistradas.csv");
+            if (!archivoCompras.exists()) {
+                archivoCompras.createNewFile();
+                System.out.println("Se ha creado el archivo comprasRegistradas.csv");
+            }
+            
         } catch (IOException e) {
             // Manejar el error
             System.out.println("Error al crear los archivos: " + e.getMessage());
@@ -47,7 +55,6 @@ class GestionArchivos {
         }
     }
 
-    
     public List<Evento> cargarEventos() {
         
         List<Evento> listaEventos = new ArrayList<>();
@@ -121,6 +128,64 @@ class GestionArchivos {
         return listaClientes;
     }
     
+    public List<Compra> cargarCompras(List<Cliente> listaClientes, List<Evento> listaEventos) {
+        List<Compra> listaCompras = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        File archivo = new File(RUTA_COMPRAS);
+        if (!archivo.exists()) {
+            System.out.println("No existe el archivo de compras.");
+            return listaCompras;
+        }
+
+        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] datos = linea.split(",");
+                if (datos.length != 7) continue; // evitar líneas corruptas
+
+                int orden = Integer.parseInt(datos[0]);
+                String rutCliente = datos[1];
+                String formaPago = datos[2];
+                LocalDate fecha = LocalDate.parse(datos[3], formatter);
+                String estado = datos[4];
+                int monto = Integer.parseInt(datos[5]);
+                int idEvento = Integer.parseInt(datos[6]);
+
+                Cliente cliente = null;
+                for (Cliente c : listaClientes) {
+                    if (c.getRut().equals(rutCliente)) {
+                        cliente = c;
+                        break;
+                    }
+                }
+
+                if (cliente == null) {
+                    System.out.println("No se encontró el cliente para la compra " + orden);
+                    continue;
+                }
+
+                Compra compra = new Compra(orden, rutCliente, formaPago, fecha, estado, monto, idEvento);
+                listaCompras.add(compra);
+
+                cliente.getComprasClientes().add(compra);
+                for (Evento ev : listaEventos) {
+                if (ev.getID() == idEvento) {
+                    ev.getCompras().add(compra);
+                    break;
+                }
+            }
+        }
+
+            System.out.println("Compras cargadas en memoria: " + listaCompras.size());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listaCompras;
+    }
+
     public void guardarEvento(Evento evento) {
         System.out.println("Guardando evento: " + evento.getNombre());
         try (FileWriter fw = new FileWriter(RUTA_EVENTOS, true);
@@ -188,4 +253,49 @@ class GestionArchivos {
             e.printStackTrace();
         }
     }
+    
+    public void guardarCompra(Compra compra) {
+        System.out.println("Guardando compra ID: " + compra.getOrdenDeCompra());
+        try (FileWriter fw = new FileWriter(RUTA_COMPRAS, true);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter out = new PrintWriter(bw)) {
+
+            out.println(compra.getOrdenDeCompra() + "," +
+                        compra.getRut() + "," +
+                        compra.getFormaDePago() + "," +
+                        compra.getFechaDeCompra() + "," +
+                        compra.getEstadoDeCompra() + "," +
+                        compra.getMontoTotal() + "," +
+                        compra.getIdEvento());
+            
+            System.out.println("Compra guardada en CSV.");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void guardarCompra(List<Compra> compras) {
+        System.out.println("Guardando lista completa de compras...");
+        try (FileWriter fw = new FileWriter(RUTA_COMPRAS, false);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter out = new PrintWriter(bw)) {
+
+            for (Compra compra : compras) {
+                out.println(compra.getOrdenDeCompra() + "," +
+                            compra.getRut() + "," +
+                            compra.getFormaDePago() + "," +
+                            compra.getFechaDeCompra() + "," +
+                            compra.getEstadoDeCompra() + "," +
+                            compra.getMontoTotal() + "," +
+                            compra.getIdEvento());
+            }
+
+            System.out.println("Lista de compras sobrescrita en CSV.");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
 }

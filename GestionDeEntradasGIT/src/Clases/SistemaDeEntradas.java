@@ -1,5 +1,6 @@
 package Clases;
 import InterfazSwing.Menu;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.*;
@@ -8,7 +9,11 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeParseException;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -63,9 +68,7 @@ public class SistemaDeEntradas {
         /* Esta es la clase principal tronco del proyecto, encargada de sostener todo */
         System.out.println("Se esta ejecutando el Sistema de Gestion de Entradas.");
         SistemaDeEntradas programa = new SistemaDeEntradas();
-        
-        
-        
+
         programa.iniciarSistema();
     } 
     
@@ -74,6 +77,10 @@ public class SistemaDeEntradas {
         int opcion;
         eventos = gestor.cargarEventos();
         clientes = gestor.cargarClientes();
+        compras = gestor.cargarCompras(clientes, eventos);
+        
+        System.out.println("Compras cargadas en memoria: " + compras.size());
+
         interfaz = new Menu(this);
 
         javax.swing.SwingUtilities.invokeLater(() -> {
@@ -83,7 +90,7 @@ public class SistemaDeEntradas {
         });
         
         if(this.clientes.isEmpty()){ 
-            RegistrarCliente();
+            // RegistrarCliente();
             limpiarConsola();
         }
         
@@ -122,55 +129,322 @@ public class SistemaDeEntradas {
                     // ModificarEvento();
                     break;
                 case 5:
-                    ListarClientes(clientes);
+                    // ListarClientes(clientes);
                     System.out.println("");
                     System.out.println(">> Presione enter para continuar.");
                     entrada.nextLine();
                     break;
                 case 6:
-                    RegistrarCliente();
+                    // RegistrarCliente();
                     break;
                 case 7: 
-                    ModificarCliente();
+                    // ModificarCliente();
                     break;
                 case 8:
-                    removerCliente();
+                    // removerCliente();
                     break;
                 case 9:
-                    CrearCompra();
+                    // CrearCompra();
                     break;
                 case 10:
-                    ListarCompra(compras);
+                    // ListarCompra(compras);
                     System.out.println("");
                     System.out.println(">> Presione enter para continuar.");
                     entrada.nextLine();
                     break;
                 case 11:
-                    ModificarCompra();
+                    // ModificarCompra();
                     break;
                 case 12:
-                    EliminarCompra();
+                    // EliminarCompra();
                     break;
                    
             }
         }
     }
     
+    public String modificarCliente(String rutIngresado, String nuevoNombre, String nuevaEdadStr, String nuevaDiscapacidad) {
+        Cliente cliente = buscarClientePorRUT(rutIngresado);
+        if (cliente == null) {
+            return "No se encontró un cliente con ese RUT.";
+        }
+
+        if (nuevoNombre != null && !nuevoNombre.trim().isEmpty()) {
+            cliente.setNombre(nuevoNombre.trim());
+        }
+
+        if (nuevaEdadStr != null && !nuevaEdadStr.trim().isEmpty()) {
+            try {
+                int nuevaEdad = Integer.parseInt(nuevaEdadStr.trim());
+                if (nuevaEdad < 16 || nuevaEdad > 120) {
+                    return "La edad debe estar entre 16 y 120 años.";
+                }
+                cliente.setEdad(nuevaEdad);
+            } catch (NumberFormatException e) {
+                return "Edad inválida. Debe ser un número.";
+            }
+        }
+
+        if (nuevaDiscapacidad != null) {
+            cliente.setDiscapacidades(nuevaDiscapacidad.trim());
+        }
+
+        gestor.guardarCliente(clientes);
+
+        return null;
+    }
+    
     public void ModificarCliente() {
-        System.out.println("falta implementarlo !!! venga mas tarde");
+        if (clientes == null || clientes.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay clientes registrados.");
+            return;
+        }
+
+        // Crear modelo de tabla
+        String[] columnas = {"RUT", "Nombre", "Edad", "Discapacidades"};
+        DefaultTableModel model = new DefaultTableModel(columnas, 0);
+
+        for (Cliente c : clientes) {
+            Object[] fila = {c.getRut(), c.getNombre(), c.getEdad(), c.getDiscapacidades()};
+            model.addRow(fila);
+        }
+
+        JTable table = new JTable(model);
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setPreferredSize(new Dimension(500, 300));
+
+        int option = JOptionPane.showConfirmDialog(null, scrollPane, 
+                "Seleccione el cliente a modificar", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        if (option != JOptionPane.OK_OPTION) return;
+
+        int selectedRow = table.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(null, "No se seleccionó ningún cliente.");
+            return;
+        }
+
+        String rutSeleccionado = (String) table.getValueAt(selectedRow, 0);
+        Cliente cliente = buscarClientePorRUT(rutSeleccionado);
+
+        JTextField nombreField = new JTextField(cliente.getNombre());
+        JTextField edadField = new JTextField(String.valueOf(cliente.getEdad()));
+        JTextField discapacidadField = new JTextField(cliente.getDiscapacidades());
+
+        JPanel panel = new JPanel(new GridLayout(3, 2, 5, 5));
+        panel.add(new JLabel("Nombre:")); panel.add(nombreField);
+        panel.add(new JLabel("Edad:")); panel.add(edadField);
+        panel.add(new JLabel("Discapacidades:")); panel.add(discapacidadField);
+
+        int result = JOptionPane.showConfirmDialog(null, panel,
+                "Modificar Cliente RUT: " + cliente.getRut(),
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        if (result == JOptionPane.OK_OPTION) {
+            String nuevoNombre = nombreField.getText().trim();
+            String nuevaEdadStr = edadField.getText().trim();
+            String nuevaDiscapacidad = discapacidadField.getText().trim();
+
+            String mensajeError = null;
+
+            if (!nuevoNombre.isEmpty()) {
+                cliente.setNombre(nuevoNombre);
+            }
+
+            if (!nuevaEdadStr.isEmpty()) {
+                try {
+                    int nuevaEdad = Integer.parseInt(nuevaEdadStr);
+                    if (nuevaEdad < 16 || nuevaEdad > 120) {
+                        mensajeError = "La edad debe estar entre 16 y 120 años.";
+                    } else {
+                        cliente.setEdad(nuevaEdad);
+                    }
+                } catch (NumberFormatException e) {
+                    mensajeError = "Edad inválida. Debe ser un número.";
+                }
+            }
+
+            if (!nuevaDiscapacidad.isEmpty()) {
+                cliente.setDiscapacidades(nuevaDiscapacidad);
+            }
+
+            if (mensajeError != null) {
+                JOptionPane.showMessageDialog(null, mensajeError);
+            } else {
+                gestor.guardarCliente(clientes); // Guardar cambios en CSV
+                JOptionPane.showMessageDialog(null, "Cliente modificado correctamente.");
+            }
+        }
     }
-    
-    public void ModificarCompra() {
-        System.out.println("falta implementarlo !!! venga mas tarde");
+
+    public void modificarCompraSwing() {
+        List<Compra> todasCompras = new ArrayList<>();
+        for (Evento ev : eventos) {
+            todasCompras.addAll(ev.getCompras());
+        }
+
+        if (todasCompras.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay compras registradas en el sistema.");
+            return;
+        }
+
+        // Panel principal
+        JPanel panel = new JPanel(new GridLayout(0, 2, 10, 10));
+
+        JComboBox<Compra> comboCompras = new JComboBox<>();
+        for (Compra c : todasCompras) {
+            comboCompras.addItem(c);
+        }
+
+        comboCompras.setRenderer(new DefaultListCellRenderer() {
+            @Override
+            public Component getListCellRendererComponent(JList<?> list, Object value, int index,
+                                                          boolean isSelected, boolean cellHasFocus) {
+                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                if (value instanceof Compra) {
+                    Compra compra = (Compra) value;
+                    Evento evento = buscarEventoPorCompra(compra);
+                    setText("ID: " + compra.getOrdenDeCompra() +
+                            " | Cliente: " + compra.getRut() +
+                            (evento != null ? " | Evento: " + evento.getNombre() : ""));
+                }
+
+                return this;
+            }
+        });
+
+        JTextField txtFormaPago = new JTextField();
+        JTextField txtEstado = new JTextField();
+
+        panel.add(new JLabel("Seleccione Compra:"));
+        panel.add(comboCompras);
+        panel.add(new JLabel("Nueva forma de pago:"));
+        panel.add(txtFormaPago);
+        panel.add(new JLabel("Nuevo estado:"));
+        panel.add(txtEstado);
+
+        JButton btnModificar = new JButton("Modificar Compra");
+        btnModificar.addActionListener(e -> {
+            Compra compraSeleccionada = (Compra) comboCompras.getSelectedItem();
+            if (compraSeleccionada == null) return;
+
+            String nuevaFormaPago = txtFormaPago.getText().trim();
+            String nuevoEstado = txtEstado.getText().trim();
+
+            if (!nuevaFormaPago.isEmpty()) {
+                compraSeleccionada.setFormaDePago(nuevaFormaPago);
+            }
+            if (!nuevoEstado.isEmpty()) {
+                compraSeleccionada.setEstadoDeCompra(nuevoEstado);
+            }
+
+            Evento evento = buscarEventoPorCompra(compraSeleccionada);
+            if (evento != null) {
+                gestor.guardarCompra(evento.getCompras());
+            }
+
+            JOptionPane.showMessageDialog(null, "Compra modificada correctamente!");
+        });
+
+        panel.add(btnModificar);
+        JOptionPane.showMessageDialog(null, panel, "Modificar Compra", JOptionPane.PLAIN_MESSAGE);
     }
-    
-    public void EliminarCompra() {
-        System.out.println("falta implementarlo !!! venga mas tarde");
+
+    /**
+     * método auxiliar para buscar evento dew una compra
+     */
+    private Evento buscarEventoPorCompra(Compra compra) {
+        for (Evento ev : eventos) {
+            if (ev.getCompras().contains(compra)) {
+                return ev;
+            }
+        }
+        return null;
     }
+
+    public void eliminarCompra() {
+        List<Compra> todasCompras = new ArrayList<>();
+        for (Evento ev : eventos) {
+            todasCompras.addAll(ev.getCompras());
+        }
+
+        if (todasCompras.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay compras registradas en el sistema.");
+            return;
+        }
+
+        // Panel principal
+        JPanel panel = new JPanel(new GridLayout(0, 2, 10, 10));
+
+        JComboBox<Compra> comboCompras = new JComboBox<>();
+        for (Compra c : todasCompras) {
+            comboCompras.addItem(c);
+        }
+
+        comboCompras.setRenderer(new DefaultListCellRenderer() {
+            @Override
+            public Component getListCellRendererComponent(JList<?> list, Object value, int index,
+                                                          boolean isSelected, boolean cellHasFocus) {
+                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                if (value instanceof Compra) {
+                    Compra compra = (Compra) value;
+                    Evento evento = buscarEventoPorCompra(compra);
+                    setText("ID: " + compra.getOrdenDeCompra() +
+                            " | Cliente: " + compra.getRut() +
+                            (evento != null ? " | Evento: " + evento.getNombre() : ""));
+                }
+                return this;
+            }
+        });
+
+        panel.add(new JLabel("Seleccione la compra a eliminar:"));
+        panel.add(comboCompras);
+
+        JButton btnEliminar = new JButton("Eliminar Compra");
+
+        btnEliminar.addActionListener(e -> {
+            Compra compraSeleccionada = (Compra) comboCompras.getSelectedItem();
+            if (compraSeleccionada == null) return;
+
+            int confirm = JOptionPane.showConfirmDialog(null,
+                    "¿Está seguro de eliminar la compra con ID " + compraSeleccionada.getOrdenDeCompra() + "?",
+                    "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+
+            if (confirm != JOptionPane.YES_OPTION) return;
+
+            // Eliminar de evento
+            Evento evento = buscarEventoPorCompra(compraSeleccionada);
+            if (evento != null) {
+                evento.getCompras().remove(compraSeleccionada);
+            }
+
+            // Eliminar de cliente
+            Cliente cliente = buscarClientePorRUT(compraSeleccionada.getRut());
+            if (cliente != null) {
+                cliente.getComprasClientes().remove(compraSeleccionada);
+            }
+
+            // Eliminar de lista general en memoria
+            todasCompras.remove(compraSeleccionada);
+
+            // reescribir todo
+            gestor.guardarCompra(todasCompras);
+            gestor.guardarCliente(clientes);
+            gestor.guardarEvento(eventos);
+
+            JOptionPane.showMessageDialog(null, "Compra eliminada correctamente.");
+        });
+
+        panel.add(btnEliminar);
+        JOptionPane.showMessageDialog(null, panel, "Eliminar Compra", JOptionPane.PLAIN_MESSAGE);
+    }
+
     
     public Compra registrarCompra(Evento evento, Cliente cliente, int cantidadAsientos, String formaDePago) {
             
-        Compra compra = evento.CrearOrdenDeCompra(cliente, cantidadAsientos, formaDePago);
+        Compra compra = evento.CrearOrdenDeCompra(cliente, cantidadAsientos, formaDePago, evento.getID());
         this.compras.add(compra);
         
         if (!clientes.contains(cliente)) {
@@ -181,61 +455,87 @@ public class SistemaDeEntradas {
     }
     
     public void CrearCompra() {
-        if (eventos.isEmpty()) { // si no hay eventos
-            System.out.println("No hay eventos para comprar entradas");
-            return;
-        }
-        
-        System.out.println("Eventos disponibles: ");
-        for (int i = 0; i < eventos.size(); i++) {
-            Evento ev = eventos.get(i);
-            System.out.println((i + 1) + ". " + ev.getNombre() + " (ID: " + ev.getID() + ")");
-        }
-        
-        System.out.println("Ingrese ID del evento deseado: ");
-        int opcionEvento = Integer.parseInt(entrada.nextLine());
-        Evento eventoSeleccionado = buscarEventosPorID(opcionEvento);
-        if (eventoSeleccionado == null) {
-            System.out.println("No se ha encontrado el evento solicitado");
-        }
-        
-        System.out.println("Ingrese RUT del cliente: ");
-        String rut = entrada.nextLine();
-        Cliente cliente = buscarClientePorRUT(rut);
-        
-        if (cliente == null) {
-            System.out.println("No se encontró el rut del cliente en el sistema");
-            return;
-        }
-        
-        System.out.println("Ingrese la cantidad de asientos a comprar: ");
-        int asientosAComprar = Integer.parseInt(entrada.nextLine());
-        
-        System.out.println("Ingrese la forma de pago: ");
-        String formaDePago = entrada.nextLine();
-        
-        System.out.println("✅");
-        System.out.println(
-            "Evento: " + eventoSeleccionado.getNombre() +
-            " | Cliente: " + cliente.getNombre() +
-            " | Asientos a comprar: " + asientosAComprar +
-            " | Forma de pago: " + formaDePago
-        );
+        // Panel principal para los inputs
+        JPanel panel = new JPanel(new GridLayout(0, 2, 10, 10));
 
-        try {
-            
-            Compra compra = registrarCompra(eventoSeleccionado, cliente, asientosAComprar, formaDePago);
-            System.out.println("✅");
-            System.out.println("✅Compra realizada con éxito.");
-            System.out.println("ID de Orden de Compra: " + compra.getOrdenDeCompra());
-            System.out.println("Monto total: $" + compra.getMontoTotal());
-            System.out.println("✅");
-        }    
-        
-        catch (IllegalArgumentException e) {
-            System.out.println("No se pudo realizar la compra: " + e.getMessage());
+        // ComboBox de eventos
+        JComboBox<Evento> comboEventos = new JComboBox<>();
+        for (Evento ev : eventos) {
+            comboEventos.addItem(ev);
         }
+
+        // Campos de texto
+        JTextField txtRUT = new JTextField();
+        JTextField txtCantidadAsientos = new JTextField();
+        JTextField txtFormaPago = new JTextField();
+
+        // Agregamos labels y campos al panel
+        panel.add(new JLabel("Seleccione Evento:"));
+        panel.add(comboEventos);
+        panel.add(new JLabel("RUT del cliente:"));
+        panel.add(txtRUT);
+        panel.add(new JLabel("Cantidad de asientos:"));
+        panel.add(txtCantidadAsientos);
+        panel.add(new JLabel("Forma de pago:"));
+        panel.add(txtFormaPago);
+
+        // Botón de compra
+        JButton btnComprar = new JButton("Confirmar Compra");
+
+        btnComprar.addActionListener(e -> {
+            Evento eventoSeleccionado = (Evento) comboEventos.getSelectedItem();
+            
+            if (eventoSeleccionado == null) {
+                JOptionPane.showMessageDialog(null, "No hay eventos disponibles.");
+                return;
+            }
+
+            String rut = txtRUT.getText().trim();
+            Cliente cliente = buscarClientePorRUT(rut);
+            if (cliente == null) {
+                JOptionPane.showMessageDialog(null, "No se encontró el cliente con ese RUT.");
+                return;
+            }
+
+            int cantidadAsientos;
+            try {
+                cantidadAsientos = Integer.parseInt(txtCantidadAsientos.getText().trim());
+                if (cantidadAsientos <= 0) throw new NumberFormatException();
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "Cantidad de asientos inválida.");
+                return;
+            }
+
+            String formaDePago = txtFormaPago.getText().trim();
+
+            // Validar disponibilidad
+            if (eventoSeleccionado.obtenerAsientosDisponibles().size() < cantidadAsientos) {
+                JOptionPane.showMessageDialog(null, "No hay suficientes asientos disponibles.");
+                return;
+            }
+
+            // Crear compra
+            try {
+                Compra compra = eventoSeleccionado.CrearOrdenDeCompra(cliente, cantidadAsientos, formaDePago, eventoSeleccionado.getID());
+                gestor.guardarCompra(compra);
+                gestor.guardarCliente(clientes);
+                gestor.guardarEvento(eventos);
+
+                JOptionPane.showMessageDialog(null,
+                        "Compra realizada con éxito!\nID de Orden: " + compra.getOrdenDeCompra() +
+                        "\nTotal: $" + compra.getMontoTotal());
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Error al realizar la compra: " + ex.getMessage());
+            }
+        });
+
+        // Agregamos el botón al panel
+        panel.add(btnComprar);
+
+        // Mostramos todo en un JOptionPane
+        JOptionPane.showMessageDialog(null, panel, "Comprar Entradas", JOptionPane.PLAIN_MESSAGE);
     }
+
     
     public void CrearEvento(String nombre, String capacidadStr, String ubicacion, 
                                        String fechaStr, String orador, String temaEvento, 
@@ -449,103 +749,77 @@ public class SistemaDeEntradas {
         return null;
     }
     
-    public void RegistrarCliente() {
-        int edad;
-        String rut;
-        String nombre;
-        Cliente nuevoCliente;
+    public String RegistrarCliente(String nombre, String rutIngresado, String edadStr, String cantAsientosStr, String discapacidad) {
+      
+        if (nombre == null || nombre.trim().isEmpty() ||
+            rutIngresado == null || rutIngresado.trim().isEmpty() ||
+            edadStr == null || edadStr.trim().isEmpty()) {
+            return "Todos los campos son obligatorios.";
+        }
 
-        if(clientes == null || clientes.isEmpty()){
-            System.out.println("");
-            System.out.println("-------------------------------------------------------");
-            System.out.println("Es tu primera vez ejecutando Sistema de Entradas. Creando datos iniciales...");
-            System.out.println("Deberas modificar esta cuenta para poder administrar eventos!");
-            System.out.println("-------------------------------------------------------");
-            
-            nuevoCliente = new Cliente("Claudio Cubillos", "12.345.678-9", 99, 0, "lorem ipsum", "lorem ipsum"); 
-            gestor.guardarCliente(nuevoCliente);
+        // Normalizar RUT
+        String rut = normalizarRUT(rutIngresado);
+
+        // Validar RUT
+        if (!Cliente.validarRut(rut)) {
+            return "RUT inválido. Verifique el formato.";
+        }
+
+        // Verificar duplicados
+        if (buscarClientePorRUT(rut) != null) {
+            return "Ya existe un cliente con ese RUT.";
+        }
+
+        try {
+            int edad = Integer.parseInt(edadStr);
+            if (edad < 16 || edad > 120) {
+                return "La edad debe estar entre 16 y 120 años.";
+            }
+
+            int cantAsientos = Integer.parseInt(cantAsientosStr);
+            if (cantAsientos < 0) {
+                return "La cantidad de asientos no puede ser negativa.";
+            }
+
+            // Crear cliente
+            Cliente nuevoCliente = new Cliente(nombre.trim(), rut, edad, cantAsientos, discapacidad, null);
             clientes.add(nuevoCliente);
-            return;
+            gestor.guardarCliente(clientes); // si usas persistencia
+
+            return null; // null = éxito
+        } catch (NumberFormatException e) {
+            return "Edad y cantidad de asientos deben ser números.";
         }
-        
-        System.out.println("Ingrese su nombre: ");
-        nombre = entrada.nextLine();
-        
-        System.out.println("Ingrese su RUT: ");
-        
-        //Validar RUT hasta que sea correcto
-        while (true) {
-            rut = entrada.nextLine();
-
-            if (Cliente.validarRut(rut)) {
-                System.out.println("RUT válido ✅.");
-                break;
-            } else {
-                System.out.println("RUT inválido ❌. Por favor, ingrese un RUT válido.");
-            }
-        }
-
-        // Validar edad
-        while (true) {
-            try {
-                System.out.println("Ingrese su edad: ");
-                edad = Integer.parseInt(entrada.nextLine());
-
-                if (edad < 16 || edad > 120) {
-                    System.out.println("Debes ingresar una edad válida! (16 - 120 años).");
-                } else {
-                    break;
-                }
-
-            } catch (NumberFormatException e) {
-                System.out.println("Debes ingresar un número entero!");
-            }
-        }
-        
-        nuevoCliente = new Cliente(nombre, rut, edad, 0, "", null); 
-        
-        // ✅ PREGUNTAR SI DESEA INGRESAR DISCAPACIDAD
-        System.out.println("¿Desea registrar alguna discapacidad para este cliente? (s/n): ");
-        String opcionDiscapacidad = entrada.nextLine();
-        
-        if (opcionDiscapacidad.toLowerCase().equals("s")) {
-            System.out.println("Ingrese la discapacidad: ");
-            String discapacidad = entrada.nextLine();
-            
-            nuevoCliente.setEdad(edad);
-            nuevoCliente.setNombre(nombre);
-            nuevoCliente.setRut(rut);
-            nuevoCliente.setDiscapacidades(discapacidad);
-            
-        } else {
-        
-            nuevoCliente.setEdad(edad);
-            nuevoCliente.setNombre(nombre);
-            nuevoCliente.setRut(rut);
-            
-            
-        }
-
-        gestor.guardarCliente(nuevoCliente);
-        clientes.add(nuevoCliente);
-        System.out.println("Gracias por registrarte!");
-        
     }
     
-    public void ListarClientes(List<Cliente> clientes) {
-         if (clientes == null || clientes.isEmpty()) {
-            System.out.println("No hay clientes registrados.");
-            return;
-  
+    public String listarClientes() {
+        if (clientes.isEmpty()) {
+            return null; 
         }
-        
+
+        StringBuilder clientesInfo = new StringBuilder();
+        clientesInfo.append("LISTA DE CLIENTES REGISTRADOS:\n");
+        clientesInfo.append("==========================================\n\n");
+
         int i = 1;
         for (Cliente c : clientes) {
-            String txt = "" + (i + ". Nombre: " + c.getNombre() + ", RUT: " + c.getRut() + ", Edad: " + c.getEdad());
-            System.out.println(txt);
+            String rutFormateado = normalizarRUT(c.getRut()); 
+
+            clientesInfo.append(i).append(". Nombre: ").append(c.getNombre()).append("\n");
+            clientesInfo.append("   RUT: ").append(rutFormateado).append("\n");
+            clientesInfo.append("   Edad: ").append(c.getEdad()).append(" años\n");
+
+            if (c.getDiscapacidades() != null && !c.getDiscapacidades().trim().isEmpty()) {
+                clientesInfo.append("   Discapacidad: ").append(c.getDiscapacidades()).append("\n");
+            }
+
+            clientesInfo.append("\n");
             i++;
         }
+
+        return clientesInfo.toString();
     }
+
     
     public Cliente buscarClientePorRUT(String rut) {
     Cliente clienteEncontrado = null;
@@ -565,44 +839,84 @@ public class SistemaDeEntradas {
     return clienteEncontrado;
 }
     
-    public void ListarCompra(List<Compra> compras) {
-    
-        if (compras.isEmpty() || compras == null){
-            System.out.println("No existen compradas realizadas.");
-        } else {
-            
-            System.out.println("Las compras son las siguentes: ");
-            for (Compra c : compras) {
-                System.out.println((compras.indexOf(c)+1) + ". Orden de Compra: " + compras.get(compras.indexOf(c)).getOrdenDeCompra() + " - Rut asociado: " + compras.get(compras.indexOf(c)).getRut() + " - Monto total (CLP): $" + compras.get(compras.indexOf(c)).getMontoTotal());
-            }
-           
+    public void ListarCompras() {
+        // Comprobamos si hay compras
+        List<Compra> todasLasCompras = new ArrayList<>();
+        for (Evento ev : eventos) {
+            todasLasCompras.addAll(ev.getCompras()); // suponiendo que cada evento tiene su lista de compras
         }
-        
-    }
-    
-    public void removerCliente() {
 
-        String rutABorrar;
-        int indice;
-        Cliente cliente = null;
-        
-        if (clientes.isEmpty() || clientes == null) {
-            System.out.println("No hay clientes para eliminar");
+        if (todasLasCompras.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay compras registradas.", "Listado de Compras", JOptionPane.INFORMATION_MESSAGE);
+            return;
         }
-        
-        else {
-            System.out.println("Los clientes son los siguientes: ");
-            ListarClientes(clientes);
-            System.out.println("Ingrese RUT del cliente a eliminar: ");
-            
-            try {
-            cliente = buscarClientePorRUT(entrada.nextLine());
-            clientes.remove(cliente);  
-            } 
-            catch(Exception e) {
-                System.out.println("Fallo en la funcion buscar Cliente por RUT.");
-            }
-            
+
+        // Construimos el texto para mostrar
+        StringBuilder sb = new StringBuilder("=== LISTADO DE COMPRAS ===\n\n");
+        for (Compra c : todasLasCompras) {
+            sb.append("ID Orden: ").append(c.getOrdenDeCompra())
+              .append(" | Cliente RUT: ").append(c.getRut())
+              .append(" | Forma de Pago: ").append(c.getFormaDePago())
+              .append(" | Fecha: ").append(c.getFechaDeCompra())
+              .append(" | Estado: ").append(c.getEstadoDeCompra())
+              .append(" | Monto Total: $").append(c.getMontoTotal())
+              .append(" | ID del evento: ").append(c.getIdEvento())
+              .append("\n");
+        }
+
+        JTextArea textArea = new JTextArea(sb.toString());
+        textArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setPreferredSize(new Dimension(600, 400));
+
+        JOptionPane.showMessageDialog(null, scrollPane, "Listado de Compras", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public void RemoverCliente() {
+        if (clientes == null || clientes.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay clientes para eliminar.");
+            return;
+        }
+
+        String[] columnas = {"RUT", "Nombre", "Edad", "Discapacidades"};
+        DefaultTableModel model = new DefaultTableModel(columnas, 0);
+
+        for (Cliente c : clientes) {
+            Object[] fila = {c.getRut(), c.getNombre(), c.getEdad(), c.getDiscapacidades()};
+            model.addRow(fila);
+        }
+
+        JTable table = new JTable(model);
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setPreferredSize(new Dimension(500, 300));
+
+        int option = JOptionPane.showConfirmDialog(null, scrollPane,
+                "Seleccione el cliente a eliminar", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        if (option != JOptionPane.OK_OPTION) return;
+
+        int selectedRow = table.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(null, "No se seleccionó ningún cliente.");
+            return;
+        }
+
+        // Obtener cliente seleccionado
+        String rutSeleccionado = (String) table.getValueAt(selectedRow, 0);
+        Cliente cliente = buscarClientePorRUT(rutSeleccionado);
+
+        // Confirmar eliminación
+        int confirm = JOptionPane.showConfirmDialog(null,
+                "¿Seguro que desea eliminar el cliente: " + cliente.getNombre() + "?",
+                "Confirmar eliminación",
+                JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            clientes.remove(cliente);
+            gestor.guardarCliente(clientes); // Guardar cambios en CSV
+            JOptionPane.showMessageDialog(null, "Cliente eliminado correctamente.");
         }
     }
     
@@ -612,6 +926,20 @@ public class SistemaDeEntradas {
         System.out.println();
         }
     }
-}
     
+    private String normalizarRUT(String rut) {
+        if (rut == null) {
+            return null;
+        }
 
+        String rutLimpio = rut.trim().replace(".", "").replace("-", "").toUpperCase();
+
+        if (rutLimpio.length() >= 2) {
+            String numero = rutLimpio.substring(0, rutLimpio.length() - 1);
+            String dv = rutLimpio.substring(rutLimpio.length() - 1);
+            return numero + "-" + dv;
+        }
+        
+        return rutLimpio;
+    }
+}

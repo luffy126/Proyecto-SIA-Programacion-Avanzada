@@ -67,6 +67,8 @@ public class Evento {
     public String getDescripcionEvento(){return this.descripcionEvento;}
     public int getAsientosEspeciales(){return this.asientosEspeciales;}
     public int getPrecioEntrada(){return this.precioEntrada;}
+    public List<Compra> getCompras() {return this.compras;}
+    public List<Cliente> getClientes() {return this.clientes;}
     
     // Setters
     public void setID(int ID){this.ID = ID;}
@@ -79,6 +81,7 @@ public class Evento {
     public void setDescripcionEvento(String descripcionEvento){this.descripcionEvento = descripcionEvento;}
     public void setAsientosEspeciales(int asientosEspeciales){this.asientosEspeciales = asientosEspeciales;}
     public void setPrecioEntrada(int precioEntrada){this.precioEntrada = precioEntrada;}
+    public void setCompras(List<Compra> compras) {this.compras = compras;}
     
        private void inicializarAsientos() {
         for (int i = 1; i <= getCapacidad(); i++) {
@@ -191,13 +194,14 @@ public class Evento {
                 
     }
     
-    public Compra CrearOrdenDeCompra(Cliente cliente, int cantidadAsientos, String formaDePago) {
+    public Compra CrearOrdenDeCompra(Cliente cliente, int cantidadAsientos, String formaDePago, int ide) {
         
         Random random = new Random();
         int ID = (random.nextInt(9999)); 
         String metodoDePago = formaDePago;
-        String estadoDeCompra = "Lorem Ipsum";
+        String estadoDeCompra = "Confirmada";
         int montoTotal;
+        int idEvento = ide;
         
         List<Asiento> asientosReservados = new ArrayList<>();
         
@@ -219,7 +223,7 @@ public class Evento {
         montoTotal = cantidadAsientos * this.precioEntrada;
         
         Compra nuevaCompra = new Compra (
-                ID, cliente.getRut(), metodoDePago, LocalDate.now(), estadoDeCompra, montoTotal 
+                ID, cliente.getRut(), metodoDePago, LocalDate.now(), estadoDeCompra, montoTotal, idEvento
         );
         
         cliente.getComprasClientes().add(nuevaCompra);
@@ -231,5 +235,11 @@ public class Evento {
         
         return nuevaCompra;
     }
+    
+    @Override
+    public String toString() {
+        return nombre + " (ID: " + ID + ")";
+    }
+
     
 }
