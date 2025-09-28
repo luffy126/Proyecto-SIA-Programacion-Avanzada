@@ -7,6 +7,17 @@ package InterfazSwing;
 import Clases.*;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 
 /**
  *
@@ -101,8 +112,7 @@ public class Menu extends javax.swing.JFrame {
         jlblTituloReporte = new javax.swing.JLabel();
         checkRutaEspecifica = new javax.swing.JCheckBox();
         txtFieldRutaDeArchivo = new javax.swing.JTextField();
-        btnGuardarPDF = new javax.swing.JButton();
-        btnGuardarWord = new javax.swing.JButton();
+        btnGenerarExcel = new javax.swing.JButton();
         btnVolverReporte = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -806,17 +816,10 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        btnGuardarPDF.setText("Guardar en .PDF");
-        btnGuardarPDF.addActionListener(new java.awt.event.ActionListener() {
+        btnGenerarExcel.setText("Guardar en Excel");
+        btnGenerarExcel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarPDFActionPerformed(evt);
-            }
-        });
-
-        btnGuardarWord.setText("Guardar en .word");
-        btnGuardarWord.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarWordActionPerformed(evt);
+                btnGenerarExcelActionPerformed(evt);
             }
         });
 
@@ -838,6 +841,7 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(panFondoReporteLayout.createSequentialGroup()
                 .addGap(60, 60, 60)
                 .addGroup(panFondoReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlblTituloReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblMsjExito)
                     .addGroup(panFondoReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(panFondoReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -846,22 +850,17 @@ public class Menu extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(checkRutaEspecifica))
                             .addComponent(lblAdvertencia))
-                        .addGroup(panFondoReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(panFondoReporteLayout.createSequentialGroup()
-                                .addComponent(btnGuardarPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnGuardarWord, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panFondoReporteLayout.createSequentialGroup()
-                                .addComponent(jlblTituloReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(53, 53, 53)))))
+                        .addGroup(panFondoReporteLayout.createSequentialGroup()
+                            .addComponent(btnGenerarExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(367, 367, 367))))
                 .addContainerGap(86, Short.MAX_VALUE))
         );
         panFondoReporteLayout.setVerticalGroup(
             panFondoReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panFondoReporteLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(58, 58, 58)
                 .addComponent(jlblTituloReporte)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
                 .addComponent(lblMsjExito)
                 .addGap(52, 52, 52)
                 .addComponent(lblAdvertencia)
@@ -870,9 +869,7 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(txtFieldRutaDeArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(checkRutaEspecifica))
                 .addGap(33, 33, 33)
-                .addGroup(panFondoReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGuardarWord, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardarPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnGenerarExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(78, 78, 78)
                 .addComponent(btnVolverReporte)
                 .addGap(9, 9, 9))
@@ -1587,12 +1584,6 @@ public class Menu extends javax.swing.JFrame {
         jTablaCompras.setVisible(false);
     }//GEN-LAST:event_VisibilidadCompras
 
-    private void btnGuardarWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarWordActionPerformed
-
-        lblMsjExito.setVisible(true);
-
-    }//GEN-LAST:event_btnGuardarWordActionPerformed
-
     private void txtFieldRutaDeArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldRutaDeArchivoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFieldRutaDeArchivoActionPerformed
@@ -1608,12 +1599,49 @@ public class Menu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnVolverReporteActionPerformed
 
-    private void btnGuardarPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPDFActionPerformed
+    private void btnGenerarExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarExcelActionPerformed
+        GeneradorExcelUtil.generarExcelDesdeCSVs();
+        
+    }//GEN-LAST:event_btnGenerarExcelActionPerformed
 
-        lblMsjExito.setVisible(true);
+    
+    private void crearHojaDesdeCSV(Workbook workbook, String sheetName, String csvFilePath) {
+        /**
+         * Lee un archivo CSV desde una ruta relativa al proyecto y lo vuelca en
+         * una hoja de Excel. workbook El libro de Excel donde se creará la
+         * hoja. sheetName El nombre para la nueva hoja. csvFilePath La ruta
+         * relativa al archivo CSV (ej: "Assets/eventos.csv").
+         */
 
-    }//GEN-LAST:event_btnGuardarPDFActionPerformed
+        // Creamos un objeto File para manejar la ruta de forma segura en cualquier SO
+        File csvFile = new File(csvFilePath);
 
+        // Verificamos si el archivo existe antes de intentar leerlo
+        if (!csvFile.exists()) {
+            JOptionPane.showMessageDialog(this, "No se pudo encontrar el archivo: " + csvFile.getAbsolutePath(), "Error de Archivo", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        Sheet sheet = workbook.createSheet(sheetName);
+        String line;
+        int rowNum = 0;
+
+        // Volvemos a usar FileReader, ya que estamos leyendo un archivo del sistema
+        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+            while ((line = br.readLine()) != null) {
+                Row row = sheet.createRow(rowNum++);
+                String[] data = line.split(","); // Asumimos separador de coma
+                int cellNum = 0;
+                for (String cellData : data) {
+                    Cell cell = row.createCell(cellNum++);
+                    cell.setCellValue(cellData);
+                }
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error al leer el archivo CSV: " + csvFilePath + "\n" + e.getMessage(), "Error de Lectura", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -1642,8 +1670,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminarClientes;
     private javax.swing.JButton btnEliminarCompras;
     private javax.swing.JButton btnEventos;
-    private javax.swing.JButton btnGuardarPDF;
-    private javax.swing.JButton btnGuardarWord;
+    private javax.swing.JButton btnGenerarExcel;
     private javax.swing.JButton btnListarClientes;
     private javax.swing.JButton btnListarCompras;
     private javax.swing.JButton btnListarEvento;
