@@ -296,13 +296,11 @@ public class Menu extends javax.swing.JFrame {
         jTablaCompras = new javax.swing.JTable();
         panFondoReporte = new javax.swing.JPanel();
         lblMsjExito = new javax.swing.JLabel();
-        lblAdvertencia = new javax.swing.JLabel();
         jlblTituloReporte = new javax.swing.JLabel();
-        checkRutaEspecifica = new javax.swing.JCheckBox();
-        txtFieldRutaDeArchivo = new javax.swing.JTextField();
-        btnGuardarPDF = new javax.swing.JButton();
-        btnGuardarWord = new javax.swing.JButton();
+        btnGuardarComprasTxt = new javax.swing.JButton();
+        btnGuardarClientesTxt = new javax.swing.JButton();
         btnVolverReporte = new javax.swing.JButton();
+        btnGuardarEventosTxt = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Entradas - by: Simon, Tomas, Pancha");
@@ -1001,36 +999,20 @@ public class Menu extends javax.swing.JFrame {
         lblMsjExito.setForeground(new java.awt.Color(0, 255, 0));
         lblMsjExito.setText("Se ha creado exitosamente el archivo!");
 
-        lblAdvertencia.setText("(La casilla desactivada generara el archivo dentro del directorio del proyecto)");
-
         jlblTituloReporte.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jlblTituloReporte.setText("Reporte");
+        jlblTituloReporte.setText("Generación de Reportes");
 
-        checkRutaEspecifica.setText("Utilizar esta ruta especifica");
-        checkRutaEspecifica.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardarComprasTxt.setText("Guardar Compras .txt");
+        btnGuardarComprasTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkRutaEspecificaActionPerformed(evt);
+                btnGuardarComprasTxtActionPerformed(evt);
             }
         });
 
-        txtFieldRutaDeArchivo.setText("C://Users/NombreDeEjemplo/Documents/NetbeansProjects/");
-        txtFieldRutaDeArchivo.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardarClientesTxt.setText("Guardar Clientes .txt");
+        btnGuardarClientesTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFieldRutaDeArchivoActionPerformed(evt);
-            }
-        });
-
-        btnGuardarPDF.setText("Guardar en .PDF");
-        btnGuardarPDF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarPDFActionPerformed(evt);
-            }
-        });
-
-        btnGuardarWord.setText("Guardar en .word");
-        btnGuardarWord.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarWordActionPerformed(evt);
+                btnGuardarClientesTxtActionPerformed(evt);
             }
         });
 
@@ -1038,6 +1020,13 @@ public class Menu extends javax.swing.JFrame {
         btnVolverReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolverReporteActionPerformed(evt);
+            }
+        });
+
+        btnGuardarEventosTxt.setText("Guardar Eventos .txt");
+        btnGuardarEventosTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarEventosTxtActionPerformed(evt);
             }
         });
 
@@ -1052,42 +1041,32 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(panFondoReporteLayout.createSequentialGroup()
                 .addGap(60, 60, 60)
                 .addGroup(panFondoReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblMsjExito)
-                    .addGroup(panFondoReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panFondoReporteLayout.createSequentialGroup()
                         .addGroup(panFondoReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panFondoReporteLayout.createSequentialGroup()
-                                .addComponent(txtFieldRutaDeArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(checkRutaEspecifica))
-                            .addComponent(lblAdvertencia))
-                        .addGroup(panFondoReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(panFondoReporteLayout.createSequentialGroup()
-                                .addComponent(btnGuardarPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnGuardarWord, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panFondoReporteLayout.createSequentialGroup()
-                                .addComponent(jlblTituloReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(53, 53, 53)))))
-                .addContainerGap(86, Short.MAX_VALUE))
+                            .addComponent(btnGuardarComprasTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlblTituloReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblMsjExito))
+                        .addContainerGap(139, Short.MAX_VALUE))
+                    .addGroup(panFondoReporteLayout.createSequentialGroup()
+                        .addGroup(panFondoReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnGuardarClientesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnGuardarEventosTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         panFondoReporteLayout.setVerticalGroup(
             panFondoReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panFondoReporteLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(38, 38, 38)
                 .addComponent(jlblTituloReporte)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
+                .addGap(121, 121, 121)
+                .addComponent(btnGuardarComprasTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnGuardarClientesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnGuardarEventosTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(lblMsjExito)
-                .addGap(52, 52, 52)
-                .addComponent(lblAdvertencia)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panFondoReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFieldRutaDeArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(checkRutaEspecifica))
-                .addGap(33, 33, 33)
-                .addGroup(panFondoReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGuardarWord, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardarPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(78, 78, 78)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                 .addComponent(btnVolverReporte)
                 .addGap(9, 9, 9))
         );
@@ -1292,19 +1271,10 @@ public class Menu extends javax.swing.JFrame {
         jTablaCompras.setVisible(false);
     }//GEN-LAST:event_VisibilidadCompras
 
-    private void btnGuardarWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarWordActionPerformed
-
+    private void btnGuardarClientesTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarClientesTxtActionPerformed
+        sistema.guardarClienteTxt();
         lblMsjExito.setVisible(true);
-
-    }//GEN-LAST:event_btnGuardarWordActionPerformed
-
-    private void txtFieldRutaDeArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldRutaDeArchivoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFieldRutaDeArchivoActionPerformed
-
-    private void checkRutaEspecificaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkRutaEspecificaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_checkRutaEspecificaActionPerformed
+    }//GEN-LAST:event_btnGuardarClientesTxtActionPerformed
 
     private void btnVolverReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverReporteActionPerformed
         panFondoReporte.setVisible(false);
@@ -1313,11 +1283,10 @@ public class Menu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnVolverReporteActionPerformed
 
-    private void btnGuardarPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPDFActionPerformed
-
+    private void btnGuardarComprasTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarComprasTxtActionPerformed
+        sistema.guardarCompraTxt();
         lblMsjExito.setVisible(true);
-
-    }//GEN-LAST:event_btnGuardarPDFActionPerformed
+    }//GEN-LAST:event_btnGuardarComprasTxtActionPerformed
 
     private void SubEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubEventoActionPerformed
 
@@ -1330,6 +1299,11 @@ public class Menu extends javax.swing.JFrame {
     private void SubCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubCompraActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_SubCompraActionPerformed
+
+    private void btnGuardarEventosTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarEventosTxtActionPerformed
+        sistema.guardarEventoTxt();
+        lblMsjExito.setVisible(true);
+    }//GEN-LAST:event_btnGuardarEventosTxtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1362,8 +1336,9 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminarClientes;
     private javax.swing.JButton btnEliminarCompras;
     private javax.swing.JButton btnEventos;
-    private javax.swing.JButton btnGuardarPDF;
-    private javax.swing.JButton btnGuardarWord;
+    private javax.swing.JButton btnGuardarClientesTxt;
+    private javax.swing.JButton btnGuardarComprasTxt;
+    private javax.swing.JButton btnGuardarEventosTxt;
     private javax.swing.JButton btnListarClientes;
     private javax.swing.JButton btnListarCompras;
     private javax.swing.JButton btnListarEvento;
@@ -1377,7 +1352,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btnVolverCompras;
     private javax.swing.JButton btnVolverEventos;
     private javax.swing.JButton btnVolverReporte;
-    private javax.swing.JCheckBox checkRutaEspecifica;
     private javax.swing.ButtonGroup grupoBotonesBusqueda;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -1397,7 +1371,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JTextArea jtxtListarEvento;
     private javax.swing.JTextArea jtxtListarEvento1;
     private javax.swing.JTextArea jtxtListarEvento2;
-    private javax.swing.JLabel lblAdvertencia;
     private javax.swing.JLabel lblMsjExito;
     private javax.swing.JLabel lblPanelBuscador;
     private javax.swing.JLabel lblPanelClientes;
@@ -1415,6 +1388,5 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel panFondoPrincipal;
     private javax.swing.JPanel panFondoReporte;
     private javax.swing.JPanel panPadre;
-    private javax.swing.JTextField txtFieldRutaDeArchivo;
     // End of variables declaration//GEN-END:variables
 }

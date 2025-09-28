@@ -222,6 +222,37 @@ class GestionArchivos {
         }
     }
     
+    public void guardarEvento(List<Evento> eventos, String rutaTxt) {
+        try (FileWriter fw = new FileWriter(rutaTxt, false);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter out = new PrintWriter(bw)) {
+
+            out.println("===== REPORTE DE EVENTOS =====");
+            out.println("Total de eventos: " + eventos.size());
+            out.println();
+
+            for (Evento evento : eventos) {
+                out.println("ID: " + evento.getID());
+                out.println("Nombre: " + evento.getNombre());
+                out.println("Capacidad: " + evento.getCapacidad());
+                out.println("Ubicación: " + evento.getUbicacion());
+                out.println("Fecha: " + evento.getFechaEvento());
+                out.println("Orador: " + evento.getOrador());
+                out.println("Tema: " + evento.getTemaEvento());
+                out.println("Descripción: " + evento.getDescripcionEvento());
+                out.println("Asientos Especiales: " + evento.getAsientosEspeciales());
+                out.println("Precio Entrada: $" + evento.getPrecioEntrada());
+                out.println("------------------------------");
+            }
+
+            System.out.println("Reporte de eventos guardado en " + rutaTxt);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    
     public void guardarCliente(Cliente cliente) {
         System.out.println("Guardando cliente: " + cliente.getNombre());
         try (FileWriter fw = new FileWriter(RUTA_CLIENTES, true);
@@ -248,6 +279,33 @@ class GestionArchivos {
                 + "," + cliente.getEdad() + "," + cliente.getAsientosAComprar()+ "," + cliente.getDiscapacidades());
             }
             System.out.println("Lista de clientes sobrescrita en CSV.");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void guardarCliente(List<Cliente> clientes, String rutaTxt) { // guardarCliente sobrecargado, si le llega una ruta genera reporte lindo en ubicación seleccionada
+        System.out.println("Guardando lista completa de clientes...");
+        try (FileWriter fw = new FileWriter(rutaTxt, false); 
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter out = new PrintWriter(bw)) {
+
+            out.println("===== REPORTE DE CLIENTES =====");
+            out.println("Total de clientes: " + clientes.size());
+            out.println();
+
+        for (Cliente cliente : clientes) {
+            out.println("RUT: " + cliente.getRut());
+            out.println("Nombre: " + cliente.getNombre());
+            out.println("Edad: " + cliente.getEdad());
+            out.println("Acompañantes: " + cliente.getAcompanantes());
+            out.println("Asientos a comprar: Determinados al momento de compra");
+            out.println("Discapacidades: " + cliente.getDiscapacidades());
+            out.println("------------------------------");
+        }
+
+        System.out.println("Reporte de clientes guardado en " + rutaTxt);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -298,4 +356,30 @@ class GestionArchivos {
         }
     }
     
+    public void guardarCompra(List<Compra> compras, String rutaTxt) {
+        try (FileWriter fw = new FileWriter(rutaTxt, false);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter out = new PrintWriter(bw)) {
+
+            out.println("===== REPORTE DE COMPRAS =====");
+            out.println("Total de compras: " + compras.size());
+            out.println();
+
+            for (Compra compra : compras) {
+                out.println("Orden: " + compra.getOrdenDeCompra());
+                out.println("RUT: " + compra.getRut());
+                out.println("Pago: " + compra.getFormaDePago());
+                out.println("Fecha: " + compra.getFechaDeCompra());
+                out.println("Estado: " + compra.getEstadoDeCompra());
+                out.println("Monto: $" + compra.getMontoTotal());
+                out.println("ID Evento: " + compra.getIdEvento());
+                out.println("------------------------------");
+            }
+
+            System.out.println("Reporte guardado en " + rutaTxt);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

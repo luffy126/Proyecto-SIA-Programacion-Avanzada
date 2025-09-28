@@ -12,6 +12,7 @@ import javax.swing.BoxLayout;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -21,6 +22,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -536,6 +538,87 @@ public class SistemaDeEntradas {
         JOptionPane.showMessageDialog(null, panel, "Comprar Entradas", JOptionPane.PLAIN_MESSAGE);
     }
 
+    public void guardarCompraTxt() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Guardar reporte de compras");
+        fileChooser.setCurrentDirectory(new java.io.File(System.getProperty("user.home")));
+
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos de texto (*.txt)", "txt");
+        fileChooser.setFileFilter(filtro);
+
+        int seleccion = fileChooser.showSaveDialog(null);
+
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+            File archivoSeleccionado = fileChooser.getSelectedFile();
+
+            String ruta = archivoSeleccionado.getAbsolutePath();
+            if (!ruta.toLowerCase().endsWith(".txt")) {
+                ruta += ".txt";
+            }
+
+            // Aquí llamas al sobrecargado de SistemaDeEntradas
+            gestor.guardarCompra(compras, ruta);
+
+            JOptionPane.showMessageDialog(null,
+                "Reporte guardado en:\n" + ruta,
+                "Éxito",
+                JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    
+    public void guardarClienteTxt() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Guardar reporte de clientes");
+        fileChooser.setCurrentDirectory(new java.io.File(System.getProperty("user.home")));
+
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos de texto (*.txt)", "txt");
+        fileChooser.setFileFilter(filtro);
+
+        int seleccion = fileChooser.showSaveDialog(null);
+
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+            File archivoSeleccionado = fileChooser.getSelectedFile();
+
+            String ruta = archivoSeleccionado.getAbsolutePath();
+            if (!ruta.toLowerCase().endsWith(".txt")) {
+                ruta += ".txt";
+            }
+
+            gestor.guardarCliente(clientes, ruta);
+
+            JOptionPane.showMessageDialog(null,
+                "Reporte guardado en:\n" + ruta,
+                "Éxito",
+                JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+    public void guardarEventoTxt() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Guardar reporte de eventos");
+        fileChooser.setCurrentDirectory(new java.io.File(System.getProperty("user.home")));
+
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos de texto (*.txt)", "txt");
+        fileChooser.setFileFilter(filtro);
+
+        int seleccion = fileChooser.showSaveDialog(null);
+
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+            File archivoSeleccionado = fileChooser.getSelectedFile();
+
+            String ruta = archivoSeleccionado.getAbsolutePath();
+            if (!ruta.toLowerCase().endsWith(".txt")) {
+                ruta += ".txt";
+            }
+
+            gestor.guardarEvento(eventos, ruta);
+
+            JOptionPane.showMessageDialog(null,
+                "Reporte guardado en:\n" + ruta,
+                "Éxito",
+                JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
     
     public void CrearEvento(String nombre, String capacidadStr, String ubicacion, 
                                        String fechaStr, String orador, String temaEvento, 
