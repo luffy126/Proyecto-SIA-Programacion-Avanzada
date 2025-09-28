@@ -5,9 +5,24 @@
 package InterfazSwing;
 
 import Clases.*;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,13 +32,196 @@ public class Menu extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Menu.class.getName());
     private SistemaDeEntradas sistema;
-
+    private JPanel panelFiltros;
+    private JTextField txtBuscarRUT, txtBuscarNombre; // Para clientes
+    private JTextField txtBuscarIDEvento, txtBuscarNombreEvento; // Para eventos
+    private JTextField txtBuscarIDCompra, txtBuscarRUTCompra; // Para compras
+    private JButton btnBuscarClientes, btnBuscarEventos, btnBuscarCompras;
+    private JTable tablaResultados;
+    private DefaultTableModel model;
+    private JRadioButton rbClientes, rbEventos, rbCompras;
+    private ButtonGroup grupoFiltros;
+    
     /**
      * Creates new form Menu
      */
     public Menu(SistemaDeEntradas sistema) {
+        model = new DefaultTableModel();
+        model.setColumnIdentifiers(new Object[]{"RUT", "Nombre", "Edad", "Acompañantes", "Asientos", "Discapacidades"});
+        tablaResultados = new JTable(model);
         this.sistema = sistema;
         initComponents();
+        inicializarPanelBusqueda();
+    }
+    
+    private void inicializarPanelBusqueda() {
+        // Panel principal de filtros (vertical)
+        panelFiltros = new JPanel();
+        panelFiltros.setLayout(new BoxLayout(panelFiltros, BoxLayout.Y_AXIS));
+
+        // --- 1. Panel de botones ---
+        JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
+        rbClientes = new JRadioButton("Clientes");
+        rbEventos = new JRadioButton("Eventos");
+        rbCompras = new JRadioButton("Compras");
+
+        grupoFiltros = new ButtonGroup();
+        grupoFiltros.add(rbClientes);
+        grupoFiltros.add(rbEventos);
+        grupoFiltros.add(rbCompras);
+
+        btnBuscarClientes = new JButton("Buscar Clientes");
+        btnBuscarEventos = new JButton("Buscar Eventos");
+        btnBuscarCompras = new JButton("Buscar Compras");
+        JButton btnVolverMenu = new JButton("Salir");
+            btnVolverMenu.addActionListener(e -> {
+                panFondoBusqueda.setVisible(false);
+                panFondoPrincipal.setVisible(true);
+            });
+
+        panelBotones.add(rbClientes);
+        panelBotones.add(rbEventos);
+        panelBotones.add(rbCompras);
+        panelBotones.add(btnBuscarClientes);
+        panelBotones.add(btnBuscarEventos);
+        panelBotones.add(btnBuscarCompras);
+        panelBotones.add(btnVolverMenu);
+
+        panelFiltros.add(panelBotones);
+
+        // --- 2. Panel de campos de búsqueda ---
+        JPanel panelCampos = new JPanel();
+        panelCampos.setLayout(new CardLayout()); // un panel por tipo de búsqueda
+
+        // Campos Clientes
+        JPanel panelClientes = new JPanel(new GridLayout(2, 2, 5, 5));
+        txtBuscarRUT = new JTextField(10);
+        txtBuscarNombre = new JTextField(10);
+        panelClientes.add(new JLabel("RUT:"));
+        panelClientes.add(txtBuscarRUT);
+        panelClientes.add(new JLabel("Nombre:"));
+        panelClientes.add(txtBuscarNombre);
+
+        // Campos Eventos
+        JPanel panelEventos = new JPanel(new GridLayout(2, 2, 5, 5));
+        txtBuscarIDEvento = new JTextField(10);
+        txtBuscarNombreEvento = new JTextField(10);
+        panelEventos.add(new JLabel("ID Evento:"));
+        panelEventos.add(txtBuscarIDEvento);
+        panelEventos.add(new JLabel("Nombre:"));
+        panelEventos.add(txtBuscarNombreEvento);
+
+        // Campos Compras
+        JPanel panelCompras = new JPanel(new GridLayout(2, 2, 5, 5));
+        txtBuscarIDCompra = new JTextField(10);
+        txtBuscarRUTCompra = new JTextField(10);
+        panelCompras.add(new JLabel("ID Compra:"));
+        panelCompras.add(txtBuscarIDCompra);
+        panelCompras.add(new JLabel("RUT Cliente:"));
+        panelCompras.add(txtBuscarRUTCompra);
+
+        panelCampos.add(panelClientes, "Clientes");
+        panelCampos.add(panelEventos, "Eventos");
+        panelCampos.add(panelCompras, "Compras");
+
+        panelFiltros.add(panelCampos);
+
+        // --- 3. Tabla de resultados ---
+        model = new DefaultTableModel();
+        tablaResultados = new JTable(model);
+        JScrollPane scrollPane = new JScrollPane(tablaResultados);
+
+        panFondoBusqueda.removeAll();
+        panFondoBusqueda.setLayout(new BorderLayout());
+        panFondoBusqueda.add(panelFiltros, BorderLayout.NORTH);
+        panFondoBusqueda.add(scrollPane, BorderLayout.CENTER);
+
+        // --- 4. Listeners ---
+        btnBuscarClientes.addActionListener(e -> {
+            CardLayout cl = (CardLayout) panelCampos.getLayout();
+            cl.show(panelCampos, "Clientes");
+            buscarClientes();
+        });
+
+        btnBuscarEventos.addActionListener(e -> {
+            CardLayout cl = (CardLayout) panelCampos.getLayout();
+            cl.show(panelCampos, "Eventos");
+            buscarEventos();
+        });
+
+        btnBuscarCompras.addActionListener(e -> {
+            CardLayout cl = (CardLayout) panelCampos.getLayout();
+            cl.show(panelCampos, "Compras");
+            buscarCompras();
+        });
+
+        panFondoBusqueda.revalidate();
+        panFondoBusqueda.repaint();
+    }
+
+    
+    // 3. Métodos de búsqueda
+    private void buscarClientes() {
+        model.setRowCount(0);
+        model.setColumnIdentifiers(new Object[]{"RUT", "Nombre", "Edad", "Acompañantes", "Asientos", "Discapacidades"});
+
+        String rut = txtBuscarRUT.getText().trim().toLowerCase();
+        String nombre = txtBuscarNombre.getText().trim().toLowerCase();
+
+        List<Cliente> resultados = new ArrayList<>();
+        for (Cliente c : sistema.getClientes()) {
+            boolean coincideRUT = rut.isEmpty() || c.getRut().toLowerCase().contains(rut);
+            boolean coincideNombre = nombre.isEmpty() || c.getNombre().toLowerCase().contains(nombre);
+            if (coincideRUT && coincideNombre) resultados.add(c);
+        }
+
+        for (Cliente c : resultados) {
+            model.addRow(new Object[]{c.getRut(), c.getNombre(), c.getEdad(),
+                c.getAcompanantes(), c.getAsientosAComprar(), c.getDiscapacidades()});
+        }
+    }
+
+    // 4. Métodos similares para eventos y compras
+    private void buscarEventos() {
+        model.setRowCount(0);
+        model.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Ubicación", "Fecha", "Orador", "Tema"});
+
+        String id = txtBuscarIDEvento.getText().trim().toLowerCase();
+        String nombre = txtBuscarNombreEvento.getText().trim().toLowerCase();
+
+        List<Evento> resultados = new ArrayList<>();
+        for (Evento ev : sistema.getEventos()) {
+            boolean coincideID = id.isEmpty() || String.valueOf(ev.getID()).contains(id);
+            boolean coincideNombre = nombre.isEmpty() || ev.getNombre().toLowerCase().contains(nombre);
+            if (coincideID && coincideNombre) resultados.add(ev);
+        }
+
+        for (Evento ev : resultados) {
+            model.addRow(new Object[]{ev.getID(), ev.getNombre(), ev.getUbicacion(),
+                ev.getFechaEvento(), ev.getOrador(), ev.getTemaEvento()});
+        }
+    }
+
+    private void buscarCompras() {
+        model.setRowCount(0);
+        model.setColumnIdentifiers(new Object[]{"ID Compra", "RUT Cliente", "Evento ID", "Forma Pago", "Estado", "Monto"});
+
+        String idCompra = txtBuscarIDCompra.getText().trim().toLowerCase();
+        String rut = txtBuscarRUTCompra.getText().trim().toLowerCase();
+
+        List<Compra> resultados = new ArrayList<>();
+        for (Evento ev : sistema.getEventos()) {
+            for (Compra c : ev.getCompras()) {
+                boolean coincideID = idCompra.isEmpty() || String.valueOf(c.getOrdenDeCompra()).contains(idCompra);
+                boolean coincideRUT = rut.isEmpty() || c.getRut().toLowerCase().contains(rut);
+                if (coincideID && coincideRUT) resultados.add(c);
+            }
+        }
+
+        for (Compra c : resultados) {
+            model.addRow(new Object[]{c.getOrdenDeCompra(), c.getRut(), c.getIdEvento(),
+                c.getFormaDePago(), c.getEstadoDeCompra(), c.getMontoTotal()});
+        }
     }
 
     /**
@@ -86,9 +284,9 @@ public class Menu extends javax.swing.JFrame {
         jlblTitulo = new javax.swing.JLabel();
         btnVolverBusqueda = new javax.swing.JButton();
         jPanInterno = new javax.swing.JLayeredPane();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
+        SubEvento = new javax.swing.JRadioButton();
+        SubCliente = new javax.swing.JRadioButton();
+        SubCompra = new javax.swing.JRadioButton();
         jPanTablas = new javax.swing.JPanel();
         ScrollPaneEventos = new javax.swing.JScrollPane();
         jTablaEventos = new javax.swing.JTable();
@@ -599,14 +797,29 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        grupoBotonesBusqueda.add(jRadioButton4);
-        jRadioButton4.setText("Eventos");
+        grupoBotonesBusqueda.add(SubEvento);
+        SubEvento.setText("Eventos");
+        SubEvento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SubEventoActionPerformed(evt);
+            }
+        });
 
-        grupoBotonesBusqueda.add(jRadioButton5);
-        jRadioButton5.setText("Clientes");
+        grupoBotonesBusqueda.add(SubCliente);
+        SubCliente.setText("Clientes");
+        SubCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SubClienteActionPerformed(evt);
+            }
+        });
 
-        grupoBotonesBusqueda.add(jRadioButton6);
-        jRadioButton6.setText("Compras");
+        grupoBotonesBusqueda.add(SubCompra);
+        SubCompra.setText("Compras");
+        SubCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SubCompraActionPerformed(evt);
+            }
+        });
 
         ScrollPaneEventos.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
@@ -713,9 +926,9 @@ public class Menu extends javax.swing.JFrame {
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        jPanInterno.setLayer(jRadioButton4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jPanInterno.setLayer(jRadioButton5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jPanInterno.setLayer(jRadioButton6, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jPanInterno.setLayer(SubEvento, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jPanInterno.setLayer(SubCliente, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jPanInterno.setLayer(SubCompra, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jPanInterno.setLayer(jPanTablas, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jPanInternoLayout = new javax.swing.GroupLayout(jPanInterno);
@@ -724,12 +937,12 @@ public class Menu extends javax.swing.JFrame {
             jPanInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanInternoLayout.createSequentialGroup()
                 .addGap(140, 140, 140)
-                .addComponent(jRadioButton4)
+                .addComponent(SubEvento)
                 .addGap(90, 90, 90)
-                .addComponent(jRadioButton5)
+                .addComponent(SubCliente)
                 .addGap(90, 90, 90)
-                .addComponent(jRadioButton6)
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addComponent(SubCompra)
+                .addContainerGap(145, Short.MAX_VALUE))
             .addGroup(jPanInternoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanTablas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -739,9 +952,9 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(jPanInternoLayout.createSequentialGroup()
                 .addContainerGap(28, Short.MAX_VALUE)
                 .addGroup(jPanInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton4)
-                    .addComponent(jRadioButton5)
-                    .addComponent(jRadioButton6))
+                    .addComponent(SubEvento)
+                    .addComponent(SubCliente)
+                    .addComponent(SubCompra))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanTablas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -1026,7 +1239,6 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnListarComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarComprasActionPerformed
         sistema.ListarCompras();
-
     }//GEN-LAST:event_btnListarComprasActionPerformed
 
     private void btnAgregarComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarComprasActionPerformed
@@ -1107,6 +1319,18 @@ public class Menu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnGuardarPDFActionPerformed
 
+    private void SubEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubEventoActionPerformed
+
+    }//GEN-LAST:event_SubEventoActionPerformed
+
+    private void SubClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SubClienteActionPerformed
+
+    private void SubCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubCompraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SubCompraActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1125,6 +1349,9 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JScrollPane ScrollPaneClientes;
     private javax.swing.JScrollPane ScrollPaneCompras;
     private javax.swing.JScrollPane ScrollPaneEventos;
+    private javax.swing.JRadioButton SubCliente;
+    private javax.swing.JRadioButton SubCompra;
+    private javax.swing.JRadioButton SubEvento;
     private javax.swing.JButton btnAgregarClientes;
     private javax.swing.JButton btnAgregarCompras;
     private javax.swing.JButton btnAgregarEvento;
@@ -1157,9 +1384,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jPanInterno;
     private javax.swing.JPanel jPanTablas;
     private javax.swing.JPopupMenu jPopupMenu1;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JTable jTablaClientes;
     private javax.swing.JTable jTablaCompras;
     private javax.swing.JTable jTablaEventos;
