@@ -280,6 +280,10 @@ public class Menu extends javax.swing.JFrame {
         btnEliminarCompras = new javax.swing.JButton();
         btnVolverCompras = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jtxtListarCliente3 = new javax.swing.JTextArea();
+        jtxtListarCliente4 = new javax.swing.JTextArea();
+        jtxtListarCliente5 = new javax.swing.JTextArea();
+        jtxtListarCliente6 = new javax.swing.JTextArea();
         panFondoBusqueda = new javax.swing.JPanel();
         jlblTitulo = new javax.swing.JLabel();
         btnVolverBusqueda = new javax.swing.JButton();
@@ -743,6 +747,42 @@ public class Menu extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel2.setText("Compras");
 
+        jtxtListarCliente3.setEditable(false);
+        jtxtListarCliente3.setColumns(1);
+        jtxtListarCliente3.setLineWrap(true);
+        jtxtListarCliente3.setRows(5);
+        jtxtListarCliente3.setText("Lista todas las compras dentro del sistema");
+        jtxtListarCliente3.setWrapStyleWord(true);
+        jtxtListarCliente3.setAutoscrolls(false);
+        jtxtListarCliente3.setRequestFocusEnabled(false);
+
+        jtxtListarCliente4.setEditable(false);
+        jtxtListarCliente4.setColumns(1);
+        jtxtListarCliente4.setLineWrap(true);
+        jtxtListarCliente4.setRows(5);
+        jtxtListarCliente4.setText("Modifica una compra especificada");
+        jtxtListarCliente4.setWrapStyleWord(true);
+        jtxtListarCliente4.setAutoscrolls(false);
+        jtxtListarCliente4.setRequestFocusEnabled(false);
+
+        jtxtListarCliente5.setEditable(false);
+        jtxtListarCliente5.setColumns(1);
+        jtxtListarCliente5.setLineWrap(true);
+        jtxtListarCliente5.setRows(5);
+        jtxtListarCliente5.setText("Elimina una compra especificada");
+        jtxtListarCliente5.setWrapStyleWord(true);
+        jtxtListarCliente5.setAutoscrolls(false);
+        jtxtListarCliente5.setRequestFocusEnabled(false);
+
+        jtxtListarCliente6.setEditable(false);
+        jtxtListarCliente6.setColumns(1);
+        jtxtListarCliente6.setLineWrap(true);
+        jtxtListarCliente6.setRows(5);
+        jtxtListarCliente6.setText("Crea una compra y la guarda dentro del sistema");
+        jtxtListarCliente6.setWrapStyleWord(true);
+        jtxtListarCliente6.setAutoscrolls(false);
+        jtxtListarCliente6.setRequestFocusEnabled(false);
+
         javax.swing.GroupLayout panFondoComprasLayout = new javax.swing.GroupLayout(panFondoCompras);
         panFondoCompras.setLayout(panFondoComprasLayout);
         panFondoComprasLayout.setHorizontalGroup(
@@ -755,11 +795,17 @@ public class Menu extends javax.swing.JFrame {
                             .addComponent(btnListarCompras, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnAgregarCompras, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnModificarCompras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEliminarCompras, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btnEliminarCompras, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(panFondoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtxtListarCliente3, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtxtListarCliente4, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtxtListarCliente5, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtxtListarCliente6, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panFondoComprasLayout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addComponent(jLabel2)))
-                .addContainerGap(481, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panFondoComprasLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnVolverCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -770,15 +816,26 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(panFondoComprasLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(jLabel2)
-                .addGap(118, 118, 118)
-                .addComponent(btnAgregarCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnListarCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnModificarCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnEliminarCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
+                .addGroup(panFondoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panFondoComprasLayout.createSequentialGroup()
+                        .addGap(127, 127, 127)
+                        .addComponent(btnAgregarCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panFondoComprasLayout.createSequentialGroup()
+                        .addGap(140, 140, 140)
+                        .addComponent(jtxtListarCliente6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(11, 11, 11)
+                .addGroup(panFondoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtxtListarCliente3, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnListarCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(panFondoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnModificarCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtxtListarCliente4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panFondoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnEliminarCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtxtListarCliente5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
                 .addComponent(btnVolverCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
         );
@@ -1368,6 +1425,10 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JTextArea jtxtListarCliente;
     private javax.swing.JTextArea jtxtListarCliente1;
     private javax.swing.JTextArea jtxtListarCliente2;
+    private javax.swing.JTextArea jtxtListarCliente3;
+    private javax.swing.JTextArea jtxtListarCliente4;
+    private javax.swing.JTextArea jtxtListarCliente5;
+    private javax.swing.JTextArea jtxtListarCliente6;
     private javax.swing.JTextArea jtxtListarEvento;
     private javax.swing.JTextArea jtxtListarEvento1;
     private javax.swing.JTextArea jtxtListarEvento2;

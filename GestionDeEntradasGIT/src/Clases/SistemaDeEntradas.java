@@ -98,6 +98,26 @@ public class SistemaDeEntradas {
         
         while(apagarSistema == false){  
             
+            System.out.println("=== SISTEMA DE GESTIÓN DE ENTRADAS ===");
+            System.out.println("1. Crear Evento");
+            System.out.println("2. Listar Eventos");
+            System.out.println("3. Remover Evento");
+            System.out.println("4. Modificar Evento");
+            System.out.println("5. Listar Clientes");
+            System.out.println("6. Registrar Cliente");
+            System.out.println("7. Eliminar Cliente");
+            System.out.println("8. Crear Orden de Compra");
+            System.out.println("9. Listar Compras");
+            System.out.println("7. Modificar Cliente");
+            System.out.println("8. Eliminar Cliente");
+            System.out.println("9. Crear Orden de Compra");
+            System.out.println("10. Listar Compras");
+            System.out.println("11. Modificar Compra");
+            System.out.println("12. Eliminar Compra");
+            System.out.println("0. Salir");
+            System.out.println("");
+            System.out.print(">> Seleccione una opción: ");
+            
             limpiarConsola();
             
             // Me genero porblemas usar .nextInt, asi que se usara casteo cada vez que se quiera guardar un Int, ya que me lo recomendo varias IAs y tiene sentido
